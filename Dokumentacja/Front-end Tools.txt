@@ -1,0 +1,5 @@
+Bootstrap v4.1.3
+Notepad++ 7.8.5
+
+Image Sources:
+https://www.freepik.com/   (Placeholder usage only [1.04.2020])
