@@ -30,16 +30,21 @@
 		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
-	 <div id=loginbox>
-		Witaj
-		<%= users[0].name %>
+	 <div id="loginbox">
+		<div id=logowanie> Zaloguj</div>
+		
+		<div id=zalogowany style="display:none;">
+			[Tutaj zdjecie]
+			<%= users[0].name %>
+		</div>
+		
 	 </div>
 	 
 	</nav>
 	<div class=spacer></div>
 	<div id=main>
-						
-						<form class="form-horizontal">
+		<div id=forma>
+		<form class="form-horizontal">
 				<fieldset>
 
 				<!-- Form Name -->
@@ -47,8 +52,8 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="textinput">Login</label>  
-				  <div class="col-md-4">
+				  <label class="col-md-6 control-label" for="textinput">Login</label>  
+				  <div class="col-md-6">
 				  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md" required="">
 					
 				  </div>
@@ -56,8 +61,8 @@
 
 				<!-- Password input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="passwordinput">Password</label>
-				  <div class="col-md-4">
+				  <label class="col-md-6 control-label" for="passwordinput">Password</label>
+				  <div class="col-md-6">
 					<input id="passwordinput" name="passwordinput" type="password" placeholder="placeholder" class="form-control input-md" required="">
 					
 				  </div>
@@ -65,8 +70,8 @@
 
 				<!-- Password input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="passwordinput">Password Again</label>
-				  <div class="col-md-4">
+				  <label class="col-md-6 control-label" for="passwordinput">Password Again</label>
+				  <div class="col-md-6">
 					<input id="passwordinput" name="passwordinput" type="password" placeholder="placeholder" class="form-control input-md" required="">
 					
 				  </div>
@@ -74,20 +79,20 @@
 
 				<!-- Button -->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="Register">Register</label>
-				  <div class="col-md-4">
+				  <label class="col-md-6 control-label" for="Register">Register</label>
+				  <div class="col-md-6">
 					<button id="Register" name="Register" class="btn btn-primary">SignIn!</button>
 				  </div>
 				</div>
 
 				</fieldset>
-				</form>
-
+		</form>
+		</div>
 
 	</div>
 	<div class=spacer></div>
 	<footer>
-		2020
+		© 2020
 	</footer>
 
  
