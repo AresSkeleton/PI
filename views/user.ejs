@@ -28,9 +28,9 @@
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
 
-	 <div id="loginbox" elid='<%=users[0].id%>'>
+	 <div id="loginbox" elid=''>
 		Witaj
-		<%= users[0].name %>
+		aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 	 </div>
 	 
 	</nav>
@@ -52,15 +52,6 @@
 <script>
 	$(document).ready(function() {
 		
-		$('#loginbox').click(function(){
-			var tmpUserid = $(this).attr('elid');
-			console.log(tmpUserid);
-			// $.get("user");
-			document.location.replace('user');
-		});
-		//$('#loginbox').on('click', {
-			
-		//});
 })
 
 </script>
