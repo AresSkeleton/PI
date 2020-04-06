@@ -13,4 +13,20 @@ router.get('/', function(req, res) {
     })
 });
 
+router.get('/login', function(req, res) {
+    Users.findAll({
+        raw: true
+    }).then(allFromusers =>{
+        // console.log(allFromusers);
+        
+        res.render('login', {
+            users : allFromusers,
+        });
+        // res.send(allFromusers);
+    }).catch(err =>{
+        console.log(err);
+    })
+});
+
+
 module.exports = router;
