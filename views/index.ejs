@@ -30,7 +30,6 @@
 
 	 <div id="loginbox" elid='<%=users[0].id%>'>
 		Witaj
-		<%= users[0].name %>
 	 </div>
 	 
 	</nav>
@@ -56,7 +55,8 @@
 			var tmpUserid = $(this).attr('elid');
 			console.log(tmpUserid);
 			// $.get("user");
-			document.location.replace('user');
+			document.location.replace('login');
+
 		});
 		//$('#loginbox').on('click', {
 			
