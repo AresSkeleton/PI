@@ -10,8 +10,6 @@ router.get('/', function(req, res) {
         
         res.render('index', {
             users : allFromusers,
-            req: req,
-            res: res
         });
         // res.send(allFromusers);
     }).catch(err =>{
@@ -27,13 +25,27 @@ router.get('/login', function(req, res) {
         
         res.render('login', {
             users : allFromusers,
-            req: req,
-            res: res
         });
         // res.send(allFromusers);
     }).catch(err =>{
         console.log(err);
     })
 });
+
+router.get('/user', function(req, res) {
+    
+    //Users.findAll({
+      //  raw: true
+    //}).then(allFromusers =>{ 
+        // console.log(1233213123213);       
+        res.render('user', {
+            //users : allFromusers,
+        });
+        // res.send(allFromusers);
+    // }).catch(err =>{
+    //     console.log(err);
+    // })
+});
+
 
 module.exports = router;

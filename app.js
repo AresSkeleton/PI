@@ -22,6 +22,7 @@ db.authenticate().then(() =>{
 app.get('/', router);
 // app.render
 app.get('/login', router);
+app.get('/user', router);
 
 app.listen(port, console.log(`Serwer urochomiony na porcie 1337`));
 
