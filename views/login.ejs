@@ -27,44 +27,48 @@
 		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
-	 <div id=loginbox>
-		Witaj
-		<%= users[0].name %>
+
+	 <div id="loginbox">
+		<div id=logowanie> Zaloguj</div>
+		
+		<div id=zalogowany style="display:none;">
+			[Tutaj zdjecie]
+			<%= users[0].name %>
+		</div>
+		
+
 	 </div>
 	 
 	</nav>
 	<div class=spacer></div>
 	<div id=main>
-		
+		<div id=forma>
 			<!-- Form Name -->
 			<legend>Logowanie</legend>
 
 			<!-- Text input-->
 			<div class="form-group">
-<<<<<<< Updated upstream
-			  <label class="col-md-4 control-label" for="textinput">Login</label>  
-			  <div class="col-md-4">
-			  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
-=======
+
 			  <label class="col-md-6 control-label" for="textinput">Login</label>  
 			  <div class="col-md-6">
 			  <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
->>>>>>> Stashed changes
+
 				
 			  </div>
 			</div>
 
 			<!-- Password input-->
 			<div class="form-group">
-<<<<<<< Updated upstream
-			  <label class="col-md-4 control-label" for="passwordinput">Password</label>
-			  <div class="col-md-4">
+
+
+			  <label class="col-md-6 control-label" for="passwordinput">Password</label>
+			  <div class="col-md-6">
+
 				<input id="passwordinput" name="passwordinput" type="password" placeholder="placeholder" class="form-control input-md">
 				
 			  </div>
 			</div>
 
-=======
 			  <label class="col-md-6 control-label" for="passwordinput">Password</label>
 			  <div class="col-md-6">
 				<input id="passwordinput" name="passwordinput" type="password" placeholder="" class="form-control input-md">
@@ -73,22 +77,23 @@
 			</div>
 			<!-- Button -->
 				<div class="form-group">
-		
+	
 				  <div class="col-md-6">
 					<button id="LogIN" name="Login" class="btn btn-primary">Zaloguj!</button>
 				  </div>
 				</div>
+
 				
 			<div class="form-group">
 				  <label class="col-md-6 control-label" for="Register">Jeśli nie masz konta kliknij tutaj!</label>
 				  
 			</div>	
 		</div>
->>>>>>> Stashed changes
+
 	</div>
 	<div class=spacer></div>
 	<footer>
-		2020
+		© 2020
 	</footer>
 
  
