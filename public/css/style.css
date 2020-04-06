@@ -1,0 +1,79 @@
+html,body{
+	width:100%;
+	height:100%;
+	float:left; 
+	margin:0;
+	font-family: 'Roboto', sans-serif;
+	/* background-color:#01d3d0; */
+}
+
+nav{
+	float:left;
+	width:100%;
+	height:7%;
+	background-color:#03a5fc;
+}
+#leftnav{
+	width:50%;
+	height:100%;
+	/* background-color:white; */
+	float:left; 
+}
+#loginbox{
+	width:50%;
+	height:100%;
+	/* background-color:yellow; */
+	float:left; 
+	padding-top:1em;
+	
+	
+	text-align:center;
+	
+}
+
+
+#dodajAnkiete,#mojeAnkiety{
+	width:50%;
+	height:100%;
+	float:left;
+	padding-top:1em;
+	text-align:center;	
+}
+
+#dodajAnkiete:hover, #mojeAnkiety:hover{
+	background-color:#0079ba;
+	
+}
+
+/* .spacer{ */
+	/* width:10%; */
+	/* float:left; */
+	/* height:88%; */
+	/* background-color:#01d3d0; */
+/* } */
+
+#main{	
+padding-top:5%;
+	float:left;
+	width:100%;
+	min-height:88%;
+	background-image:url('../img/xd.jpg');
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover;
+	background-color:#01d3d0;
+	/* opacity:0.45; */
+	overflow:hidden;
+	
+	/* background-color:lightblue; */
+}
+
+footer{
+	float:left;
+	width:100%;
+	height:5%;
+	background-color:black;
+	color:white;
+	padding-top:1em;
+	text-align:center;
+}

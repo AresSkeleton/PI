@@ -1,6 +1,6 @@
 {
   "name": "pi",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "project inzynierski",
   "main": "elo.js",
   "scripts": {
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/AresSkeleton/PI#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "ejs": "^3.0.2",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.0",
     "mysql": "^2.18.1",

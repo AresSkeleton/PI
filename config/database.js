@@ -3,7 +3,7 @@ module.exports = new Sequelize('pi', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
   operatorsAliases: false,
-
+  logging: false,
   pool: {
     max: 5,
     min: 0,

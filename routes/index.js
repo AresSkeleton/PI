@@ -7,7 +7,11 @@ router.get('/', function(req, res) {
         raw: true
     }).then(allFromusers =>{
         // console.log(allFromusers);
-        res.send(allFromusers);
+        
+        res.render('index', {
+            users : allFromusers,
+        });
+        // res.send(allFromusers);
     }).catch(err =>{
         console.log(err);
     })
