@@ -1,0 +1,83 @@
+<!DOCTYPE html>	
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>System do głosowania </title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.js"></script>
+  
+  <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet" type="text/css" >
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');		
+	</style>
+
+
+</head>
+
+<body>
+
+	<nav>
+	 <div id=leftnav>
+		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
+		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
+	 </div>
+
+	 <div id="loginbox">
+		<div id=logowanie> Zaloguj</div>
+		
+		<div id=zalogowany style="display:none;">
+			[Tutaj zdjecie]
+			<%= users[0].name %>
+		</div>
+		
+
+	 </div>
+	 
+	</nav>
+	<div class=spacer></div>
+	<div id=main>
+		<div id=forma>
+			<!-- Form Name -->
+			<legend>Dodaj Ankietę!</legend>
+
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-6 control-label" for="textinput">Klucz do Ankiety</label>  
+			  <div class="col-md-6">
+			  <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+				
+			  </div>
+			</div>
+			<!-- Button -->
+				<div class="form-group">
+		
+				  <div class="col-md-6">
+					<button id="Dolacz" name="Dolacz" class="btn btn-primary">Dołącz do ankiety!</button>
+				  </div>
+				</div>
+
+		
+				
+				
+			<div class="form-group">
+				  <label class="col-md-6 control-label" for="newOne">Aby stworzyć nową ankietę kliknij tutaj!</label>
+				  
+			</div>	
+		</div>
+	</div>
+	<div class=spacer></div>
+	<footer>
+		© 2020
+	</footer>
+
+ 
+ 
+</body>
+
+</html>

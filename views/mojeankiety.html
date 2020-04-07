@@ -8,17 +8,17 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  
   <script src="/bootstrap/js/bootstrap.js"></script>
-  <script src="/js/js.js"></script>
-  <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
-  <link href="/css/style.css" rel="stylesheet" type="text/css" >
+  
+  <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet" type="text/css" >
 
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');		
 	</style>
-</head>
 
+
+</head>
 
 <body>
 
@@ -27,26 +27,55 @@
 		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
-	 
-	 <div id="loginbox" elid='<%=users[0].id%>' >
-		<div id=logowanie onclick="zaloguj()"> Zaloguj</div>
+
+	 <div id="loginbox">
+		<div id=logowanie> Zaloguj</div>
 		
 		<div id=zalogowany style="display:none;">
 			[Tutaj zdjecie]
 			<%= users[0].name %>
 		</div>
-
+		
 
 	 </div>
 	 
 	</nav>
 	<div class=spacer></div>
 	<div id=main>
+		<div id=listA>
+			<legend>Twoje Ankiety</legend>
 		
-		<div id=wilkommen>
-			Witaj ponownie <%= users[0].name %>, miło cię widzieć!
+			<table class="table  table-dark">
+			  <thead>
+				<tr>
+				  <th scope="col">#</th>
+				  <th scope="col">Nazwa</th>
+				  <th scope="col">Klucz</th>
+				  <th scope="col">Przejdź</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <th scope="row">1</th>
+				  <td>Mark</td>
+				  <td>Otto</td>
+				  <td><a href='#'>XD</a></td>
+				</tr>
+				<tr>
+				  <th scope="row">2</th>
+				  <td>Jacob</td>
+				  <td>Thornton</td>
+				  <td><a href='#'>XD</a></td>
+				</tr>
+				<tr>
+				  <th scope="row">3</th>
+				  <td>Larry</td>
+				  <td>theBird</td>
+				  <td><a href='#'>XD</a></td>
+				</tr>
+			  </tbody>
+			</table>
 		</div>
-		
 	</div>
 	<div class=spacer></div>
 	<footer>
@@ -56,22 +85,5 @@
  
  
 </body>
+
 </html>
-
-<script>
-	$(document).ready(function() {
-		
-		<!-- $('#loginbox').click(function(){ -->
-			<!-- var tmpUserid = $(this).attr('elid'); -->
-			<!-- console.log(tmpUserid); -->
-			<!-- // $.get("user"); -->
-			<!-- <!-- document.location.replace('login'); --> -->
-			<!-- document.location.replace('login.html'); -->
-
-		<!-- }); -->
-		//$('#loginbox').on('click', {
-			
-		//});
-})
-
-</script>
