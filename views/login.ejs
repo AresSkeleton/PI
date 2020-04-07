@@ -7,7 +7,7 @@
   <meta name="author" content="">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="/bootstrap/js/bootstrap.js"></script>
   
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -33,7 +33,6 @@
 		
 		<div id=zalogowany style="display:none;">
 			[Tutaj zdjecie]
-			<%= users[0].name %>
 		</div>
 		
 
@@ -50,7 +49,7 @@
 			<div class="form-group">
 			  <label class="col-md-6 control-label" for="textinput">Login</label>  
 			  <div class="col-md-6">
-			  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
+			  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md" >
 				
 			  </div>
 			</div>
@@ -69,6 +68,9 @@
 				  <div class="col-md-6">
 					<button id="LogIN" name="Login" class="btn btn-primary">Zaloguj!</button>
 				  </div>
+				  <div class="col-md-6">
+					<button id="register" name="register" class="btn btn-primary">Zarejestruj się!</button>
+				  </div>
 				</div>
 		</div>
 	</div>
@@ -82,3 +84,24 @@
 </body>
 
 </html>
+<script>
+	$(document).ready(function() {
+
+		$('#LogIN').click(function(){
+			let login = $('#textinput').val();
+			let password = $('#passwordinput').val();
+			console.log('click');
+			$.post("/home",{login: login, password: password}, function(res){
+				alert(res.iscorrect);
+			});
+			// document.location.replace("home");
+		});
+		
+		
+
+		$('#register').click(function(){
+			// console.log(333333);
+			document.location.replace('register');
+		})
+	});
+</script>

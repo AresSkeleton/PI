@@ -6,9 +6,12 @@ const Users = db.define( 'users', {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    name: {
+    login: {
         type: Sequelize.STRING
-    },    
+    },   
+    password: {
+        type: Sequelize.STRING
+    },     
 });
 
 module.exports = Users;
