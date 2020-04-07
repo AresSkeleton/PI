@@ -7,18 +7,18 @@
   <meta name="author" content="">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
   <script src="/bootstrap/js/bootstrap.js"></script>
-  <script src="/js/js.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
   <link href="/css/style.css" rel="stylesheet" type="text/css" >
-
+  <!-- <link href="style.css" rel="stylesheet" type="text/css" > -->
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');		
 	</style>
-</head>
 
+
+</head>
 
 <body>
 
@@ -28,11 +28,12 @@
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
 	 
-	 <div id="loginbox">
+	 <div id="loginbox" elid='<%=users[0].id%>' >
 		<div id=logowanie> Zaloguj</div>
 		
 		<div id=zalogowany style="display:none;">
 			[Tutaj zdjecie]
+			<%= users[0].name %>
 		</div>
 
 
@@ -43,7 +44,7 @@
 	<div id=main>
 		
 		<div id=wilkommen>
-			Witaj ponownie <%= user.login%>, miło cię widzieć!
+			Witaj ponownie <%= users[0].name %>, miło cię widzieć!
 		</div>
 		
 	</div>
@@ -55,19 +56,19 @@
  
  
 </body>
+
 </html>
 
 <script>
 	$(document).ready(function() {
 		
-		 $('#loginbox').click(function(){
-			 var tmpUserid = $(this).attr('elid'); 
-			console.log(tmpUserid); 
-			 // $.get("user");
-			 document.location.replace('login'); 
-			 document.location.replace('login.html'); 
+		$('#loginbox').click(function(){
+			var tmpUserid = $(this).attr('elid');
+			console.log(tmpUserid);
+			// $.get("user");
+			document.location.replace('login');
 
-		 }); 
+		});
 		//$('#loginbox').on('click', {
 			
 		//});
