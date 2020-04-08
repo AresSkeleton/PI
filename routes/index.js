@@ -36,13 +36,7 @@ router.post('/home', async function(req, res){
                 console.log('-----------');
                 console.log(iscorrect);
                 console.log('-----------');
-                // let isPassSame = compareTwoHashPass(req.body.password, userRow.password);
-                // isPassSame.then(function(result){
-                //     console.log(result);
-                // })
-                // console.log(result);
-                // res.send( {iscorrect: result} );
-                // res.send();
+
             
         });
     } catch(er){
