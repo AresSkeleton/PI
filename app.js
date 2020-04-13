@@ -43,6 +43,7 @@ app.get('/register', routerIndex);
 app.post('/register', routerRegister);
 
 app.post('/home', routerIndex);
+app.get('/home', routerIndex);
 // app.get('/user', router);
 
 // app.get('/home', routerHome);

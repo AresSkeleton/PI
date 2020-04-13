@@ -94,7 +94,10 @@
 			let password = $('#passwordinput').val();
 			console.log('click');
 			$.post("/home",{login: login, password: password}, function(res){
-				alert(res.iscorrect);
+				// alert(res.iscorrect);
+				if(res.iscorrect){
+					document.location.replace("home");
+				}
 			});
 			// document.location.replace("home");
 		});

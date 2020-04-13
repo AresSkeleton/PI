@@ -19,15 +19,11 @@ router.get('/register', function(req, res) {
 
 router.post('/home', async function(req, res){
     try{
-        const hashedInsertPass = await bcrypt.hash(req.body.password, 10);
         return Users.findOne({
             where: {
                 login : req.body.login, 
                 }
             }).then( userRow =>{
-                console.log(userRow.password +' ----- ' + req.body.password);
-               
-                console.log(userRow.password +' ----- ' + hashedInsertPass);
                 // let iscorrect = bcrypt.compare(req.body.password, userRow.password, function(err, result) {
                 //     if (err) { throw (err); }
                 //     console.log(result);
@@ -36,6 +32,8 @@ router.post('/home', async function(req, res){
                 console.log('-----------');
                 console.log(iscorrect);
                 console.log('-----------');
+                res.cookie('login', req.body.login);
+                res.send( {iscorrect: iscorrect} );
 
             
         });
@@ -43,6 +41,16 @@ router.post('/home', async function(req, res){
 
     }
 });
+
+
+router.get('/home', function( req, res){
+    console.log( req.cookies.login);
+    // Users.findOne({
+    //     where: {
+    //         login: req.cookies.login
+    //     }
+    // })
+})
 
 // async function compareTwoHashPass(password, rowPass){
 //     try{
