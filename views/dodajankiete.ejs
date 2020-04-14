@@ -7,12 +7,16 @@
   <meta name="author" content="">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
-  <script src="/bootstrap/js/bootstrap.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
   
-  <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  
+	<!-- <script src="/js/js.js"></script> -->
+  <!-- <script src="./bootstrap/js/bootstrap.js"></script> -->
+  <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+  <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
   <link href="/css/style.css" rel="stylesheet" type="text/css" >
-  <!-- <link href="style.css" rel="stylesheet" type="text/css" > -->
+  
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');		
 	</style>
@@ -28,14 +32,26 @@
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
 
-	 <div id="loginbox">
-		<div id=logowanie> Zaloguj</div>
+	 <div id="loginbox" elid='<%=users[0].id%>' >
+		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
 		
 		<div id=zalogowany style="display:none;">
-			[Tutaj zdjecie]
-			<%= users[0].name %>
+			<div id=ikona></div>
+			<div id=uzytkownik>
+				<div class="dropdown show">
+					  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<%= users[0].name %>
+					  </a>
+
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="#">Wyloguj</a>
+					  </div>
+				</div>
+			
+			
+			</div>
 		</div>
-		
+
 
 	 </div>
 	 
