@@ -5,15 +5,28 @@ const bcrypt = require('bcrypt');
 
 router.get('/', function(req, res) {
         // res.cookie('chuj', 'miWdupe');
-        res.render('login', {
+        
+        if(!req.cookies.login){
+            res.render('login', {
             // users : allFromusers,
-        });
+            });
+        }else{
+            // res.render('home')
+            res.redirect('home');
+        }
         // res.send(allFromusers);
 });
 
 
 router.get('/register', function(req, res) {
-    res.render('register',{ });
+    if(!req.cookies.login){
+        res.render('register', {
+        // users : allFromusers,
+        });
+    }else{
+        // res.render('home')
+        res.redirect('home');
+    }
 });
 
 
@@ -29,9 +42,6 @@ router.post('/home', async function(req, res){
                 //     console.log(result);
                 // });
                 let iscorrect = bcrypt.compareSync(req.body.password, userRow.password);
-                // console.log('-----------');
-                // console.log(iscorrect);
-                // console.log('-----------');
                 res.cookie('login', req.body.login);
                 res.send( {iscorrect: iscorrect} );
             
@@ -43,7 +53,7 @@ router.post('/home', async function(req, res){
 
 
 router.get('/home', function( req, res){
-    console.log( req.cookies.login);
+    // console.log( req.cookies.login);
     // поля будут обновлены со временем
     Users.findOne({
         where: {

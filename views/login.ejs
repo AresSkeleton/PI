@@ -32,27 +32,8 @@
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
 
-	 <div id="loginbox" elid='<%=users[0].id%>' >
+	 <div id="loginbox" >
 		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
-		
-		<div id=zalogowany style="display:none;">
-			<div id=ikona></div>
-			<div id=uzytkownik>
-				<div class="dropdown show">
-					  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<%= users[0].name %>
-					  </a>
-
-					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">Wyloguj</a>
-					  </div>
-				</div>
-			
-			
-			</div>
-		</div>
-
-
 	 </div>
 	 
 	</nav>
@@ -105,7 +86,6 @@
 </html>
 <script>
 	$(document).ready(function() {
-
 		$('#LogIN').click(function(){
 			let login = $('#textinput').val();
 			let password = $('#passwordinput').val();
