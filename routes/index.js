@@ -29,12 +29,11 @@ router.post('/home', async function(req, res){
                 //     console.log(result);
                 // });
                 let iscorrect = bcrypt.compareSync(req.body.password, userRow.password);
-                console.log('-----------');
-                console.log(iscorrect);
-                console.log('-----------');
+                // console.log('-----------');
+                // console.log(iscorrect);
+                // console.log('-----------');
                 res.cookie('login', req.body.login);
                 res.send( {iscorrect: iscorrect} );
-
             
         });
     } catch(er){
@@ -45,11 +44,16 @@ router.post('/home', async function(req, res){
 
 router.get('/home', function( req, res){
     console.log( req.cookies.login);
-    // Users.findOne({
-    //     where: {
-    //         login: req.cookies.login
-    //     }
-    // })
+    Users.findOne({
+        where: {
+            login: req.cookies.login
+        },
+        attributes: ['id', 'login']
+    }).then( userSession =>{
+        res.render('home', {user: userSession});
+    }).catch( err =>{
+        res.send( err);
+    });
 })
 
 // async function compareTwoHashPass(password, rowPass){
