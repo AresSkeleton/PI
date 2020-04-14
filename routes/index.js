@@ -44,6 +44,7 @@ router.post('/home', async function(req, res){
 
 router.get('/home', function( req, res){
     console.log( req.cookies.login);
+    // поля будут обновлены со временем
     Users.findOne({
         where: {
             login: req.cookies.login
