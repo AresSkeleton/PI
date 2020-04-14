@@ -21,7 +21,6 @@
 		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');		
 	</style>
 
-
 </head>
 
 <body>
@@ -34,9 +33,10 @@
 	 
 
 	 <div id="loginbox" elid='<%=user.id%>' >
-		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
 		
-		<div id=zalogowany style="display:none;">
+		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
+			
+		<div id=zalogowany >
 			<div id=ikona></div>
 			<div id=uzytkownik>
 				<div class="dropdown show">
@@ -45,13 +45,14 @@
 					  </a>
 
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">Wyloguj</a>
+						<a id="logout" class="dropdown-item" href="#">Wyloguj</a>
 					  </div>
 				</div>
 			
 			
 			</div>
 		</div>
+
 
 
 	 </div>
@@ -78,14 +79,25 @@
 
 <script>
 	$(document).ready(function() {
-		
-		$('#loginbox').click(function(){
-			var tmpUserid = $(this).attr('elid');
-			console.log(tmpUserid);
-			// $.get("user");
-			document.location.replace('login');
+		var session = document.cookie;
+		if(session){
+			document.getElementById("logowanie").style.display = "none";
+		}else{
+			document.getElementById("zalogowany").style.display = "none";
+		}
 
-		});
+		$('#logout').click(function(){
+			document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			document.location.replace('/');
+		})
+
+		// $('#loginbox').click(function(){
+		// 	var tmpUserid = $(this).attr('elid');
+		// 	console.log(tmpUserid);
+		// 	// $.get("user");
+		// 	document.location.replace('/');
+
+		// });
 		//$('#loginbox').on('click', {
 			
 		//});
