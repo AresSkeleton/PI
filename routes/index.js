@@ -11,10 +11,8 @@ router.get('/', function(req, res) {
             // users : allFromusers,
             });
         }else{
-            // res.render('home')
             res.redirect('home');
         }
-        // res.send(allFromusers);
 });
 
 
@@ -31,23 +29,27 @@ router.get('/register', function(req, res) {
 
 
 router.post('/home', async function(req, res){
-    try{
-        return Users.findOne({
-            where: {
-                login : req.body.login, 
-                }
-            }).then( userRow =>{
-                // let iscorrect = bcrypt.compare(req.body.password, userRow.password, function(err, result) {
-                //     if (err) { throw (err); }
-                //     console.log(result);
-                // });
-                let iscorrect = bcrypt.compareSync(req.body.password, userRow.password);
-                res.cookie('login', req.body.login);
-                res.send( {iscorrect: iscorrect} );
-            
-        });
-    } catch(er){
+    if(req.cookies.login){
+        try{
+            return Users.findOne({
+                where: {
+                    login : req.body.login, 
+                    }
+                }).then( userRow =>{
+                    // let iscorrect = bcrypt.compare(req.body.password, userRow.password, function(err, result) {
+                    //     if (err) { throw (err); }
+                    //     console.log(result);
+                    // });
+                    let iscorrect = bcrypt.compareSync(req.body.password, userRow.password);
+                    res.cookie('login', req.body.login);
+                    res.send( {iscorrect: iscorrect} );
+                
+            });
+        } catch(er){
 
+        }
+    }else{
+        res.redirect('/');
     }
 });
 
