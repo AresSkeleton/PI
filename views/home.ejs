@@ -86,21 +86,14 @@
 			document.getElementById("zalogowany").style.display = "none";
 		}
 
+
+
+		
 		$('#logout').click(function(){
 			document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 			document.location.replace('/');
 		})
 
-		// $('#loginbox').click(function(){
-		// 	var tmpUserid = $(this).attr('elid');
-		// 	console.log(tmpUserid);
-		// 	// $.get("user");
-		// 	document.location.replace('/');
-
-		// });
-		//$('#loginbox').on('click', {
-			
-		//});
 })
 
 </script>
