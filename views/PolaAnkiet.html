@@ -1,0 +1,227 @@
+<!DOCTYPE html>	
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>System do głosowania </title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  
+	<!-- <script src="/js/js.js"></script> -->
+  <!-- <script src="./bootstrap/js/bootstrap.js"></script> -->
+  <script src="./bootstrap/js/bootstrap.bundle.js"></script>
+  <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">  
+  <link href="./css/style.css" rel="stylesheet" type="text/css" >
+  <link href="./css/style2.css" rel="stylesheet" type="text/css" >
+  
+  
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');		
+	</style>
+
+</head>
+
+<body>
+
+	<nav>
+	 <div id=leftnav>
+		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
+		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
+	 </div>
+	 
+
+	 <div id="loginbox" elid='<%=user.id%>' >
+		
+		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
+			
+		<div id=zalogowany >
+			<div id=ikona></div>
+			<div id=uzytkownik>
+				<div class="dropdown show">
+					  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<%= user.login %>
+					  </a>
+
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a id="logout" class="dropdown-item" href="#">Wyloguj</a>
+					  </div>
+				</div>
+			
+			
+			</div>
+		</div>
+
+
+
+	 </div>
+	 
+	</nav>
+	<div class=spacer></div>
+	<div id=main >
+	
+		
+		<div class="col-md-8" style="margin-left:20%;">
+		
+		  <!-- <div class="form-group"> -->
+			<!-- <label for="exampleFormControlInput1">Email address</label> -->
+			<!-- <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"> -->
+		  <!-- </div> -->
+		  <!-- <div class="form-check"> -->
+			  <!-- <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios"> -->
+			  <!-- <label class="form-check-label" for="materialGroupExample1">Option 1</label> -->
+			<!-- </div> -->
+
+			
+			<!-- <div class="form-check"> -->
+			  <!-- <input type="radio" class="form-check-input" id="materialGroupExample2" name="groupOfMaterialRadios" checked> -->
+			  <!-- <label class="form-check-label" for="materialGroupExample2">option 2</label> -->
+			<!-- </div> -->
+
+			<!-- <div class="form-check"> -->
+			  <!-- <input type="radio" class="form-check-input" id="materialGroupExample3" name="groupOfMaterialRadios"> -->
+			  <!-- <label class="form-check-label" for="materialGroupExample3">option 3</label> -->
+			<!-- </div> -->
+			
+			
+			
+			<!-- Group of default radios - option 1 --><br>
+			<label class="questionLabel" >Example question </label>
+			<div id=Question1>
+				
+				
+				<div class="custom-control custom-radio">
+				  <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios">
+				  <label class="custom-control-label" for="defaultGroupExample1">Option 1</label>
+				</div>
+
+				<!-- Group of default radios - option 2 -->
+				<div class="custom-control custom-radio">
+				  <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="groupOfDefaultRadios">
+				  <label class="custom-control-label" for="defaultGroupExample2">Option 2</label>
+				</div>
+
+				<!-- Group of default radios - option 3 -->
+				<div class="custom-control custom-radio">
+				  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="groupOfDefaultRadios">
+				  <label class="custom-control-label" for="defaultGroupExample3">Option 3</label>
+				</div>
+			</div>
+			
+		  <hr>
+		  
+		  	<label class="questionLabel" >Example question checkbox </label>
+			<div id=Question2>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
+					<label class="custom-control-label" for="defaultUnchecked1">Default unchecked</label>
+				</div>
+				
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="defaultUnchecked2">
+					<label class="custom-control-label" for="defaultUnchecked2">Default unchecked</label>
+				</div>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="defaultUnchecked3">
+					<label class="custom-control-label" for="defaultUnchecked3">Default unchecked</label>
+				</div>
+			</div>
+			
+			
+		  <hr>
+		  
+		  
+		  <div class="form-group">
+			
+			<label class="questionLabel" for="exampleFormControlSelect1">Example select</label>
+			<select class="form-control" id="exampleFormControlSelect1">
+			  <option>1</option>
+			  <option>2</option>
+			  <option>3</option>
+			  <option>4</option>
+			  <option>5</option>
+			</select>
+		  </div>
+		  
+		  
+		  
+		  
+		  
+		  <hr>
+		  
+		  
+		  
+		  <div class="form-group">
+			
+			<label class="questionLabel" for="exampleFormControlTextarea1">Example textarea</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+		  </div>
+		</form>
+
+
+
+		  <hr>
+		
+		  
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+	<div class=spacer></div>
+	<footer>
+		© 2020
+	</footer>
+
+ 
+ 
+</body>
+
+</html>
+
+<script>
+	$(document).ready(function() {
+		var session = document.cookie;
+		if(session){
+			document.getElementById("logowanie").style.display = "none";
+		}else{
+			document.getElementById("zalogowany").style.display = "none";
+		}
+
+
+
+		
+		$('#logout').click(function(){
+			document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			document.location.replace('/');
+		})
+
+})
+
+</script>
