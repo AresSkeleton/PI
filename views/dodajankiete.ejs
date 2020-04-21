@@ -11,7 +11,7 @@
   
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   
-	<!-- <script src="/js/js.js"></script> -->
+	<script src="/js/js.js"></script>
   <!-- <script src="./bootstrap/js/bootstrap.js"></script> -->
   <script src="/bootstrap/js/bootstrap.bundle.js"></script>
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
@@ -58,34 +58,38 @@
 	</nav>
 	<div class=spacer></div>
 	<div id=main>
+
+		<div class="form-group col-md-8" style="margin-left: 20%; text-align: center;" >
+			<h2>Wybierz typy pól do dodania</h2><br>
+			<div >
+			  <button  name="AddFieldTextbox" class="btn btn-light" onclick="newTextbox()">Wypowiedź</button>
+			  <!-- <button  name="AddFieldSelectOne" class="btn btn-light" onclick="newSelectOne()">Wybierz jedno</button> -->
+			  <button  name="AddFieldCheckbox" class="btn btn-light" onclick="newCheckbox()">Wybierz wiele</button>
+			  <button  name="AddFieldRadio" class="btn btn-light" onclick="newRadio()">Wybierz opcję</button>
+			</div>
+		</div>
 		<div id=forma>
 			<!-- Form Name -->
-			<legend>Dodaj Ankietę!</legend>
+			<legend id="title" contenteditable="true" class="col-md-8" style="text-align: center;">Kliknij tutaj aby zmienić tytuł ankiety!</legend>
 
 			<!-- Text input-->
-			<div class="form-group">
-			  <label class="col-md-6 control-label" for="textinput">Klucz do Ankiety</label>  
-			  <div class="col-md-6">
-			  <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+			<!-- <div class="form-group">
+				<label class="col-md-8 control-label" for="textinput">Podaj Tytuł ankiety</label>  
+				<div class="col-md-8">
+					<input id="textinput" name="SurveyTitle" type="text" placeholder="" class="form-control input-md">
 				
-			  </div>
-			</div>
+			  	</div> -->
+			<!-- </div> -->
 			<!-- Button -->
-				<div class="form-group">
-		
-				  <div class="col-md-6">
-					<button id="Dolacz" name="Dolacz" class="btn btn-primary">Dołącz do ankiety!</button>
-				  </div>
-				</div>
+				
+		</div>
 
 		
-				
-				
-			<div class="form-group">
-				  <label class="col-md-6 control-label" for="newOne">Aby stworzyć nową ankietę kliknij tutaj!</label>
+			<div class="form-group col-md-12" style="text-align: center; ">
+				<hr>
+				  <label class="col-md-8 control-label">Aby stworzyć nową ankietę kliknij tutaj!</label>
 				  
 			</div>	
-		</div>
 	</div>
 	<div class=spacer></div>
 	<footer>
