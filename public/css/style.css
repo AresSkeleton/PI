@@ -93,18 +93,12 @@ a, a:hover{
 	float:left;
 	
 }
+hr{
+	border-color:white;
+	margin-bottom:50px;
+	margin-top:50px;
+}
 
-/* #uzytkownik:hover{ */
-	/* background-color:gray; */
-	
-	
-/* } */
-/* .spacer{ */
-	/* width:10%; */
-	/* float:left; */
-	/* height:88%; */
-	/* background-color:#01d3d0; */
-/* } */
 
 #main{	
 padding-top:5%;
