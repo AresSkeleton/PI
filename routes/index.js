@@ -29,44 +29,41 @@ router.get('/register', function(req, res) {
 
 
 router.post('/home', async function(req, res){
-    if(req.cookies.login){
-        try{
-            return Users.findOne({
-                where: {
-                    login : req.body.login, 
-                    }
-                }).then( userRow =>{
-                    // let iscorrect = bcrypt.compare(req.body.password, userRow.password, function(err, result) {
-                    //     if (err) { throw (err); }
-                    //     console.log(result);
-                    // });
-                    let iscorrect = bcrypt.compareSync(req.body.password, userRow.password);
-                    res.cookie('login', req.body.login);
-                    res.send( {iscorrect: iscorrect} );
-                
-            });
-        } catch(er){
-
-        }
-    }else{
-        res.redirect('/');
-    }
+        Users.findOne({
+            where: {
+                login : req.body.login, 
+                }
+            }).then( userRow =>{
+                // console.log(userRow);
+                // let iscorrect = bcrypt.compare(req.body.password, userRow.password, function(err, result) {
+                //     if (err) { throw (err); }
+                //     console.log(result);
+                // });
+                let iscorrect = bcrypt.compareSync(req.body.password, userRow.password);
+                res.cookie('login', req.body.login);
+                res.send( {iscorrect: iscorrect} );
+            
+        });
 });
 
 
 router.get('/home', function( req, res){
     // console.log( req.cookies.login);
     // поля будут обновлены со временем
-    Users.findOne({
-        where: {
-            login: req.cookies.login
-        },
-        attributes: ['id', 'login']
-    }).then( userSession =>{
-        res.render('home', {user: userSession});
-    }).catch( err =>{
-        res.send( err);
-    });
+    if(req.cookies.login){
+        Users.findOne({
+            where: {
+                login: req.cookies.login
+            },
+            attributes: ['id', 'login']
+        }).then( userSession =>{
+            res.render('home', {user: userSession});
+        }).catch( err =>{
+            res.send( err);
+        });
+    }else{
+        res.redirect('/');
+    }
 })
 
 // async function compareTwoHashPass(password, rowPass){
