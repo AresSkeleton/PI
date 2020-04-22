@@ -1,20 +1,20 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 
-const Users = db.define( 'users', {
+const Surveys = db.define( 'surveys', {
     id :{
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    login: {
+    key: {
         type: Sequelize.STRING
     },   
-    password: {
+    name: {
         type: Sequelize.STRING
-    },
-    hashedKeys: {
+    },    
+    data: {
         type: Sequelize.TEXT
-    },      
+    },   
 });
 
-module.exports = Users;
+module.exports = Surveys;
