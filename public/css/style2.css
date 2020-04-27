@@ -29,3 +29,13 @@
         -ms-user-select: none; 
             user-select: none;
 }
+.deleteButton{
+	position: relative;
+	margin-left:-220px;
+	margin-right: 30px;
+
+
+
+
+
+}

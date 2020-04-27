@@ -17,9 +17,6 @@ function deleteQuestion(idPytania){
     // TODO: Możliwość wstawienia placeholdera w miejsce usuwanego pytania z przyciskiem cofnij //
 }
 
-
-
-
 function newTextbox(){   
     idOfQuestion++;
     questionDetails.push(0);
@@ -27,14 +24,17 @@ function newTextbox(){
     // <label class="questionLabel" for="questiofn`+idOfQuestion +`" contenteditable="true">Example textarea</label>
     document.getElementById("forma").innerHTML += `
     <div id="EntireQuestionNo`+idOfQuestion+`">
-        <div id="divOfQuestion`+idOfQuestion+`" class="form-group col-md-8">
+
+    <button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>       
+    <label class="questionLabel " id="questionLabel`+idOfQuestion +`" contenteditable="true">Example textarea</label>
+
+        <div id="divOfQuestion`+idOfQuestion+`" class="form-group col-md-8">             
+               
                 
-                
-                <label class="questionLabel " id="questionLabel`+idOfQuestion +`" contenteditable="true">Example textarea</label>
-                <button type="button" class="btn btn-danger" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>
                 <br>
                 <textarea  class="form-control" id="question`+idOfQuestion +`" rows="1"></textarea>
         </div><br>
+
     </div>
     `;
 }
@@ -76,9 +76,12 @@ function newRadio(){
    
     document.getElementById("forma").innerHTML +=`
     <div id="EntireQuestionNo`+idOfQuestion+`">
+
+    <button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>
+
         <label class="questionLabel"  id="questionLabel`+idOfQuestion +`" contenteditable="true" >Example question  </label>
 
-        <button type="button" class="btn btn-danger" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>
+        
             <div id=unSelect >
 
         <label onclick="dodajOpcjeRadio(`+ idOfQuestion+`);">[dodaj opcje]</label>\t
@@ -141,9 +144,10 @@ function newCheckbox(){
 /* <label onclick="dodajOpcje(`+ checkboxOption +`,`+ idOfQuestion+`);">[dodaj opcje]</label> */
     document.getElementById("forma").innerHTML +=`
     <div id="EntireQuestionNo`+idOfQuestion+`">
+    <button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>
         <label class="questionLabel" id="questionLabel`+idOfQuestion +`" contenteditable="true" >Example question checkbox </label>
 
-        <button type="button" class="btn btn-danger" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>
+        
             <div id=unSelect >
         <label onclick="dodajOpcjeCheckbox(`+ idOfQuestion+`);">[dodaj opcje]</label>
         <label onclick="usunOpcjeCheckbox(`+ idOfQuestion+`);">[usun opcje]</label>
