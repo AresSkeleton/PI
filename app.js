@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser')
 
 const routerIndex = require('./routes/index');
 const routerRegister = require('./routes/register');
-// const routerHome = require('./routes/home');
+const routerHome = require('./routes/home');
 
 app.use(cookieParser());
 app.set('views', path.join(__dirname, 'views'));
@@ -44,6 +44,10 @@ app.post('/register', routerRegister);
 
 app.post('/home', routerIndex);
 app.get('/home', routerIndex);
+
+
+
+app.get('/dodajankiete', routerHome);
 // app.get('/user', router);
 
 // app.get('/home', routerHome);

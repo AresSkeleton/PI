@@ -32,7 +32,7 @@
 	 </div>
 	 
 
-	 <div id="loginbox" elid='<%=user.id%>' >
+	 <div id="loginbox" >
 		
 		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
 			
@@ -86,7 +86,9 @@
 			document.getElementById("zalogowany").style.display = "none";
 		}
 
-
+		$('#dodajAnkiete').click(function(){
+			document.location.replace('dodajankiete');
+		})
 
 		
 		$('#logout').click(function(){
