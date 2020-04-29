@@ -1,0 +1,28 @@
+{
+    "Name" : "dsadasdsad" ,
+
+
+    "Entirequesiton123":{
+        Name: 'oyarscoij""'
+        "typ":text,
+        opcje: {},
+        "input" : ""
+        
+    },
+    "PYtanie2":{
+        "typ":checkbox,
+        opcje : "elo0,xd,rucham psa"
+        input : "12,3,123,12,";
+    },
+    "PYtanie3":{
+        "typ":radio,
+        opcje : {
+            0 : "XD",
+            1 : "opcja 2",
+
+        }
+        input : "1";
+    }
+
+
+}
