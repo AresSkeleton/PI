@@ -11,9 +11,11 @@
   
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   
-	<script src="/js/js.js"></script>
+  
   <!-- <script src="./bootstrap/js/bootstrap.js"></script> -->
+  
   <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="/js/js.js"></script>
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
   <link href="/css/style.css" rel="stylesheet" type="text/css" >
   <link href="/css/style2.css" rel="stylesheet" type="text/css" >
@@ -90,7 +92,7 @@
 		
 			<div class="form-group col-md-12" style="text-align: center; ">
 				<hr>
-				  <label class="col-md-8 control-label">Aby stworzyć nową ankietę kliknij tutaj!</label>
+				  <label id="sendSurvey" class="col-md-8 control-label">Aby stworzyć nową ankietę kliknij tutaj!</label>
 				  
 			</div>	
 	</div>
@@ -108,11 +110,128 @@
 <script>
 	$(document).ready(function(){
 		var session = document.cookie;
-		console.log(session);
+		// console.log(session);
+		
+
 		if(session){
 			document.getElementById("logowanie").style.display = "none";
 		}else{
 			document.getElementById("zalogowany").style.display = "none";
 		}
-	})
+		
+		
+		$('#sendSurvey').click(function(){
+
+			let surveyName =$('#title').text();
+			
+			let surveyObject = {
+				title : surveyName,
+			};
+			
+			for(let number = 0; number <= idOfQuestion; number++){
+				// console.log(idOfQuestion);
+				$('#EntireQuestionNo'+number).each(function(){
+
+
+
+					if($(this).attr('xd') == 'Radio'){
+						let optionsOfRadio = [];
+						let radioToObject = {};
+						//radio title-----
+						let questionLabel = $('#questionLabel'+number).text();
+						//----------------
+
+
+						let options = $('#divOfQuestion'+number).children('div').length;
+						for(let optionCount = 0; optionCount < options; optionCount++){
+
+							//all radio options-----
+							let radioOptionName = $('#Q'+number+'o'+optionCount).children("label").text();
+							//----------------------
+
+							optionsOfRadio.push(radioOptionName);
+
+							
+						}
+
+						radioToObject["EntireQuestionNo"+number]= {
+								name : questionLabel,
+								type : "r" , // radio - radio
+								options : optionsOfRadio,
+								input : ""
+							}
+						// console.log(radioToObject);
+						// surveyObject = { 
+						// 	radioToObject
+						// };
+						$.extend(surveyObject, radioToObject);
+
+						// console.log(surveyObject);
+						// surveyObject
+						// console.log('all data from radio');
+						// console.log('Survey title: '+ surveyName);
+						// console.log('Options names: '+ optionsOfRadio);
+						
+					}
+					if($(this).attr('xd') == 'Text'){
+						
+
+						let questionLabel = $('#questionLabel'+number).text();
+						// let textarea = $('#divOfQuestion'+number).children("textarea").text();
+						let textarea = document.getElementById("question"+number).value;
+						let textToObject = {
+							name : questionLabel,
+							type : "t" , // t - textarea
+							options : [],
+							input : textarea
+						};
+						$.extend(surveyObject, textToObject);
+						// console.log(textarea);
+					}
+					if($(this).attr('xd') == 'Check'){
+						let optionsOfCheck = [];
+						let checkboxToObject = {};
+
+
+						//radio title-----
+						let questionLabel = $('#questionLabel'+number).text();
+						//----------------
+
+
+						let options = $('#divOfQuestion'+number).children('div').length;
+						for(let optionCount = 0; optionCount < options; optionCount++){
+							
+
+							//all radio options-----
+							let checkOptionName = $('#Q'+number+'o'+optionCount).children("label").val();						
+							//----------------------
+							
+							optionsOfCheck.push(checkOptionName);
+							
+						}
+
+
+						checkboxToObject["EntireQuestionNo"+number]= {
+								name : questionLabel,
+								type : "c" , // c - checkbox
+								options : optionsOfCheck,
+								input : ""
+							}
+						// console.log(checkboxToObject);
+
+						$.extend(surveyObject, checkboxToObject);
+
+						// console.log(surveyObject);
+						// console.log('Check'+number)
+						// console.log('all data from check');
+						// console.log('Checkbox title: '+ questionLabel);
+						// console.log('Options names: '+ optionsOfCheck);
+						
+					}
+					
+				});
+			}
+			// console.log(questionDetails);
+		})
+	});
 </script>
