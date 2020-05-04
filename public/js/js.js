@@ -1,10 +1,11 @@
 
 //########################### Po wciśnięciu "Dodaj ankiete"
 var idOfQuestion = 0;     // Przechowuje informacje na temat ilosci pytań   //
+
 var questionDetails = []; // Przechowuje informacje na temat ilosci inputow //
 questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 //########################### Po wysłaniu ankiety do bazy
-var SurveyKey = ""; // 10 znaków - Generacja
+//var SurveyKey = "";  10 znaków - Generacja
 
 
 function deleteQuestion(idPytania){
