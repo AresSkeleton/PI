@@ -55,7 +55,7 @@
 			
 			</div>
 		</div>
-
+		<div id="date" style="display: none;"><%=  moment().format('DDMMYY');%></div>
 
 
 	 </div>
@@ -111,7 +111,7 @@
 	$(document).ready(function(){
 		var session = document.cookie;
 		// console.log(session);
-		
+		 
 
 		if(session){
 			document.getElementById("logowanie").style.display = "none";
@@ -120,14 +120,22 @@
 		}
 		
 		
+
+		// console.log(SurveyKey);
+		// console.log(typeof(date));
+
+		
+
+
 		$('#sendSurvey').click(function(){
 
 			let surveyName =$('#title').text();
-			
+			let surveyKey;
 			let surveyObject = {
 				title : surveyName,
 			};
 			
+			//------------------------------------------------------------------
 			for(let number = 0; number <= idOfQuestion; number++){
 				// console.log(idOfQuestion);
 				$('#EntireQuestionNo'+number).each(function(){
@@ -174,12 +182,12 @@
 						
 					}
 					if($(this).attr('xd') == 'Text'){
-						
+						let textToObject = {};
 
 						let questionLabel = $('#questionLabel'+number).text();
 						// let textarea = $('#divOfQuestion'+number).children("textarea").text();
 						let textarea = document.getElementById("question"+number).value;
-						let textToObject = {
+						textToObject["EntireQuestionNo"+number] = {
 							name : questionLabel,
 							type : "t" , // t - textarea
 							options : [],
@@ -193,7 +201,7 @@
 						let checkboxToObject = {};
 
 
-						//radio title-----
+						//check title-----
 						let questionLabel = $('#questionLabel'+number).text();
 						//----------------
 
@@ -202,12 +210,13 @@
 						for(let optionCount = 0; optionCount < options; optionCount++){
 							
 
-							//all radio options-----
-							let checkOptionName = $('#Q'+number+'o'+optionCount).children("label").val();						
+							//all check options-----
+							let checkOptionName = $('#Q'+number+'o'+optionCount).children("label").text();						
 							//----------------------
 							
 							optionsOfCheck.push(checkOptionName);
 							
+							console.log(optionsOfCheck);
 						}
 
 
@@ -226,11 +235,58 @@
 						// console.log('all data from check');
 						// console.log('Checkbox title: '+ questionLabel);
 						// console.log('Options names: '+ optionsOfCheck);
-						
+
 					}
 					
 				});
 			}
+			
+			//------------------------------------------------------------------
+			function makeid(length) {
+				var result           = '';
+				var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+				var charactersLength = characters.length;
+				for ( var i = 0; i < length; i++ ) {
+					result += characters.charAt(Math.floor(Math.random() * charactersLength));
+				}
+
+				return result;
+			}
+
+			let date = $('#date').text();
+			surveyKey = makeid(4) + date;
+
+
+			console.log(surveyKey);
+
+
+			let surveyData = JSON.stringify(surveyObject);
+
+
+			$.post("/dodajankiete",{key: surveyKey ,title: surveyName, data: surveyData});
+			console.log('Sended to middlevare-----------------');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			// console.log(surveyData);
 			// console.log(questionDetails);
 		})
 	});

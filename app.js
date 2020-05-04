@@ -3,6 +3,7 @@ const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const path = require("path");
 const db = require('./config/database');
+
 const app = express();
 const port = 1337;
 var cookieParser = require('cookie-parser')
@@ -10,12 +11,13 @@ var cookieParser = require('cookie-parser')
 const routerIndex = require('./routes/index');
 const routerRegister = require('./routes/register');
 const routerHome = require('./routes/home');
+const routerSurvey = require('./routes/dodajankiete');
 
 app.use(cookieParser());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
-
+app.locals.moment = require('moment');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -48,6 +50,7 @@ app.get('/home', routerIndex);
 
 
 app.get('/dodajankiete', routerHome);
+app.post('/dodajankiete', routerSurvey);
 // app.get('/user', router);
 
 // app.get('/home', routerHome);
