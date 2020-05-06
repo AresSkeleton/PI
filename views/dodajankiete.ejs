@@ -289,7 +289,7 @@
 			let surveyData = JSON.stringify(surveyObject);
 
 
-			$.post("/dodajankiete",{key: surveyKey ,title: surveyName, data: surveyData});
+			$.post("/dodajankiete",{key: surveyKey ,title: surveyName, data: surveyData, session: session});
 			console.log('Sended to middlevare-----------------');
 
 

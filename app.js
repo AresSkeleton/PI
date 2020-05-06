@@ -49,6 +49,8 @@ app.get('/home', routerIndex);
 
 
 
+app.get('/mojeankiety', routerHome);
+
 app.get('/dodajankiete', routerHome);
 app.post('/dodajankiete', routerSurvey);
 // app.get('/user', router);

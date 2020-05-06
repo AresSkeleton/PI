@@ -1,29 +1,4 @@
 {
-    "title" : "Ankieta" ,
-    "EntireQuestionNo1":{
-        "Name": "Pytanie1",
-        "type": "r",
-        "options": [],
-        "input" : ""
-        
-    },
-    "EntireQuestionNo2":{
-        "Name": "Pytanie2",
-        "type": "t",
-        "options": ["pierwsze","drugie" ,"trzecie"],
-        "input" : ""
-    },
-    "EntireQuestionNo3":{
-        "Name": "Pytanie3",
-        "type": "c",
-        "options": ["pierwszeC","drugieC" ,"trzecieC"],
-        "input" : ""
-    }
-
-}
-
-
-{
     "title":"Kliknij tutaj aby zmienić tytuł ankiety!",
     "EntireQuestionNo1":{
         "name":"Example textarea",
