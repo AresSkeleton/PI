@@ -126,9 +126,16 @@ padding-top:5%;
 #forma{
 	width:70%;
 	margin-left:30%;
+	float: left;
 	
 }
 #listA{
+	width:90%;
+	margin-left:5%;
+	
+	
+}
+#listB{
 	width:90%;
 	margin-left:5%;
 	

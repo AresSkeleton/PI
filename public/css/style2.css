@@ -33,9 +33,10 @@
 	position: relative;
 	margin-left:-220px;
 	margin-right: 30px;
-
-
-
-
-
+}
+.generatorAnkiet{
+	display: none;
+}
+#generatedSurveySend{
+	display: none;
 }

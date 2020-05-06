@@ -11,10 +11,12 @@
   
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   
-  
+	
+
   <script src="/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="/js/js.js"></script>
   <script src="/js/loadView.js"></script>
+
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
   <link href="/css/style.css" rel="stylesheet" type="text/css" >
   <link href="/css/style2.css" rel="stylesheet" type="text/css" >
@@ -60,88 +62,23 @@
 	</nav>
 	<div class=spacer></div>
 	<div id=main>
+        <div id=forma>
+			
+			
 
-		<!-- W/o collapsable tables -->
-	<div id=listB>
-		<legend>Utworzone ankiety</legend>
+
+
+
+
+
+           
+
+        </div>
+            
+		
 	
-		<table class="table  table-dark">
-		  <thead>
-			<tr>
-			  <th scope="col">#</th>
-			  <th scope="col">Nazwa</th>
-			  <th scope="col">Klucz</th>
-			  <th scope="col">Przejdź</th>
-			  <th scope="col">Usuń</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <th scope="row">1</th>
-			  <td>Mark</td>
-			  <td>Otto</td>
-			  <td><a href='#'>XD</a></td>
-			  <td><a href='#'>DEL</a></td>
-			</tr>
-			<tr>
-			  <th scope="row">2</th>
-			  <td>Jacob</td>
-			  <td>Thornton</td>
-			  <td><a href='#'>XD</a></td>
-			  <td><a href='#'>DEL</a></td>
-			</tr>
-			<tr>
-			  <th scope="row">3</th>
-			  <td>Larry</td>
-			  <td>theBird</td>
-			  <td><a href='#'>XD</a></td>
-			  <td><a href='#'>DEL</a></td>
-			</tr>
-		  </tbody>
-		</table>
 
-
-
-	</div>
-
-	<div id=listA>
-		<legend>Twoje Ankiety</legend>
 	
-		<table class="table  table-dark">
-		  <thead>
-			<tr>
-			  <th scope="col">#</th>
-			  <th scope="col">Nazwa</th>
-			  <th scope="col">Klucz</th>
-			  <th scope="col">Przejdź</th>
-			  <th scope="col">Usuń</th>			  
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <th scope="row">1</th>
-			  <td>Mark</td>
-			  <td>Otto</td>
-			  <td><a href='#'>XD</a></td>
-			  <td><a href='#'>DEL</a></td>
-			</tr>
-			<tr>
-			  <th scope="row">2</th>
-			  <td>Jacob</td>
-			  <td>Thornton</td>
-			  <td><a href='#'>XD</a></td>
-			  <td><a href='#'>DEL</a></td>
-			</tr>
-			<tr>
-			  <th scope="row">3</th>
-			  <td>Larry</td>
-			  <td>theBird</td>
-			  <td><a href='#'>XD</a></td>
-			  <td><a href='#'>DEL</a></td>
-			</tr>
-		  </tbody>
-		</table>
-	</div>
 	</div>
 	<div class=spacer></div>
 	<footer>
@@ -162,5 +99,10 @@
 		}else{
 			document.getElementById("zalogowany").style.display = "none";
 		}
+
+		////////////////////////////////////////////////////
+		doQuestionary(obj)
+		//////////////////////////////////////////////////
+
 	})
 </script>

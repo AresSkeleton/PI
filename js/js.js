@@ -1,10 +1,54 @@
 
 //########################### Po wciśnięciu "Dodaj ankiete"
 var idOfQuestion = 0;     // Przechowuje informacje na temat ilosci pytań   //
+
 var questionDetails = []; // Przechowuje informacje na temat ilosci inputow //
 questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 //########################### Po wysłaniu ankiety do bazy
-var SurveyKey = ""; // 10 znaków - Generacja
+//var SurveyKey = "";  10 znaków - Generacja
+
+
+
+function showGenerator(){
+    var xd = document.getElementsByClassName("generatorAnkiet");
+    for(var i = 0; i<xd.length;i++){
+
+        xd[i].style.display = "inline";
+    }
+
+    document.getElementById("AddSurveyByKey").style.display = "none";
+
+
+
+
+}
+
+function wysylanieWygenerowanejAnkiety(){
+    var xd = document.getElementsByClassName("generatorAnkiet");
+    for(var i = 0; i<xd.length;i++){
+
+        xd[i].style.display = "none";
+    }
+    
+    document.getElementById("generatedSurveySend").style.display = "block";
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function deleteQuestion(idPytania){
@@ -23,7 +67,7 @@ function newTextbox(){
 
     // <label class="questionLabel" for="questiofn`+idOfQuestion +`" contenteditable="true">Example textarea</label>
     document.getElementById("forma").innerHTML += `
-    <div id="EntireQuestionNo`+idOfQuestion+`">
+    <div xd="Text" id="EntireQuestionNo`+idOfQuestion+`">
 
     <button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>       
     <label class="questionLabel " id="questionLabel`+idOfQuestion +`" contenteditable="true">Example textarea</label>
@@ -75,19 +119,18 @@ function newRadio(){
     // <input type="radio" class="custom-control-input" id="radioGroupToQuestion`+idOfQuestion+`" name="groupOfDefaultRadios">
    
     document.getElementById("forma").innerHTML +=`
-    <div id="EntireQuestionNo`+idOfQuestion+`">
+    <div xd="Radio" id="EntireQuestionNo`+idOfQuestion+`">
 
     <button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>
 
         <label class="questionLabel"  id="questionLabel`+idOfQuestion +`" contenteditable="true" >Example question  </label>
 
-        
             <div id=unSelect >
-
-        <label onclick="dodajOpcjeRadio(`+ idOfQuestion+`);">[dodaj opcje]</label>\t
-        <label onclick="usunOpcjeRadio(`+ idOfQuestion+`);">[usuń opcje]</label>
+                <label onclick="dodajOpcjeRadio(`+ idOfQuestion+`);">[dodaj opcje]</label>\t
+                <label onclick="usunOpcjeRadio(`+ idOfQuestion+`);">[usuń opcje]</label>
             </div>
-			<div id="divOfQuestion`+idOfQuestion+`">
+
+			<div xdd='elo' id="divOfQuestion`+idOfQuestion+`">
 				
 				
 				<div class="custom-control custom-radio" id="Q`+idOfQuestion+`o`+questionDetails[idOfQuestion]+`">
@@ -130,10 +173,6 @@ function usunOpcjeCheckbox(idPytania){
     questionDetails[idPytania] = currentQuestionOptionsCount;
 }
 
-
-
-
-
 function newCheckbox(){
     idOfQuestion++;
     questionDetails.push(0);
@@ -143,7 +182,7 @@ function newCheckbox(){
 
 /* <label onclick="dodajOpcje(`+ checkboxOption +`,`+ idOfQuestion+`);">[dodaj opcje]</label> */
     document.getElementById("forma").innerHTML +=`
-    <div id="EntireQuestionNo`+idOfQuestion+`">
+    <div xd="Check" id="EntireQuestionNo`+idOfQuestion+`">
     <button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE</button>
         <label class="questionLabel" id="questionLabel`+idOfQuestion +`" contenteditable="true" >Example question checkbox </label>
 
