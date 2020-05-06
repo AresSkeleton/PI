@@ -8,7 +8,11 @@ router.get('/dodajankiete', (req, res) =>{
     res.render('dodajankiete', { user: req.cookies.login});
 })
 
+router.get('/mojeankiety', (req, res) =>{
 
+    
+    //res.render('mojeankiety', { user: req.cookies.login});
+})
 
 
 module.exports = router;
