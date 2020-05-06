@@ -8,6 +8,49 @@ questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 //var SurveyKey = "";  10 znaków - Generacja
 
 
+
+function showGenerator(){
+    var xd = document.getElementsByClassName("generatorAnkiet");
+    for(var i = 0; i<xd.length;i++){
+
+        xd[i].style.display = "inline";
+    }
+
+    document.getElementById("AddSurveyByKey").style.display = "none";
+
+
+
+
+}
+
+function wysylanieWygenerowanejAnkiety(){
+    var xd = document.getElementsByClassName("generatorAnkiet");
+    for(var i = 0; i<xd.length;i++){
+
+        xd[i].style.display = "none";
+    }
+    
+    document.getElementById("generatedSurveySend").style.display = "block";
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function deleteQuestion(idPytania){
     questionDetails[idPytania] = 'x';
     var pytanie = document.getElementById("EntireQuestionNo"+idPytania);
@@ -129,10 +172,6 @@ function usunOpcjeCheckbox(idPytania){
     currentQuestionOptionsCount --;
     questionDetails[idPytania] = currentQuestionOptionsCount;
 }
-
-
-
-
 
 function newCheckbox(){
     idOfQuestion++;
