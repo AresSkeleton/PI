@@ -32,9 +32,9 @@ router.post('/dodajankiete', function(req, res){
             }
             }).then( function(){
                 //console.log("added to table");
-                UserSurveys.create({
-                    
-                })
+                // UserSurveys.create({
+
+                // })
 
 
             }).catch( e =>{
