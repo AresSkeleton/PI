@@ -62,18 +62,43 @@
 	 
 	</nav>
 	<div class=spacer></div>
-	<div id=main>
-
-		<div class="form-group col-md-8" style="margin-left: 20%; text-align: center;" >
-			<h2>Wybierz typy pól do dodania</h2><br>
-			<div >
-			  <button  name="AddFieldTextbox" class="btn btn-light" onclick="newTextbox()">Wypowiedź</button>
-			  <!-- <button  name="AddFieldSelectOne" class="btn btn-light" onclick="newSelectOne()">Wybierz jedno</button> -->
-			  <button  name="AddFieldCheckbox" class="btn btn-light" onclick="newCheckbox()">Wybierz wiele</button>
-			  <button  name="AddFieldRadio" class="btn btn-light" onclick="newRadio()">Wybierz opcję</button>
-			</div>
+	<div id=main >
+		<div id=generatedSurveySend class="col-md-5" style=" margin-left: 27%;">
+			
+			<h1>Jeszcze tylko podaj hasło!</h1>
+			<br>
+			<input class=form-control type="password" id=passwordWygen><br><br>
+			<button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView  onclick="showGenerator()" id="sendSurvey" > Wyślij ankietę !</button>
 		</div>
-		<div id=forma>
+
+		<div id=AddSurveyByKey class=col-md-5 style="margin-left: 27%;">
+			<label class="" for="surveyKey" >Podaj klucz do ankiety</label>
+			<input class=form-control type="text" id=surveyKey>
+			<br>
+			<label class="" for="Password" >Hasło do konta</label>
+			<input class=form-control type="password" id=password>
+			<br><br>
+			
+			<button type="button" class="btn btn-light btn-lg btn-block" name=sendAddSurveyByKey onclick="" > Dodaj ankietę !</button>
+			<hr class=col-md-6 >
+			<h1>Lub utwórz nową!</h1><br>
+			<button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView onclick="showGenerator()" > Generuj ankietę !</button>
+		</div>
+
+
+
+		
+			<div class="form-group col-md-8 generatorAnkiet" style="margin-left: 20%; text-align: center;" >
+				<h2>Wybierz typy pól do dodania</h2><br>
+				<div >
+				<button  name="AddFieldTextbox" class="btn btn-light" onclick="newTextbox()">Wypowiedź</button>
+				<!-- <button  name="AddFieldSelectOne" class="btn btn-light" onclick="newSelectOne()">Wybierz jedno</button> -->
+				<button  name="AddFieldCheckbox" class="btn btn-light" onclick="newCheckbox()">Wybierz wiele</button>
+				<button  name="AddFieldRadio" class="btn btn-light" onclick="newRadio()">Wybierz opcję</button>
+				</div>
+			</div>
+		
+		<div id=forma  class="generatorAnkiet" style="margin-left:30%;">
 			<!-- Form Name -->
 			<legend id="title" contenteditable="true" class="col-md-8" style="text-align: center;">Kliknij tutaj aby zmienić tytuł ankiety!</legend>
 
@@ -87,15 +112,16 @@
 			<!-- </div> -->
 			<!-- Button -->
 				
-		</div>
-
 		
-			<div class="form-group col-md-12" style="text-align: center; ">
+		</div>	
+			<div  id=sendSurveydiv class="form-group col-md-12 generatorAnkiet"  style="text-align: center; float: left; ">
 				<hr>
-				  <label id="sendSurvey" class="col-md-8 control-label">Aby stworzyć nową ankietę kliknij tutaj!</label>
+				  <label id="sendSurveyInit" class="col-md-8 control-label" onclick="wysylanieWygenerowanejAnkiety()">Aby stworzyć nową ankietę kliknij tutaj!</label>
 				  
 			</div>	
 	</div>
+
+	
 	<div class=spacer></div>
 	<footer>
 		© 2020
@@ -128,7 +154,7 @@
 
 
 		$('#sendSurvey').click(function(){
-
+			//TODO: Pobranie hasła z tego samego id  = #sendSurvey // teraz jest to button // id inputu z hasłem = passwordWygen
 			let surveyName =$('#title').text();
 			let surveyKey;
 			let surveyObject = {
