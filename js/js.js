@@ -9,18 +9,21 @@ questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 
 
 
+function mojeAnkiety(){
+    location.replace("./mojeankiety");
+    // jak nie działa to 
+    // location.replace("./");
+}
+
+
 function showGenerator(){
     var xd = document.getElementsByClassName("generatorAnkiet");
     for(var i = 0; i<xd.length;i++){
 
         xd[i].style.display = "inline";
     }
-
+    document.getElementById("generatedSurveySend").style.display = "none"
     document.getElementById("AddSurveyByKey").style.display = "none";
-
-
-
-
 }
 
 function wysylanieWygenerowanejAnkiety(){
@@ -31,24 +34,7 @@ function wysylanieWygenerowanejAnkiety(){
     }
     
     document.getElementById("generatedSurveySend").style.display = "block";
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function deleteQuestion(idPytania){
