@@ -7,6 +7,26 @@ questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 //########################### Po wysłaniu ankiety do bazy
 //var SurveyKey = "";  10 znaków - Generacja
 
+function errorOverlayShow(){
+    document.getElementById("overlay").style.display = "flex";
+
+}
+function errorOverlayHide(){
+    document.getElementById("overlay").style.display = "none";
+
+}
+function errorGoToMain(){
+    location.replace("./home");
+
+}
+
+
+
+function mojeAnkiety(){
+    location.replace("./mojeankiety");
+    // jak nie działa to 
+    // location.replace("./");
+}
 
 
 function showGenerator(){
@@ -15,12 +35,8 @@ function showGenerator(){
 
         xd[i].style.display = "inline";
     }
-
+    document.getElementById("generatedSurveySend").style.display = "none"
     document.getElementById("AddSurveyByKey").style.display = "none";
-
-
-
-
 }
 
 function wysylanieWygenerowanejAnkiety(){
@@ -31,24 +47,7 @@ function wysylanieWygenerowanejAnkiety(){
     }
     
     document.getElementById("generatedSurveySend").style.display = "block";
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function deleteQuestion(idPytania){

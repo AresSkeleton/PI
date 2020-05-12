@@ -16,6 +16,7 @@
   
   <script src="/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="/js/js.js"></script>
+  <script src="/js/loadView.js"></script>
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
   <link href="/css/style.css" rel="stylesheet" type="text/css" >
   <link href="/css/style2.css" rel="stylesheet" type="text/css" >
@@ -28,6 +29,13 @@
 </head>
 
 <body>
+	<div id="overlay">
+		<div id=errorBox onclick="errorGoToMain()">
+			<h2 id=errorTitle>Coś poszło nie tak!</h2>
+			<div id=errorMsg>Aby kontynuować kliknij...</div>
+
+		</div>
+	</div>
 
 	<nav>
 	 <div id=leftnav>
