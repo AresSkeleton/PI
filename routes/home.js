@@ -11,7 +11,7 @@ router.get('/dodajankiete', (req, res) =>{
 router.get('/mojeankiety', (req, res) =>{
 
     
-    //res.render('mojeankiety', { user: req.cookies.login});
+    res.render('mojeankiety', { user: req.cookies.login});
 })
 
 
