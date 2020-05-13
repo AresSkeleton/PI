@@ -28,7 +28,7 @@
 </head>
 
 <body>
-
+	
 	<nav>
 	 <div id=leftnav>
 		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
@@ -72,14 +72,14 @@
 		</div>
 
 		<div id=AddSurveyByKey class=col-md-5 style="margin-left: 27%;">
-			<label class="" for="surveyKey" >Podaj klucz do ankiety</label>
-			<input class=form-control type="text" id=surveyKey>
+			<label  class="" for="surveyKey" >Podaj klucz do ankiety</label>
+			<input id="key" class=form-control type="text" id=surveyKey>
 			<br>
-			<label class="" for="Password" >Hasło do konta</label>
-			<input class=form-control type="password" id=password>
+			<label  class="" for="Password" >Hasło do konta</label>
+			<input id="pass" class=form-control type="password" id=password>
 			<br><br>
 			
-			<button type="button" class="btn btn-light btn-lg btn-block" name=sendAddSurveyByKey onclick="" > Dodaj ankietę !</button>
+			<button type="button" id="sendAddSurveyByKey" class="btn btn-light btn-lg btn-block" name=sendAddSurveyByKey onclick="" > Dodaj ankietę !</button>
 			<hr class=col-md-6 >
 			<h1>Lub utwórz nową!</h1><br>
 			<button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView onclick="showGenerator()" > Generuj ankietę !</button>
@@ -150,7 +150,9 @@
 		// console.log(SurveyKey);
 		// console.log(typeof(date));
 
-		
+		$('#dodajAnkiete').click(function(){
+			document.location.reload();
+		})
 
 
 		$('#sendSurvey').click(function(){
@@ -292,28 +294,21 @@
 			$.post("/dodajankiete",{key: surveyKey ,title: surveyName, data: surveyData, session: session});
 			console.log('Sended to middlevare-----------------');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			// console.log(surveyData);
 			// console.log(questionDetails);
-		})
+		});
+
+
+
+		$('#sendAddSurveyByKey').click(function(){
+			//console.log('123213')
+			let key = $('#key').val();
+			let pass = $('#pass').val();
+			$.post("/addSurveyByKey",{key: key ,pass: pass});
+			//console.log(key);
+		});
+
+
+
 	});
 </script>

@@ -26,9 +26,6 @@ app.use(express.static(__dirname + '/public'));
 
 
 
-
-
-
 db.authenticate().then(() =>{
     console.log('database connected')
 }).catch(err =>{
@@ -53,6 +50,7 @@ app.get('/mojeankiety', routerHome);
 
 app.get('/dodajankiete', routerHome);
 app.post('/dodajankiete', routerSurvey);
+app.post('/addSurveyByKey', routerSurvey);
 // app.get('/user', router);
 
 // app.get('/home', routerHome);
