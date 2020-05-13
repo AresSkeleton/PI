@@ -7,25 +7,31 @@ questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 //########################### Po wysłaniu ankiety do bazy
 //var SurveyKey = "";  10 znaków - Generacja
 
-function errorOverlayShow(){
-    document.getElementById("overlay").style.display = "flex";
 
+//#################################################### Obsługa błędów
+function errorOverlayShow(header, info){
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("errorTitle").innerHTML = header;
+    document.getElementById("errorMsg").innerHTML = info;
 }
+
 function errorOverlayHide(){
     document.getElementById("overlay").style.display = "none";
-
+    document.getElementById("errorTitle").innerHTML = "Coś poszło nie tak!";
+    document.getElementById("errorMsg").innerHTML = "Aby kontynuować kliknij...";
 }
+
 function errorGoToMain(){
-    location.replace("./home");
-
+    location.replace("/home");
 }
+
+//#################################################### Obsługa błędów ^^^
 
 
 
 function mojeAnkiety(){
-    location.replace("./mojeankiety");
-    // jak nie działa to 
-    // location.replace("./");
+    location.replace("/mojeankiety");
+
 }
 
 
