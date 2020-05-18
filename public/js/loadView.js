@@ -15,7 +15,7 @@ var json = `{
     "EntireQuestionNo3":{
         "name":"Example question  ",
         "type":"r",
-        "options":["Option 0"],
+        "options":["Option 0","Option 1"],
         "input":""
     }
 }`
@@ -26,7 +26,7 @@ let obj = JSON.parse(json);
 
 
 function radio(pytango, numereg){
-    console.log(pytango);
+    // console.log(pytango);
     var tajtle  = pytango['name'];
     var opszyns = pytango['options'];
     var inputy = Object.keys(opszyns).length;
@@ -36,7 +36,7 @@ function radio(pytango, numereg){
 
         <label class="questionLabel"  id="questionLabel`+numereg +`" contenteditable="false" >` + tajtle+ `  </label>            
 
-			<div id="divOfQuestion`+numereg+`">`;
+		<div id="divOfQuestion`+numereg+`">`;
 				
 	for(var i = 0 ; i< inputy; i++){
         document.getElementById("forma").innerHTML +=`
@@ -55,13 +55,12 @@ function radio(pytango, numereg){
 }
 
 function checkbox(pytango, numereg){
-    console.log(pytango);
+    // console.log(pytango);
     var tajtle  = pytango['name'];
     var opszyns = pytango['options'];
     var inputy = Object.keys(opszyns).length;
-
     document.getElementById("forma").innerHTML +=`
-    <div xd="Check" id="EntireQuestionNo`+idOfQuestion+`">
+    <div xd="Check" id="EntireQuestionNo`+numereg+`">
     
         <label class="questionLabel" id="questionLabel`+numereg +`" contenteditable="false" >`+tajtle+`</label>
 
@@ -86,7 +85,7 @@ function checkbox(pytango, numereg){
 
 
 function textbox(pytango, numereg){
-    console.log(pytango);
+    // console.log(pytango);
     var tajtle  = pytango['name'];
 
 
@@ -94,7 +93,7 @@ function textbox(pytango, numereg){
     <div xd="Text" id="EntireQuestionNo`+numereg+`">
 
     
-    <label class="questionLabel " id="questionLabel`+numereg +`" contenteditable="false">`+ tajtle+`</label>
+        <label class="questionLabel " id="questionLabel`+numereg +`" contenteditable="false">`+ tajtle+`</label>
 
         <div id="divOfQuestion`+numereg+`" class="form-group col-md-8">              
                 
