@@ -7,46 +7,99 @@ const Users = require('../models/Users');
 const SimpleCrypto = require("simple-crypto-js").default;
 const bcrypt = require("bcrypt");
 
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+
 router.post('/dodajankiete', function(req, res){
     //console.log('Post Survey data--------------------------');
     // console.log(req.body.key);
     let key = req.body.key;
-    let session = req.body.session
+    let session = req.body.session;
+    let surveyJsonWithoutCCV = req.body.data;
     let parseSession = session.split('=');
-    // console.log();
-    let hashPass = new SimpleCrypto("password");
-    let hashKey = hashPass.encrypt(key)
+    //console.log("dsaddddddddasdddsaadsasd");
 
-    Surveys.create({
-        key: key,
-        name : req.body.title,
-        data : req.body.data,
-    }, {raw : true}).then( newSurvey  =>{
-        //console.log('Sended');
-        // console.log(newSurvey);
-        //res.send({status: 'Ok'});
-            Users.update({
-                hashedKeys : Sequelize.fn('CONCAT', Sequelize.col("hashedKeys"), hashKey+", "    )
-            }, {where : {
-                login : parseSession[1]
-            }
-            }).then( function(){
-                //console.log("added to table");
-                UserSurveys.create({
-                    hashedKey: hashKey,
-                    data: req.body.data,
-                    done: '0',
-                }).catch(e =>{
-                    res.send({status : 'error'})
-                });
+    let hashPass = new SimpleCrypto(req.body.pass); //TODO change to actual password
+    let hashKey = new SimpleCrypto(key);
+    // TODO encrypt req.body.data
+
+
+    let surveyData = JSON.parse(req.body.data);
+
+    // console.log("---------------------------");
+    // console.log(surveyData);
+    // console.log("---------------------------");
+    surveyData["ccv"] = makeid(10);
+
+    let surveyJsonWithCCV = JSON.stringify(surveyData);
+    
+
+    let hashedKey = hashPass.encrypt(key) // szyfrowane klucza hasłem 
+
+    let hashSurveyByKey = hashKey.encrypt(surveyJsonWithoutCCV);
+    let hashSurveyByPassword = hashPass.encrypt(surveyJsonWithCCV);
+    
+
+    //console.log(req.app.locals.status);
+
+    Users.findOne({
+        where : {
+            login : req.cookies.login
+        }
+    }).then( userRecord =>{
+
+        let comparePass = bcrypt.compareSync(req.body.pass, userRecord.password);
+
+        if(comparePass){
+                Surveys.create({
+                key: key,
+                name : req.body.title,
+                data : hashSurveyByKey,
+            }, {raw : true}).then( newSurvey  =>{
+                //console.log('Sended');
+                // console.log(newSurvey);
+                //res.send({status: 'Ok'});
+                    Users.update({
+                        hashedKeys : Sequelize.fn('CONCAT', Sequelize.col("hashedKeys"), hashedKey+", "    )
+                    }, {where : {
+                        login : parseSession[1]
+                    }
+                    }).then( function(){
+                        //console.log("added to table");
+                        UserSurveys.create({
+                            hashedKey: hashedKey,    //zmienic sposób szyfrowania (nie pamietam czym, Klaku pajac kurde)
+                            data: hashSurveyByPassword,
+                            done: '0',
+                        }).then(function(){
+                            
+                            res.send({status : "ok"});
+                        }).catch(e =>{
+                            res.send({status : 'error'});
+                        });
+                    }).catch( e =>{
+                        res.send({status : 'error'});
+                    });
+                
             }).catch( e =>{
-                res.send({status : 'error'})
+                res.send({status : 'error'});
             });
-        
-    }).catch( e =>{
-        res.send({status : 'error'})
-    });
+        }else{
+            res.send({status: "error"});
+        }
+    })
 
+        
+
+    
 
 });
 
@@ -77,18 +130,18 @@ router.post('/addSurveyByKey', async function(req, res){
                         login : req.cookies.login
                         }
                     }).then( function(){
-                        res.send(200).json({status: "ok"});
+                        res.send({status: "ok"});
                         
                     }).catch(err =>{
-                        res.send(400).json({status: "server error"})
+                        res.send({status: "error"});
                     })
                 }else{
-                    res.send(400).json({status : "dont find survey by key"});
+                    res.send({status: "error"});
                 }
             })
         }else{
             // console.log('2222222222222222222222222');
-            res.send(400).json({status : "false password"});
+            res.send({status: "error"});
         }
     }).catch(err =>{
         res.send({status : 'error'});

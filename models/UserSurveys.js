@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 
-const UserSurveys = db.define( 'users', {
+const UserSurveys = db.define( 'usersurveys', {
     id :{
         type: Sequelize.INTEGER,
         primaryKey: true
@@ -14,7 +14,7 @@ const UserSurveys = db.define( 'users', {
     },
     done : {
         type: Sequelize.ENUM,
-        values: ['0', '1']
+        values: ['0', '1', '2']
     }      
 });
 
