@@ -7,7 +7,7 @@ class pytanie{
       }
 }
 let questionListR = []
-let jsonAnswers;
+let jsonSurvey;
 
 function surveyRadio(handle, numerPytania){
     let name;
