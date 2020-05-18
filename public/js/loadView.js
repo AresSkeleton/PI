@@ -1,5 +1,6 @@
 var json = `{
     "title":"Kliknij tutaj aby zmienić tytuł ankiety!",
+    "CCV" : "qweretyuiop",
     "EntireQuestionNo1":{
         "name":"Example textarea",
         "type":"t",
@@ -19,6 +20,7 @@ var json = `{
         "input":""
     }
 }`
+
 
 
 let obj = JSON.parse(json);
@@ -95,8 +97,7 @@ function textbox(pytango, numereg){
     
     <label class="questionLabel " id="questionLabel`+numereg +`" contenteditable="false">`+ tajtle+`</label>
 
-        <div id="divOfQuestion`+numereg+`" class="form-group col-md-8">             
-               
+        <div id="divOfQuestion`+numereg+`" class="form-group col-md-8">              
                 
                 <br>
                 <textarea  class="form-control" id="question`+numereg +`" rows="1"></textarea>
