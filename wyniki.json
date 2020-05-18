@@ -1,0 +1,23 @@
+
+{
+    "title":"Ankieta !",
+    "EntireQuestionNo1":{
+        "name":"Example textarea",
+        "type":"t",
+        "input":["odp1","odp2", "odp3"]         
+    },
+    "EntireQuestionNo2":{
+        "name":"Example question checkbox ",
+        "type":"c",
+        "options":["Opcja do wiel  numer 0" ,"Opcja do wiel  numer 1", "Opcja do wiel  numer 2"],
+        "input": [[1], [2,3], [2,3]]
+    },
+    "EntireQuestionNo3":{
+        "name":"Example question ",
+        "type":"r",
+        "options":["Option 0","Option 1", "Option 3"],
+        "input":[1,2,3]
+    }
+}
+
+

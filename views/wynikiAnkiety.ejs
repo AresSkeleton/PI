@@ -11,11 +11,12 @@
   
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   
-	<!-- <script src="/js/js.js"></script> -->
-  <!-- <script src="./bootstrap/js/bootstrap.js"></script> -->
+	
+
   <script src="/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="/js/js.js"></script>
-  <script src="/js/loadView.js"></script>
+  <!-- <script src="./js/loadView.js"></script> -->
+  <script src="/js/loadResults.js"></script>
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
   <link href="/css/style.css" rel="stylesheet" type="text/css" >
   <link href="/css/style2.css" rel="stylesheet" type="text/css" >
@@ -23,6 +24,7 @@
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');		
 	</style>
+
 
 </head>
 
@@ -40,22 +42,20 @@
 		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
-	 
 
-	 <div id="loginbox" >
-		
+	 <div id="loginbox" elid='<%=users[0].id%>' >
 		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
-			
+		
 		<div id=zalogowany >
 			<div id=ikona></div>
 			<div id=uzytkownik>
 				<div class="dropdown show">
 					  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<%= user.login %>
+						<%= users[0].name %>
 					  </a>
 
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a id="logout" class="dropdown-item" href="#">Wyloguj</a>
+						<a class="dropdown-item" href="#">Wyloguj</a>
 					  </div>
 				</div>
 			
@@ -64,17 +64,28 @@
 		</div>
 
 
-
 	 </div>
 	 
 	</nav>
 	<div class=spacer></div>
 	<div id=main>
+        <div id=forma>
+			
+			
+
+
+
+
+
+
+           
+
+        </div>
+            
 		
-		<div id=wilkommen>
-			Witaj ponownie <%= user.login %>, miło cię widzieć!
-		</div>
-		
+	
+
+	
 	</div>
 	<div class=spacer></div>
 	<footer>
@@ -88,7 +99,7 @@
 </html>
 
 <script>
-	$(document).ready(function() {
+	$(document).ready(function( ){
 		var session = document.cookie;
 		if(session){
 			document.getElementById("logowanie").style.display = "none";
@@ -96,22 +107,9 @@
 			document.getElementById("zalogowany").style.display = "none";
 		}
 
-		$('#dodajAnkiete').click(function(){
-			document.location.replace('dodajankiete');
+		////////////////////////////////////////////////////
+		pokazWyniki(wyn)
+		//////////////////////////////////////////////////
 
-		});
-		$('#mojeAnkiety').click(function(){
-			document.location.replace('mojeankiety');
-		});
-
-
-
-		
-		$('#logout').click(function(){
-			document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-			document.location.replace('/');
-		});
-
-})
-
+	})
 </script>
