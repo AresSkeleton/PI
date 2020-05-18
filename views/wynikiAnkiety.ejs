@@ -1,0 +1,115 @@
+<!DOCTYPE html>	
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>System do głosowania </title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  
+	
+
+  <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="/js/js.js"></script>
+  <!-- <script src="./js/loadView.js"></script> -->
+  <script src="/js/loadResults.js"></script>
+  <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
+  <link href="/css/style.css" rel="stylesheet" type="text/css" >
+  <link href="/css/style2.css" rel="stylesheet" type="text/css" >
+  
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');		
+	</style>
+
+
+</head>
+
+<body>
+	<div id="overlay">
+		<div id=errorBox onclick="errorGoToMain()">
+			<h2 id=errorTitle>Coś poszło nie tak!</h2>
+			<div id=errorMsg>Aby kontynuować kliknij...</div>
+
+		</div>
+	</div>
+
+	<nav>
+	 <div id=leftnav>
+		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
+		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
+	 </div>
+
+	 <div id="loginbox" elid='<%=users[0].id%>' >
+		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
+		
+		<div id=zalogowany >
+			<div id=ikona></div>
+			<div id=uzytkownik>
+				<div class="dropdown show">
+					  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<%= users[0].name %>
+					  </a>
+
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" href="#">Wyloguj</a>
+					  </div>
+				</div>
+			
+			
+			</div>
+		</div>
+
+
+	 </div>
+	 
+	</nav>
+	<div class=spacer></div>
+	<div id=main>
+        <div id=forma>
+			
+			
+
+
+
+
+
+
+           
+
+        </div>
+            
+		
+	
+
+	
+	</div>
+	<div class=spacer></div>
+	<footer>
+		© 2020
+	</footer>
+
+ 
+ 
+</body>
+
+</html>
+
+<script>
+	$(document).ready(function( ){
+		var session = document.cookie;
+		if(session){
+			document.getElementById("logowanie").style.display = "none";
+		}else{
+			document.getElementById("zalogowany").style.display = "none";
+		}
+
+		////////////////////////////////////////////////////
+		pokazWyniki(wyn)
+		//////////////////////////////////////////////////
+
+	})
+</script>
