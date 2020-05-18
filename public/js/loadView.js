@@ -1,6 +1,5 @@
 var json = `{
     "title":"Kliknij tutaj aby zmienić tytuł ankiety!",
-    "CCV" : "qweretyuiop",
     "EntireQuestionNo1":{
         "name":"Example textarea",
         "type":"t",
