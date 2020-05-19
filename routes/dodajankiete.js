@@ -51,7 +51,8 @@ router.post('/dodajankiete', function(req, res){
     
 
     //console.log(req.app.locals.status);
-
+    console.log("IDZIE");
+    console.log("----------------------");
     Users.findOne({
         where : {
             login : req.cookies.login
@@ -81,6 +82,7 @@ router.post('/dodajankiete', function(req, res){
                             data: hashSurveyByPassword,
                             done: '0',
                         }).then(function(){
+                            console.log("Przeszło");
                             req.app.locals.ccv = ccv;
                             req.app.locals.surveyKey = key;
                             res.send({status : "ok"});
