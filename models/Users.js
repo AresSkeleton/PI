@@ -14,7 +14,10 @@ const Users = db.define( 'users', {
     },
     hashedKeys: {
         type: Sequelize.TEXT
-    },      
+    },   
+    anotherHashedKeys: {
+        type: Sequelize.TEXT
+    },     
 });
 
 module.exports = Users;

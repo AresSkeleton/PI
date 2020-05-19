@@ -38,7 +38,8 @@ router.post('/dodajankiete', function(req, res){
     // console.log("---------------------------");
     // console.log(surveyData);
     // console.log("---------------------------");
-    surveyData["ccv"] = makeid(10);
+    let ccv = makeid(10);
+    surveyData["ccv"] = ccv;
 
     let surveyJsonWithCCV = JSON.stringify(surveyData);
     
@@ -80,7 +81,8 @@ router.post('/dodajankiete', function(req, res){
                             data: hashSurveyByPassword,
                             done: '0',
                         }).then(function(){
-                            
+                            req.app.locals.ccv = ccv;
+                            req.app.locals.surveyKey = key;
                             res.send({status : "ok"});
                         }).catch(e =>{
                             res.send({status : 'error'});
@@ -125,7 +127,7 @@ router.post('/addSurveyByKey', async function(req, res){
                     let hashPass = new SimpleCrypto(req.body.pass); 
                     let hashKey = hashPass.encrypt(req.body.key)
                     Users.update({
-                        hashedKeys : Sequelize.fn('CONCAT', Sequelize.col("hashedKeys"), hashKey+", "    )
+                        AnotherHashedKeys : Sequelize.fn('CONCAT', Sequelize.col("AnotherHashedKeys"), hashKey+", "    )
                     }, {where : {
                         login : req.cookies.login
                         }
