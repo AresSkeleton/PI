@@ -75,23 +75,25 @@
 		<div id=generatedSurveySend class="col-md-5" style=" margin-left: 27%;">			
 			
 			<br><br>
-			<h3>Hasło Do konta</h3>		
+			<h3 class=" gSPID">Hasło Do konta</h3>		
 			
 			<br>
-			<input class=form-control type="password" id=passwordWygen><br><br>
+			<input class="form-control gSPID" type="password" id=passwordWygen><br><br>
 
-			
-			<h1>Zapisz Koniecznie te dane!</h1>
-			<br>
-			<!-- <input class=form-control type="password" id=passwordWygen><br><br> -->
-			<h3>Klucz udostępniania ankiety: </h3>
-			<label id="KluczAnkiety" style="font-size: 2em;">PLACE HOLDER</label>
-			<br><br>
-			<h3>Klucz dostępu  do wyników ankiety (nie jest później dostępny): </h3>
-			<label id="CCV" style="color: red;font-size: 2em;">PLACE HOLDER</label>
-			<br><br><br>
+			<div id="generatedSurveyPasswdInputDiv" style="display:none;">
+				<h1>Zapisz koniecznie te dane!</h1>
+				<br>
+				<!-- <input class=form-control type="password" id=passwordWygen><br><br> -->
+				<h3>Klucz udostępniania ankiety: </h3>
+				<label id="KluczAnkiety" style="font-size: 2em;">PLACE HOLDER</label>
+				<br><br>
+				<h3>Klucz dostępu  do wyników ankiety (nie jest później dostępny): </h3>
+				<label id="CCV" style="color: red;font-size: 2em;">PLACE HOLDER</label><br><br><br>
+				<button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView  onclick="showGenerator(); writeSurvey(); " id="sendSurvey" > Wyślij ankietę !</button>
+			</div>
+		
 			<!-- <button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView  onclick="showGenerator(); writeSurvey(); mojeAnkiety()" id="sendSurvey" > Wyślij ankietę !</button> -->
-			<button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView  onclick="showGenerator(); writeSurvey(); " id="sendSurvey" > Wyślij ankietę !</button>
+			<button type="button" class="btn btn-light btn-lg btn-block gSPID"  onclick="gSPID()" id="sendSurvey" > > Dalej > </button>
 		</div>
 
 		<div id=AddSurveyByKey class=col-md-5 style="margin-left: 27%;">

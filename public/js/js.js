@@ -27,6 +27,18 @@ function errorGoToMain(){
 
 //#################################################### Obsługa błędów ^^^
 
+function gSPID(){
+    let xd = document.getElementsByClassName("gSPID");
+    for(var i = 0; i<xd.length;i++){
+
+        xd[i].style.display = "none";
+    }
+
+    document.getElementById("generatedSurveyPasswdInputDiv").style.display="block";
+
+}
+
+
 
 
 function mojeAnkiety(){
