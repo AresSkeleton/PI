@@ -14,7 +14,7 @@ router.get('/dodajankiete', (req, res) =>{
 router.get('/mojeankiety', async(req, res) =>{
 
     // TODO need user password
-    let hashpass = new SimpleCrypto("password"); // change to pass
+    let hashpass = new SimpleCrypto("password"); // TODO change to pass
     let arrayObj = [];
     Users.findOne({
         where: {
@@ -26,9 +26,7 @@ router.get('/mojeankiety', async(req, res) =>{
         let arrayKeys = surveyKeys.hashedKeys.split(', ');
         for(let i = 0; i < arrayKeys.length-1; i++){
 
-            let unhashedKey = hashpass.decrypt(arrayKeys[i]); // password here
-
-
+            let unhashedKey = hashpass.decrypt(arrayKeys[i]); // TODO password here
             // Surveys.findOne({
             //             where :{
             //                 key: unhashedKey

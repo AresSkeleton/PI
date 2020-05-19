@@ -19,6 +19,8 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 app.locals.moment = require('moment');
 app.locals.status = null;
+app.locals.ccv = null;
+app.locals.surveyKey = null
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
