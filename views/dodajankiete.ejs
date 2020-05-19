@@ -335,6 +335,9 @@
 			}, function(){
 				//document.location.replace("home");
 				// TODO ajax'em dodać wartości ccv i klucza
+				$("#KluczAnkiety").text (surveyKey);
+				$("#CCV").val(ccv);
+				document.getElementById("generatedSurveyPasswdInputDiv").style.display = "block";
 			});
 			console.log('Sended to middlevare-----------------');
 
