@@ -78,6 +78,7 @@
 			<h3 class=" gSPID">Hasło Do konta</h3>		
 			
 			<br>
+
 			<input class="form-control gSPID" type="password" id=passwordWygen><br><br>
 
 			<div id="generatedSurveyPasswdInputDiv" style="display:none;">
@@ -93,7 +94,9 @@
 			</div>
 		
 			<!-- <button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView  onclick="showGenerator(); writeSurvey(); mojeAnkiety()" id="sendSurvey" > Wyślij ankietę !</button> -->
+
 			<button type="button" class="btn btn-light btn-lg btn-block gSPID"  onclick="gSPID();  writeSurvey(); " id="sendSurvey" > Prześlij! </button>
+
 		</div>
 
 		<div id=AddSurveyByKey class=col-md-5 style="margin-left: 27%;">
@@ -183,9 +186,12 @@
 		$('#sendSurvey').click(function(){
 			//TODO: Pobranie hasła z tego samego id  = #sendSurvey // teraz jest to button // id inputu z hasłem = passwordWygen
 			let surveyName =$('#title').text();
-			let surveyKey;
+			
+			
+			
 			let surveyObject = {
 				title : surveyName,
+				ccv : "",
 			};
 			
 			//------------------------------------------------------------------
@@ -269,7 +275,7 @@
 							
 							optionsOfCheck.push(checkOptionName);
 							
-							console.log(optionsOfCheck);
+							//console.log(optionsOfCheck);
 						}
 
 
@@ -307,7 +313,10 @@
 			}
 
 			let date = $('#date').text();
-			surveyKey = makeid(4) + date;
+			let surveyKey = makeid(4) + date;
+
+			let pass = $("#passwordWygen").val();
+
 
 
 			console.log(surveyKey);
@@ -315,8 +324,18 @@
 
 			let surveyData = JSON.stringify(surveyObject);
 
+			//console.log(surveyObject);
 
-			$.post("/dodajankiete",{key: surveyKey ,title: surveyName, data: surveyData, session: session});
+
+			$.post("/dodajankiete",{
+				key: surveyKey ,
+				title: surveyName, 
+				data: surveyData, 
+				session: session, 
+				pass : pass
+			}, function(){
+				//document.location.replace("home");
+			});
 			console.log('Sended to middlevare-----------------');
 
 			// console.log(surveyData);
