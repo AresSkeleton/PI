@@ -319,7 +319,7 @@
 
 
 
-			console.log(surveyKey);
+			//console.log(surveyKey);
 
 
 			let surveyData = JSON.stringify(surveyObject);
@@ -336,8 +336,10 @@
 			}, function(){
 				//document.location.replace("home");
 				// TODO ajax'em dodać wartości ccv i klucza
-				$("#KluczAnkiety").text (surveyKey);
-				$("#CCV").val(ccv);
+				$("#KluczAnkiety").text(surveyKey);
+				$("#CCV").text("<%= uniqueCCV%>");
+
+
 				document.getElementById("generatedSurveyPasswdInputDiv").style.display = "block";
 			});
 			console.log('Sended to middlevare-----------------');

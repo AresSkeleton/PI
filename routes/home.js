@@ -6,6 +6,11 @@ const Surveys = require('../models/Surveys');
 
 router.get('/dodajankiete', (req, res) =>{
     // console.log(req.cookies.login);
+
+
+    
+
+    
     res.render('dodajankiete', { user: req.cookies.login});
 })
 
@@ -14,54 +19,75 @@ router.get('/dodajankiete', (req, res) =>{
 router.get('/mojeankiety', async(req, res) =>{
 
     // TODO need user password
-    let hashpass = new SimpleCrypto("password"); // TODO change to pass
-    let arrayObj = [];
+    
+    let hashpass = new SimpleCrypto("test2"); // TODO change to pass
+    let arrayYourSurveyObj = [];
+    let arrayNONEYourSurveyObj = [];
     Users.findOne({
         where: {
             login : req.cookies.login
         },
-        attributes : ['hashedKeys']
+        attributes : ['hashedKeys', 'anotherHashedKeys']
     }).then(async surveyKeys=>{
+        if(!surveyKeys.hashedKeys ){
+            let arrayKeys = ["xd"];
+            let addedArraysKeys = surveyKeys.anotherHashedKeys.split(', ');
+            for(let i = 0; i < addedArraysKeys.length-1; i++){
+
+                let unhashedKey = hashpass.decrypt(addedArraysKeys[i]); // TODO password here
+                const surv = await Surveys.findOne({
+                    where : {
+                        key: unhashedKey
+                    },
+                    attributes: ['id', 'name'],
+                })
+    
+                arrayNONEYourSurveyObj.push(surv);
+                //console.log(arrayYourSurveyObj+"\n"+surv);
+                 // TODO send arrayYourSurveyObj and arrayNONEYourSurveyObj to mojeankiety
+            } // for end
+
+
+        }else
+        if(!surveyKeys.anotherHashedKeys){
+            let arrayKeys = surveyKeys.hashedKeys.split(', ');
+            arrayNONEYourSurveyObj = ["xd"];
+            for(let i = 0; i < arrayKeys.length-1; i++){
+
+                let unhashedKey = hashpass.decrypt(arrayKeys[i]); // TODO password here
+                const surv = await Surveys.findOne({
+                    where : {
+                        key: unhashedKey
+                    },
+                    attributes: ['id', 'name'],
+                })
+    
+                arrayYourSurveyObj.push(surv);
+                //console.log(surv+"\n"+arrayNONEYourSurveyObj);
+                // TODO send arrayYourSurveyObj and arrayNONEYourSurveyObj to mojeankiety
+            } // for end
+            
+        }
         
-        let arrayKeys = surveyKeys.hashedKeys.split(', ');
-        for(let i = 0; i < arrayKeys.length-1; i++){
+        console.log(arrayYourSurveyObj[0].name+"\n"+arrayNONEYourSurveyObj);
+        res.status(200).send('ok');
+        // for(let i = 0; i < arrayKeys.length-1; i++){
 
-            let unhashedKey = hashpass.decrypt(arrayKeys[i]); // TODO password here
-            // Surveys.findOne({
-            //             where :{
-            //                 key: unhashedKey
-            //             },
-            //             attributes: ['id', 'name'],
-                        
-            //         }).then(surveyInfo=>{
-                        
-            //             arrayObj.push(surveyInfo);
-            //             //console.log(arrayObj.length);
-            //             //console.log("FINDONE")
-                        
-            //             //res.render('mojeankiety', { user: req.cookies.login, usersurveys : arrayObj});
-            //         })
+        //     let unhashedKey = hashpass.decrypt(arrayKeys[i]); // TODO password here
+        //     const surv = await Surveys.findOne({
+        //         where : {
+        //             key: unhashedKey
+        //         },
+        //         attributes: ['id', 'name'],
+        //     })
 
-
-            // findSurveys(unhashedKey).then(err ,foundSurvey =>{
-            //     arrayObj.push(foundSurvey);
-                
-            //     //console.log(arrayObj.length);
-            // })
-            const surv = await Surveys.findOne({
-                where : {
-                    key: unhashedKey
-                },
-                attributes: ['id', 'name'],
-            })
-
-            arrayObj.push(surv);
+        //     arrayYourSurveyObj.push(surv);
 
             
 
-        } // for end
+        // } // for end
         
-        console.log(arrayObj.length+"co kurwa");
+        
     })
     
     //res.render('mojeankiety', { user: req.cookies.login});

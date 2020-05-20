@@ -19,8 +19,9 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 app.locals.moment = require('moment');
 app.locals.status = null;
-app.locals.ccv = null;
-app.locals.surveyKey = null
+
+app.locals.uniqueCCV = makeid(10);
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -59,5 +60,18 @@ app.post('/addSurveyByKey', routerSurvey);
 // app.get('/home', routerHome);
 
 app.listen(port, console.log(`Serwer urochomiony na porcie 1337`));
+
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+
 
 module.exports = app;
