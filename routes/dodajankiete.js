@@ -24,14 +24,7 @@ router.post('/dodajankiete', function(req, res){
     // console.log(req.body.key);
     let key = req.body.key;
     let session = req.body.session;
-
-    //json with empty ccv
-    
-    // -----
-
-
-    let parseSession = session.split('=');
-    //console.log("dsaddddddddasdddsaadsasd");
+    let parseSession = session.split('=');;
 
     let hashPass = new SimpleCrypto(req.body.pass); 
     let hashKey = new SimpleCrypto(key);
