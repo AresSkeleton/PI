@@ -24,35 +24,60 @@ router.post('/dodajankiete', function(req, res){
     // console.log(req.body.key);
     let key = req.body.key;
     let session = req.body.session;
-    let surveyJsonWithoutCCV = req.body.data;
+
+    //json with empty ccv
+    
+    // -----
+
+
     let parseSession = session.split('=');
     //console.log("dsaddddddddasdddsaadsasd");
 
-    let hashPass = new SimpleCrypto(req.body.pass); //TODO change to actual password
+    let hashPass = new SimpleCrypto(req.body.pass); 
     let hashKey = new SimpleCrypto(key);
-    // TODO encrypt req.body.data
+    
 
 
+    //TODO - not usefull in this js--------------------
+    //let surveyDataDeleteCVV = JSON.parse(req.body.data);
+    //delete surveyDataDeleteCVV["ccv"];
+    //let surveyJsonWithoutCCV = JSON.stringify(surveyDataDeleteCVV);
+    // let hashSurveyByKey = hashKey.encrypt(surveyJsonWithoutCCV);
+    //-------------------------------------------
+    
+    
+    //become object
     let surveyData = JSON.parse(req.body.data);
+    //------
 
     // console.log("---------------------------");
     // console.log(surveyData);
     // console.log("---------------------------");
-    let ccv = makeid(10);
-    surveyData["ccv"] = ccv;
+
+    
+    surveyData["ccv"] = req.app.locals.uniqueCCV;
+    
+    // console.log(surveyData["ccv"]+" -------------------------------------------- ccv in survey");
+
+
+    // console.log("------------------------with ccv--------------------------");
+    // console.log(surveyData);
+
+
+    // console.log("------------------------without ccv--------------------------");
+    // console.log(surveyDataDeleteCVV);
 
     let surveyJsonWithCCV = JSON.stringify(surveyData);
     
 
     let hashedKey = hashPass.encrypt(key) // szyfrowane klucza hasłem 
 
-    let hashSurveyByKey = hashKey.encrypt(surveyJsonWithoutCCV);
+    let hashSurveyByKey = hashKey.encrypt(surveyJsonWithCCV);
     let hashSurveyByPassword = hashPass.encrypt(surveyJsonWithCCV);
     
-
+    let importccv = makeid(10);
     //console.log(req.app.locals.status);
-    console.log("IDZIE");
-    console.log("----------------------");
+   
     Users.findOne({
         where : {
             login : req.cookies.login
@@ -82,9 +107,14 @@ router.post('/dodajankiete', function(req, res){
                             data: hashSurveyByPassword,
                             done: '0',
                         }).then(function(){
-                            console.log("Przeszło");
-                            req.app.locals.ccv = ccv;
-                            req.app.locals.surveyKey = key;
+                            // console.log("----------------------------");
+                            // console.log(req.app.locals.uniqueCCV); 
+                            // console.log("---------------------------- old");
+                            req.app.locals.uniqueCCV = importccv;
+                            // console.log("----------------------------");
+                            // console.log(req.app.locals.uniqueCCV);
+                            // console.log("---------------------------- new" );
+                            
                             res.send({status : "ok"});
                         }).catch(e =>{
                             res.send({status : 'error'});

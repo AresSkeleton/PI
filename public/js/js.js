@@ -1,4 +1,3 @@
-
 //########################### Po wciśnięciu "Dodaj ankiete"
 var idOfQuestion = 0;     // Przechowuje informacje na temat ilosci pytań   //
 
@@ -48,6 +47,7 @@ function mojeAnkiety(){
 
 
 function showGenerator(){
+    
     var xd = document.getElementsByClassName("generatorAnkiet");
     for(var i = 0; i<xd.length;i++){
 
@@ -55,6 +55,7 @@ function showGenerator(){
     }
     document.getElementById("generatedSurveySend").style.display = "none"
     document.getElementById("AddSurveyByKey").style.display = "none";
+    
 }
 
 function wysylanieWygenerowanejAnkiety(){
