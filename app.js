@@ -61,6 +61,9 @@ app.post('/addSurveyByKey', routerSurvey);
 
 app.listen(port, console.log(`Serwer urochomiony na porcie 1337`));
 
+
+
+
 function makeid(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
