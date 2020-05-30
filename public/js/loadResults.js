@@ -21,7 +21,11 @@ var jsonWyn = `{
 
 let wyn = JSON.parse(jsonWyn);
 
-
+/**
+ * Funkcja licząca odpowiedzi z pytań typu jednokrotnego wyboru
+ * @param {integer} pytango 
+ * @param {integer} numereg 
+ */
 function radioWyn(pytango, numereg){
     console.log(pytango);
     let tajtle  = pytango['name'];
@@ -66,7 +70,11 @@ function radioWyn(pytango, numereg){
     </div>
     `;
 }
-
+/**
+ * Funkcja licząca odpowiedzi z pytań typu wielokrotnego wyboru
+ * @param {integer} pytango 
+ * @param {integer} numereg 
+ */
 function checkboxWyn(pytango, numereg){
     console.log(pytango);
     let tajtle  = pytango['name'];
@@ -116,7 +124,11 @@ function checkboxWyn(pytango, numereg){
 
 }
 
-// Text wysyłany do pliku ?
+/**
+ * Funkcja licząca odpowiedzi z pytań otwartych
+ * @param {integer} pytango 
+ * @param {integer} numereg 
+ */
 function textboxWyn(pytango, numereg){
     console.log(pytango);
     var tajtle  = pytango['name'];
@@ -152,7 +164,10 @@ function textboxWyn(pytango, numereg){
 
 
 
-//Input is parsed Json file
+/**
+ * Funkcja przetwarzająca plik typu JSON na wyniki ankiety
+ * @param {JSON} wyn 
+ */
 function pokazWyniki(wyn){
     var iloscPytan = Object.keys(wyn).length;
     var prefix = "EntireQuestionNo";

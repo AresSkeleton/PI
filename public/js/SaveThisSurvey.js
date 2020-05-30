@@ -1,4 +1,12 @@
+
 class pytanie{
+    /**
+     * Klasa opisująca każde pytanie
+     * @param {string} name 
+     * @param {char} type 
+     * @param {String Array} options 
+     * @param {String|integer Array} input 
+     */
     constructor(name, type, options, input) {
         this.name = name;
         this.type = type;
@@ -8,7 +16,11 @@ class pytanie{
 }
 let questionListR = []
 let jsonSurvey;
-
+/**
+ * Zapisywanie odpowiedzi z pytania jednokrotnego wyboru
+ * @param {DOM} handle 
+ * @param {integer} numerPytania 
+ */
 function surveyRadio(handle, numerPytania){
     let name;
     let type = "r";
@@ -40,6 +52,11 @@ function surveyRadio(handle, numerPytania){
     questionListR.push(temp);
    
 }
+/**
+ * Zapisywanie odpowiedzi z pytania wielokrotnego wyboru 
+ * @param {DOM} handle 
+ * @param {integer} numerPytania 
+ */
 function surveyCheck(handle, numerPytania){
     let name;
     let type = "c";
@@ -76,7 +93,11 @@ function surveyCheck(handle, numerPytania){
     questionListR.push(temp);
 }
 
-
+/**
+ * Zapisywanie odpowiedzi z pytania otwartego
+ * @param {DOM} handle 
+ * @param {integer} numerPytania 
+ */
 function surveyText(handle, numerPytania){
     let name;
     let type = "t";
@@ -98,7 +119,9 @@ function surveyText(handle, numerPytania){
 
 
 
-
+/**
+ * Zapisywanie odpowiedzi z ankiety do pliku Json 
+ */
 function writeSurvey(){
     let Title;
     let prefix = "EntireQuestionNo";
