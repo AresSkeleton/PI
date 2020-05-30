@@ -29,7 +29,7 @@ function radioWyn(pytango, numereg){
     let opszyns = pytango['options'];     // Tablica opcji
     let opcjeLiczba = Object.keys(opszyns).length; // liczba opcji
 
-    let odpowiedzi = pytango['input'];
+    let odpowiedzi = pytango['input'].flat();
     let odpowiedziLiczba =  Object.keys(odpowiedzi).length;
 
     zliczOdpowiedzi = [];
@@ -91,8 +91,6 @@ function checkboxWyn(pytango, numereg){
     }
 
 
-    
-
     document.getElementById("forma").innerHTML +=`
     <div xd="Check" id="EntireQuestionNo`+idOfQuestion+`">
     
@@ -123,7 +121,7 @@ function textboxWyn(pytango, numereg){
     console.log(pytango);
     var tajtle  = pytango['name'];
 
-    let odpowiedzi = pytango['input'];   
+    let odpowiedzi = pytango['input'].flat();   
     
     let odpowiedziLiczba =  Object.keys(odpowiedzi).length;
 
