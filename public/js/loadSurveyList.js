@@ -1,5 +1,3 @@
-
-
 a = ["xd"];
 b = [[1,"Name"],[2,"Name2"],[3,"Name3"]];
 
@@ -50,7 +48,4 @@ function tabelaWynikowAnkiet(a){
             row.insertCell().innerHTML = "<a href='?usun="+x[0]+"'>"+" Usuń "+"</a>";
         }
     }
-
-
-
 }
