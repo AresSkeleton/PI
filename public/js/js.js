@@ -41,7 +41,7 @@ function gSPID(){
 
 
 function mojeAnkiety(){
-    location.replace("/mojeankiety");
+    location.replace("/home");
 
 }
 

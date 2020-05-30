@@ -139,29 +139,48 @@ router.post('/addSurveyByKey', async function(req, res){
             login : req.cookies.login
         }
     }).then( userRecord =>{
-        let iscorrect = bcrypt.compareSync(req.body.pass, userRecord.password);  // TODO: change compare function to in if(pass1 == pass2)
+        let iscorrect = bcrypt.compareSync(req.body.pass, userRecord.password);  
         if(iscorrect){
-            console.log('11111111111111111111111111111111');
+            //console.log('11111111111111111111111111111111');
             Surveys.findOne({
                 where : {
                     key: req.body.key
                 },
-                attributes: ['name']
+                attributes: ['name', 'data']
             }).then( surveyByKey=>{
                 if(surveyByKey){
+
+                    let hashByKey = new SimpleCrypto(req.body.key);
                     let hashPass = new SimpleCrypto(req.body.pass); 
-                    let hashKey = hashPass.encrypt(req.body.key)
+
+
+                    let surveyDataJson = hashByKey.decrypt(surveyByKey.data); //json data
+                    let hashKey = hashPass.encrypt(req.body.key);
+
+                    let hashedData = hashPass.encrypt(surveyDataJson);
+                    //console.log(surveyDataJson);
+
                     Users.update({
-                        AnotherHashedKeys : Sequelize.fn('CONCAT', Sequelize.col("AnotherHashedKeys"), hashKey+", "    )
+                        anotherHashedKeys : Sequelize.fn('CONCAT', Sequelize.col("anotherHashedKeys"), hashKey+", "    )
                     }, {where : {
                         login : req.cookies.login
                         }
                     }).then( function(){
-                        res.send({status: "ok"});
-                        
+                        //console.log('dobrze');
+                        //res.send({status: "ok"});
+                        UserSurveys.create({
+                            hashedKey: hashKey,                 // data z ankiety
+                            data: hashedData,
+                            done: '0',
+                        }).then( function(){
+                            res.send("ok");
+                        }).catch(err =>{
+                            res.send(err);
+                        });
                     }).catch(err =>{
                         res.send({status: "error"});
-                    })
+                    });
+
                 }else{
                     res.send({status: "error"});
                 }

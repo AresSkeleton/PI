@@ -50,7 +50,7 @@
 			<div id=uzytkownik>
 				<div class="dropdown show">
 					  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						
+						<%= user %>
 					  </a>
 
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -77,8 +77,8 @@
 		  <thead>
 			<tr>
 			  <th scope="col">#</th>
+			  <th scope="col">ID</th>
 			  <th scope="col">Nazwa</th>
-			  <th scope="col">Klucz</th>
 			  <th scope="col">Przejdź</th>
 			  <th scope="col">Usuń</th>
 			</tr>
@@ -107,8 +107,8 @@
 		  <thead>
 			<tr>
 				<th scope="col">#</th>
+				<th scope="col">ID</th>
 				<th scope="col">Nazwa</th>
-				<th scope="col">Klucz</th>
 				<th scope="col">Przejdź</th>
 				<th scope="col">Usuń</th>
 			  </tr>
@@ -149,4 +149,78 @@
 			document.getElementById("zalogowany").style.display = "none";
 		}
 	})
+	console.log("<%= surveyAnother%>");
+
+	//tabelaAnkietDoWypelnienia("<%= JSON.stringify("{{surveyAnother}}")%>");
+
+
+
+	
+	let handleW = document.getElementById("wypelnianeAnkiety");
+	let rowW, cellW, keyNamesW;
+    //if("<%= surveyAnother[0]%>" == "xd"){ //a[0]
+	<% if( surveyAnother[0] == "xd"){ %>
+        //Pusta tabela
+        handleW.innerHTML = "<h5> Stwórz ankietę aby zobaczyć wyniki </h5>";
+    //}else{  
+	<% }else{ %>
+        <% let x %>     
+        //for(let i = 0 ; i < <%= surveyAnother.length%> ; i++){
+		 <% for(let i = 0 ; i <  surveyAnother.length ; i++){ %>  
+			<% x = surveyAnother[i];  %> 
+            rowW = handleW.insertRow();
+            rowW.insertCell().innerHTML = (<%= i %>+1);
+            //for(let j=0; j < x.length; j++){
+
+			<% for(let j=0; j < 2; j++){ %>
+				cellW = rowW.insertCell();
+				
+				<% keyNamesW = Object.keys( x.dataValues );%>
+				cellW.innerHTML  = "<%= x[keyNamesW[j]] %>";
+			
+			<% } %>
+            //linkowanie do zaladujAnkiete.ejs
+            
+			rowW.insertCell().innerHTML = "<a href='zaladujankiete/" + "<%= x[keyNamesW[0]] %>" + "'>" +" >> "+"</a>";
+			//rowW.insertCell().innerHTML = "<a href='zaladujankiete' >" +" >> "+"</a>";
+            rowW.insertCell().innerHTML = "<a href='?usun="+ "<%= x[keyNamesW[0]] %> "+"'>"+" Usuń "+"</a>";
+            
+	 <% 	}%>
+	 <% } %>
+
+
+
+	let handle = document.getElementById("mojeWyniki");
+	let row	, cell, keyNames;
+    //if("<%= surveyAnother[0]%>" == "xd"){ //a[0]
+	<% if( surveysYour[0] == "xd"){ %>
+        //Pusta tabela
+        handle.innerHTML = "<h5> Dodaj ankiety aby je wypełnić </h5>";
+    //}else{  
+	<% }else{ %>
+        <% let x %>     
+        //for(let i = 0 ; i < <%= surveyAnother.length%> ; i++){
+		 <% for(let i = 0 ; i <  surveysYour.length ; i++){ %>  
+			<% x = surveysYour[i];  %> 
+            row = handle.insertRow();
+            row.insertCell().innerHTML = (<%= i %>+1);
+            //for(let j=0; j < x.length; j++){
+
+			<% for(let j=0; j < 2; j++){ %>
+				cell = row.insertCell();
+				<% keyNames = Object.keys( x.dataValues );%>
+				cell.innerHTML  = "<%= x[keyNames[j]] %>";
+			
+			<% } %>
+            //linkowanie do zaladujAnkiete.ejs
+			row.insertCell().innerHTML = "<a href='wynikiankiety/"+"<%= x[keyNames[0]] %>"+"'>"+" >> "+"</a>";
+			row.insertCell().innerHTML = "<a href='?usun="+"<%= x[keyNames[0]] %>"+"'>"+" Usuń "+"</a>";
+            
+	 <% 	}%>
+	 <% } %>
+
+
+	
+
+
 </script>
