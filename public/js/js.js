@@ -56,6 +56,7 @@ function gSPID(){
 
 function mojeAnkiety(){
 
+
     // location.replace("/mojeankiety");
     document.body.innerHTML+=`<div id="overlay" style="display:flex;">
         
@@ -68,6 +69,9 @@ function mojeAnkiety(){
             </div>
        
 	</div>`;
+
+
+//     location.replace("/home");
 
 
 }
