@@ -1,4 +1,11 @@
 class pytanie{
+    /**
+     * Klasa opisująca każde pytanie
+     * @param {string} name 
+     * @param {char} type 
+     * @param {String Array} options 
+     * @param {String|integer Array} input 
+     */
     constructor(name, type, options, input) {
         this.name = name;
         this.type = type;
@@ -8,7 +15,12 @@ class pytanie{
 }
 let questionListR = []
 let jsonAnswers;
-
+/**
+ * Liczenie odpowiedzi pytania typu jednokrotnego wyboru
+ * 
+ * @param {DOM} handle 
+ * @param {integer} numerPytania 
+ */
 function answerRadio(handle, numerPytania){
     let name;
     let type = "r";
@@ -39,6 +51,12 @@ function answerRadio(handle, numerPytania){
     let temp = new pytanie(name,type,options,input);
     questionListR.push(temp);
 }
+/**
+ * Liczenie odpowiedzi pytania typu wielokrotnego wyboru
+ * 
+ * @param {DOM} handle 
+ * @param {integer} numerPytania 
+ */
 function answerCheck(handle, numerPytania){
     let name;
     let type = "c";
@@ -70,7 +88,11 @@ function answerCheck(handle, numerPytania){
     questionListR.push(temp);
 }
 
-
+/**
+ * Liczenie odpowiedzi pytania typu otwartego
+ * @param {DOM} handle 
+ * @param {integer} numerPytania 
+ */
 function answerText(handle, numerPytania){
     let name;
     let type = "t";
@@ -94,7 +116,11 @@ function answerText(handle, numerPytania){
 
 
 
-
+/**
+ * Funkcja licząca pytania pobrane z pliku JSON
+ * @param {DOM} handle 
+ * @param {integer} numerPytania 
+ */
 function readAnswers(){
     let Title;
     let prefix = "EntireQuestionNo";
