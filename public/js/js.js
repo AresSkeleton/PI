@@ -9,6 +9,30 @@ questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 
 
 //#################################################### Obsługa błędów
+let answersCCV;
+
+
+function getCCV(){
+    document.body.innerHTML+=`<div id="overlay" style="display:flex;">
+        
+        <div id=errorBox >
+            <h2 id="getPasswdTitle">Aby przejść do wyników wpisz kod CCV ankiety: </h2>
+            
+            <input class="form-control" type="text" id="getCCVCVV">
+            <br>
+            <button id="getCCVSubmit" class="btn btn-light btn-lg btn-block" style="margin-top:4em;" onClick="readAnswerCCV()"> Przejdź </button>
+        </div>
+
+</div>`;
+
+
+}
+
+
+function readAnswerCCV(){
+    answersCCV = document.getElementById("getCCVCVV").innerText;
+}
+
 
 
 /**
@@ -16,7 +40,6 @@ questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
  * @param {string} header 
  * @param {string} info
  */
-
 function errorOverlayShow(header, info){
     document.getElementById("overlay").style.display = "flex";
     document.getElementById("errorTitle").innerHTML = header;
@@ -63,16 +86,12 @@ function mojeAnkiety(){
             <div id=errorBox >
                 <h2 id="getPasswdTitle">Aby przejść dalej podaj hasło: </h2>
                 
-                <input id="pass" class="form-control" type="password" id="getPasswdPasswd">
+                <input class="form-control" type="password" id="getPasswdPasswd">
                 <br>
                 <button id="getPasswdSubmit" class="btn btn-light btn-lg btn-block" style="margin-top:4em;"> Przejdź </button>
             </div>
        
 	</div>`;
-
-
-//     location.replace("/home");
-
 
 }
 
