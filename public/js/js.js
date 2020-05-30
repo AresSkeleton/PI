@@ -70,6 +70,10 @@ function mojeAnkiety(){
        
 	</div>`;
 
+
+//     location.replace("/home");
+
+
 }
 
 /**

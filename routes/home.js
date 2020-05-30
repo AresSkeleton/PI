@@ -7,20 +7,16 @@ const Surveys = require('../models/Surveys');
 router.get('/dodajankiete', (req, res) =>{
     // console.log(req.cookies.login);
 
-
-    
-
-    
     res.render('dodajankiete', { user: req.cookies.login});
 })
 
 
 
-router.get('/mojeankiety', async(req, res) =>{
+router.get('/mojeankiety', (req, res) =>{
 
     // TODO need user password
     
-    let hashpass = new SimpleCrypto("test2"); // TODO change to pass
+    let hashpass = new SimpleCrypto("test4"); // TODO change to pass
     let arrayYourSurveyObj = [];
     let arrayNONEYourSurveyObj = [];
     Users.findOne({
@@ -29,8 +25,9 @@ router.get('/mojeankiety', async(req, res) =>{
         },
         attributes : ['hashedKeys', 'anotherHashedKeys']
     }).then(async surveyKeys=>{
+
         if(!surveyKeys.hashedKeys ){
-            let arrayKeys = ["xd"];
+            arrayYourSurveyObj = ["xd"];
             let addedArraysKeys = surveyKeys.anotherHashedKeys.split(', ');
             for(let i = 0; i < addedArraysKeys.length-1; i++){
 
@@ -50,8 +47,8 @@ router.get('/mojeankiety', async(req, res) =>{
 
         }else
         if(!surveyKeys.anotherHashedKeys){
-            let arrayKeys = surveyKeys.hashedKeys.split(', ');
             arrayNONEYourSurveyObj = ["xd"];
+            let arrayKeys = surveyKeys.hashedKeys.split(', ');
             for(let i = 0; i < arrayKeys.length-1; i++){
 
                 let unhashedKey = hashpass.decrypt(arrayKeys[i]); // TODO password here
@@ -69,8 +66,12 @@ router.get('/mojeankiety', async(req, res) =>{
             
         }
         
-        console.log(arrayYourSurveyObj[0].name+"\n"+arrayNONEYourSurveyObj);
-        res.status(200).send('ok');
+        //console.log(arrayYourSurveyObj[0].name+"\n"+arrayNONEYourSurveyObj);
+        //res.status(200).send('ok');
+        //console.log(arrayYourSurveyObj +"                     "+ arrayNONEYourSurveyObj);
+
+
+        res.render('mojeankiety', {surveysYour : arrayYourSurveyObj, surveyAnother : arrayNONEYourSurveyObj, user: req.cookies.login});
         // for(let i = 0; i < arrayKeys.length-1; i++){
 
         //     let unhashedKey = hashpass.decrypt(arrayKeys[i]); // TODO password here

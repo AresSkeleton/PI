@@ -12,6 +12,7 @@ const routerIndex = require('./routes/index');
 const routerRegister = require('./routes/register');
 const routerHome = require('./routes/home');
 const routerSurvey = require('./routes/dodajankiete');
+const routerShow = require('./routes/mojeankiety');
 
 app.use(cookieParser());
 app.set('views', path.join(__dirname, 'views'));
@@ -55,8 +56,13 @@ app.get('/mojeankiety', routerHome);
 app.get('/dodajankiete', routerHome);
 app.post('/dodajankiete', routerSurvey);
 app.post('/addSurveyByKey', routerSurvey);
-// app.get('/user', router);
+// app.get('/user', router);   routerShow
 
+//app.get('/=', routerShow);
+app.get('/zaladujankiete/:id', routerShow);
+app.get('/wynikiankiety/:id', routerShow);
+
+app.post('/sendSurvey/:id', routerShow);
 // app.get('/home', routerHome);
 
 app.listen(port, console.log(`Serwer urochomiony na porcie 1337`));
