@@ -4,19 +4,19 @@ var json = `{
         "name":"Example textarea",
         "type":"t",
         "options":[],
-        "input":""
+        "input":[]
     },
     "EntireQuestionNo2":{
         "name":"Example question checkbox ",
         "type":"c",
         "options":["Opcja do wielokrotnego wyboru numer 0"],
-        "input":""
+        "input":[]
     },
     "EntireQuestionNo3":{
         "name":"Example question  ",
         "type":"r",
         "options":["Option 0","Option 1"],
-        "input":""
+        "input":[]
     }
 }`
 

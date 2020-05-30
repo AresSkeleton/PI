@@ -13,7 +13,7 @@ function answerRadio(handle, numerPytania){
     let name;
     let type = "r";
     let options= [];
-    let input;
+    let input= [];
     let sel = 0;
 
     let nextHandle = handle.childNodes;
@@ -22,11 +22,11 @@ function answerRadio(handle, numerPytania){
     handle = handle.nextElementSibling;
     while(1){
         if(handle.id == "Q"+numerPytania+"o"+sel){
-             
+            
             nextHandle = handle.childNodes;
             
             if(nextHandle[1].checked){
-                input= sel;
+                input.push( sel);
             }
             options.push(nextHandle[3].innerHTML);
             sel = sel + 1;
@@ -75,7 +75,7 @@ function answerText(handle, numerPytania){
     let name;
     let type = "t";
     let options= "";
-    let input;
+    let input = [];
 
     // console.log(handle);
 
@@ -84,7 +84,7 @@ function answerText(handle, numerPytania){
     name = nextHandle[1].innerHTML;
     // console.log(name);
     nextHandle = nextHandle[1].nextElementSibling.childNodes;
-    input = nextHandle[3].value;
+    input.push (nextHandle[3].value);
     
 
     let temp = new pytanie(name,type,options,input);
