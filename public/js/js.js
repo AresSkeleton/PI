@@ -10,6 +10,7 @@ questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 
 //#################################################### Obsługa błędów
 let answersCCV;
+let pass; //temp
 
 /**
  * Otwieranie okna do wpisania kodu CCV potrzebnego do wyświetlania ankiety
@@ -92,11 +93,17 @@ function mojeAnkiety(){
                 
                 <input class="form-control" type="password" id="getPasswdPasswd">
                 <br>
-                <button id="getPasswdSubmit" class="btn btn-light btn-lg btn-block" style="margin-top:4em;"> Przejdź </button>
+                <button id="getPasswdSubmit" onClick="getPass()" class="btn btn-light btn-lg btn-block" style="margin-top:4em;"> Przejdź </button>
             </div>
        
 	</div>`;
 
+}
+/**
+ * Pobranie hasła z inputu
+ */
+function getPass(){
+    pass =document.getElementById("getPasswdPasswd").innerText;
 }
 
 /**
