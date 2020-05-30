@@ -24,7 +24,11 @@ var json = `{
 
 let obj = JSON.parse(json);
 
-
+/**
+ * Funkcja wyświetlająca pytanie 
+ * @param {integer} pytango 
+ * @param {integer} numereg 
+ */
 function radio(pytango, numereg){
     // console.log(pytango);
     var tajtle  = pytango['name'];
@@ -54,6 +58,11 @@ function radio(pytango, numereg){
     `;
 }
 
+/**
+ * Funkcja wyświetlająca pytanie 
+ * @param {integer} pytango 
+ * @param {integer} numereg 
+ */
 function checkbox(pytango, numereg){
     // console.log(pytango);
     var tajtle  = pytango['name'];
@@ -83,7 +92,11 @@ function checkbox(pytango, numereg){
 
 }
 
-
+/**
+ * Funkcja wyświetlająca pytanie 
+ * @param {integer} pytango 
+ * @param {integer} numereg 
+ */
 function textbox(pytango, numereg){
     // console.log(pytango);
     var tajtle  = pytango['name'];
@@ -109,7 +122,10 @@ function textbox(pytango, numereg){
 
 
 
-//Input is parsed Json file
+/**
+ * Funkcja wyświetlająca na ekranie pytania zapisane w pliku JSON
+ * @param {JSON} obj 
+ */
 function doQuestionary(obj){
     var iloscPytan = Object.keys(obj).length;
     var prefix = "EntireQuestionNo";
