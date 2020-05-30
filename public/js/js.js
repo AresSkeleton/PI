@@ -1,3 +1,4 @@
+
 //########################### Po wciśnięciu "Dodaj ankiete"
 var idOfQuestion = 0;     // Przechowuje informacje na temat ilosci pytań   //
 
@@ -26,6 +27,19 @@ function errorGoToMain(){
 
 //#################################################### Obsługa błędów ^^^
 
+// function przejdzDoAnkiety(){
+
+//     document.getElementsByName(body).innerHTML+=`<div id="overlay">
+// 		<div id="getPasswd" >
+// 			<h2 id="getPasswdTitle">Aby przejść dalej podaj hasło</h2>
+// 			<input id="pass" class="form-control" type="password" id="getPasswdPasswd">
+//             <button id="getPasswdSubmit" class="btn btn-light btn-lg btn-block"> </button>
+// 		</div>
+// 	</div>`;
+// }
+
+
+
 function gSPID(){
     let xd = document.getElementsByClassName("gSPID");
     for(var i = 0; i<xd.length;i++){
@@ -41,13 +55,25 @@ function gSPID(){
 
 
 function mojeAnkiety(){
-    location.replace("/mojeankiety");
+
+    // location.replace("/mojeankiety");
+    document.body.innerHTML+=`<div id="overlay" style="display:flex;">
+        
+            <div id=errorBox >
+                <h2 id="getPasswdTitle">Aby przejść dalej podaj hasło: </h2>
+                
+                <input id="pass" class="form-control" type="password" id="getPasswdPasswd">
+                <br>
+                <button id="getPasswdSubmit" class="btn btn-light btn-lg btn-block" style="margin-top:4em;"> Przejdź </button>
+            </div>
+       
+	</div>`;
+
 
 }
 
 
 function showGenerator(){
-    
     var xd = document.getElementsByClassName("generatorAnkiet");
     for(var i = 0; i<xd.length;i++){
 
@@ -55,7 +81,6 @@ function showGenerator(){
     }
     document.getElementById("generatedSurveySend").style.display = "none"
     document.getElementById("AddSurveyByKey").style.display = "none";
-    
 }
 
 function wysylanieWygenerowanejAnkiety(){
