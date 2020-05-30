@@ -175,7 +175,7 @@
 			<% for(let j=0; j < 2; j++){ %>
 				cellW = rowW.insertCell();
 				
-				<% keyNamesW = Object.keys( x.dataValues );%>
+				<% keyNamesW = Object.keys( x );%>
 				cellW.innerHTML  = "<%= x[keyNamesW[j]] %>";
 			
 			<% } %>
@@ -208,7 +208,7 @@
 
 			<% for(let j=0; j < 2; j++){ %>
 				cell = row.insertCell();
-				<% keyNames = Object.keys( x.dataValues );%>
+				<% keyNames = Object.keys( x );%>
 				cell.innerHTML  = "<%= x[keyNames[j]] %>";
 			
 			<% } %>

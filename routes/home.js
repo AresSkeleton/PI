@@ -16,7 +16,7 @@ router.get('/mojeankiety', (req, res) =>{
 
     // TODO need user password
     
-    let hashpass = new SimpleCrypto("test4"); // TODO change to pass
+    let hashpass = new SimpleCrypto("test2"); // TODO change to pass
     let arrayYourSurveyObj = [];
     let arrayNONEYourSurveyObj = [];
     Users.findOne({
@@ -37,15 +37,15 @@ router.get('/mojeankiety', (req, res) =>{
                         key: unhashedKey
                     },
                     attributes: ['id', 'name'],
+                    raw: true
                 })
     
                 arrayNONEYourSurveyObj.push(surv);
                 //console.log(arrayYourSurveyObj+"\n"+surv);
-                 // TODO send arrayYourSurveyObj and arrayNONEYourSurveyObj to mojeankiety
             } // for end
 
 
-        }else
+        }
         if(!surveyKeys.anotherHashedKeys){
             arrayNONEYourSurveyObj = ["xd"];
             let arrayKeys = surveyKeys.hashedKeys.split(', ');
@@ -57,16 +57,51 @@ router.get('/mojeankiety', (req, res) =>{
                         key: unhashedKey
                     },
                     attributes: ['id', 'name'],
+                    raw: true
                 })
     
                 arrayYourSurveyObj.push(surv);
                 //console.log(surv+"\n"+arrayNONEYourSurveyObj);
-                // TODO send arrayYourSurveyObj and arrayNONEYourSurveyObj to mojeankiety
             } // for end
             
         }
+        if(surveyKeys.hashedKeys && surveyKeys.anotherHashedKeys){
+            let addedArraysKeys = surveyKeys.anotherHashedKeys.split(', ');
+            for(let i = 0; i < addedArraysKeys.length-1; i++){
+
+                let unhashedKey = hashpass.decrypt(addedArraysKeys[i]); // TODO password here
+                const surv = await Surveys.findOne({
+                    where : {
+                        key: unhashedKey
+                    },
+                    attributes: ['id', 'name'],
+                    raw: true
+                })
+    
+                arrayNONEYourSurveyObj.push(surv);
+                //console.log(arrayYourSurveyObj+"\n"+surv);
+            } // for end
+            let arrayKeys = surveyKeys.hashedKeys.split(', ');
+            for(let i = 0; i < arrayKeys.length-1; i++){
+
+                let unhashedKey = hashpass.decrypt(arrayKeys[i]); // TODO password here
+                const surv = await Surveys.findOne({
+                    where : {
+                        key: unhashedKey
+                    },
+                    attributes: ['id', 'name'],
+                    raw: true
+                })
+    
+                arrayYourSurveyObj.push(surv);
+                //console.log(surv+"\n"+arrayNONEYourSurveyObj);
+            } // for end
+
+        }
         
-        //console.log(arrayYourSurveyObj[0].name+"\n"+arrayNONEYourSurveyObj);
+        console.log("home.js");
+        console.log(arrayYourSurveyObj+"\n"+arrayNONEYourSurveyObj);
+        console.log("------------------------");
         //res.status(200).send('ok');
         //console.log(arrayYourSurveyObj +"                     "+ arrayNONEYourSurveyObj);
 

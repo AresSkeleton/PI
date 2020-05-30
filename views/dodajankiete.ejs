@@ -354,7 +354,11 @@
 			//console.log('123213')
 			let key = $('#key').val();
 			let pass = $('#pass').val();
-			$.post("/addSurveyByKey",{key: key ,pass: pass});
+			$.post("/addSurveyByKey",{key: key ,pass: pass}, function(data, status){
+				if(data.status == "ok"){
+					alert("Ankieta została dodana!");
+				}
+			});
 			//console.log(key);
 		});
 

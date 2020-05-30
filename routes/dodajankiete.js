@@ -173,7 +173,7 @@ router.post('/addSurveyByKey', async function(req, res){
                             data: hashedData,
                             done: '0',
                         }).then( function(){
-                            res.send("ok");
+                            res.send({status : "ok"});
                         }).catch(err =>{
                             res.send(err);
                         });
