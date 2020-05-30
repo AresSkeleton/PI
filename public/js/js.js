@@ -11,7 +11,9 @@ questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
 //#################################################### Obsługa błędów
 let answersCCV;
 
-
+/**
+ * Otwieranie okna do wpisania kodu CCV potrzebnego do wyświetlania ankiety
+ */
 function getCCV(){
     document.body.innerHTML+=`<div id="overlay" style="display:flex;">
         
@@ -28,7 +30,9 @@ function getCCV(){
 
 }
 
-
+/**
+ * Funkcja zapisująca CCV
+ */
 function readAnswerCCV(){
     answersCCV = document.getElementById("getCCVCVV").innerText;
 }
