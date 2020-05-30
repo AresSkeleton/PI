@@ -15,7 +15,7 @@
 
   <script src="/bootstrap/js/bootstrap.bundle.js"></script>
   <script src="/js/js.js"></script>
-  <script src="/js/loadView.js"></script>
+ 
   <script src="/js/readAnswers.js"></script>
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">  
   <link href="/css/style.css" rel="stylesheet" type="text/css" >
@@ -43,7 +43,7 @@
 		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
 
-	 <div id="loginbox" elid='<%=users[0].id%>' >
+	 <div id="loginbox" >
 		<div id=logowanie onclick="zaloguj()" > Zaloguj</div>
 		
 		<div id=zalogowany >
@@ -51,7 +51,7 @@
 			<div id=uzytkownik>
 				<div class="dropdown show">
 					  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<%= users[0].name %>
+						<%= user %>
 					  </a>
 
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -82,7 +82,7 @@
 
 		</div>
 		<div id="SendSurveyDiv" >
-        	<button type="button" class="btn btn-light btn-lg btn-block" name=SendSurvey  onclick="readAnswers()" id="SendSurvey" > Wyślij ankietę !</button>
+        	<button id="SendSurvey" type="button" class="btn btn-light btn-lg btn-block" name=SendSurvey  onclick="readAnswers()" id="SendSurvey" > Wyślij ankietę !</button>
 		</div>
 	
 
@@ -102,15 +102,137 @@
 <script>
 	$(document).ready(function( ){
 		var session = document.cookie;
+		console.log(session);
 		if(session){
 			document.getElementById("logowanie").style.display = "none";
 		}else{
 			document.getElementById("zalogowany").style.display = "none";
 		}
 
+
+
+
+
+		$('#SendSurvey').click(function() {
+			let id = window.location.pathname;
+			id = id.split('/')[2];
+			console.log(jsonAnswers);
+			$.post("/sendSurvey/"+id, { answers: jsonAnswers} , function(req, res){
+
+			})
+		});
+
+	});
 		////////////////////////////////////////////////////
-		doQuestionary(obj)
+		//doQuestionary(obj)
 		//////////////////////////////////////////////////
 
-	})
+		<% let iloscPytan = Object.keys(data).length;
+		let prefix = "EntireQuestionNo"; %>
+
+		document.getElementById("forma").innerHTML += `<legend id="title" contenteditable="false" class="col-md-8" style="text-align: center;">`+"<%= data['title'] %>" +`</legend>` ;
+		
+		<% for(let i = 1; i<iloscPytan ; i++){
+			// var questionName = obj[prefix+i]["name"];
+			let question = data[prefix+i];
+			if(question['type']=="r"){
+				
+				radio(question,i);
+			}        
+			else
+			if(question['type']=="c"){
+				
+				checkbox(question,i);
+			}else
+			if(question['type']=="t"){
+				//textbox(question,i);
+			}
+
+		} %>
+
+
+		<% function radio(pytango, numereg){
+
+    	// console.log(pytango);
+			var tajtle  = pytango['name'];
+			var opszyns = pytango['options'];
+			var inputy = Object.keys(opszyns).length; %>
+
+			document.getElementById("forma").innerHTML +=`
+			<div xd="Radio" id="EntireQuestionNo`+ "<%= numereg %>" +`">
+
+				<label class="questionLabel"  id="questionLabel`+ "<%= numereg %>"+`" contenteditable="false" >` + "<%=tajtle %>" + `  </label>            
+
+				<div id="divOfQuestion`+"<%=numereg%>"+`">`;
+						
+			<% for(let i = 0 ; i< inputy; i++){ %>
+
+				document.getElementById("forma").innerHTML +=`
+						<div class="custom-control custom-radio" id="Q`+"<%= numereg %>"+`o`+"<%= i %>"+`">
+
+						<input type="radio" class="custom-control-input" id="radioGroupOption`+  "<%= i %>" +`" name="groupOfRadiosFromQuestion`+"<%= numereg %>"+`">
+						<label class="custom-control-label" for="radioGroupOption`+ "<%= i %>"  +`" contenteditable="false">`+"<%= opszyns[i] %>"+`</label> 
+						</div>`;
+			<% } %>
+			
+				document.getElementById("forma").innerHTML +=`
+						</div>
+						<br>
+					</div>
+					`;
+		<% } %>
+
+		<% function checkbox(pytango, numereg){
+			// console.log(pytango);
+			var tajtle  = pytango['name'];
+			var opszyns = pytango['options'];
+			var inputy = Object.keys(opszyns).length; %>
+
+			document.getElementById("forma").innerHTML +=`
+			<div xd="Check" id="EntireQuestionNo`+"<%= numereg %>"+`">
+			
+				<label class="questionLabel" id="questionLabel`+"<%= numereg %>" +`" contenteditable="false" >`+"<%= tajtle %>"+`</label>
+
+					<div id="divOfQuestion`+"<%= numereg %>"+`">`;
+
+			<% for(var i = 0 ; i< inputy; i++){  %>
+				document.getElementById("forma").innerHTML +=`
+						<div class="custom-control custom-checkbox" id="Q`+"<%= numereg %>"+`o`+"<%= i %>"+`">
+						
+							<input type="checkbox" class="custom-control-input" id="checkboxOption`+"<%= i %>"+`">
+							<label class="custom-control-label" for="checkboxOption`+ "<%= i %>"+`" contenteditable="false">`+"<%= opszyns[i] %>"+`</label>
+						</div>`
+			<% } %>        
+			document.getElementById("forma").innerHTML +=`			
+					</div>		
+						
+					<br>
+			</div>        
+			`;
+
+
+		<% } %>
+
+
+		<% function textbox(pytango, numereg){
+			// console.log(pytango);
+			var tajtle  = pytango['name']; %>
+
+
+			document.getElementById("forma").innerHTML += `
+			<div xd="Text" id="EntireQuestionNo`+"<%= numereg %>"+`">
+
+			
+				<label class="questionLabel " id="questionLabel`+"<%= numereg %>" +`" contenteditable="false">`+ "<%= tajtle %>"+`</label>
+
+				<div id="divOfQuestion`+"<%= numereg %>"+`" class="form-group col-md-8">              
+						
+						<br>
+						<textarea  class="form-control" id="question`+"<%= numereg %>" +`" rows="1"></textarea>
+				</div><br>
+
+			</div>
+			`;
+
+		<% } %>
 </script>

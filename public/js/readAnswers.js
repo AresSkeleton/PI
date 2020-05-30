@@ -125,7 +125,7 @@ function readAnswers(){
         numerPytania=numerPytania+1;
     }
 
-    console.log(questionListR)
+    //console.log(questionListR)
 
     numerPytaniaJson =1;
     let tablicaPytanDoZapisu ={};
