@@ -35,7 +35,7 @@ function getCCV(){
  * Funkcja zapisująca CCV
  */
 function readAnswerCCV(){
-    answersCCV = document.getElementById("getCCVCVV").innerText;
+    answersCCV = document.getElementById("getCCVCVV").value;
 }
 
 
@@ -103,7 +103,7 @@ function mojeAnkiety(){
  * Pobranie hasła z inputu
  */
 function getPass(){
-    pass =document.getElementById("getPasswdPasswd").innerText;
+    pass =document.getElementById("getPasswdPasswd").value;
 }
 
 /**

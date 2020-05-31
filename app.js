@@ -20,9 +20,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 app.locals.moment = require('moment');
 app.locals.status = null;
-
 app.locals.uniqueCCV = makeid(10);
-
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -51,7 +49,7 @@ app.get('/home', routerIndex);
 
 
 
-app.get('/mojeankiety', routerHome);
+app.get('/mojeankiety/:uspass', routerHome);
 
 app.get('/dodajankiete', routerHome);
 app.post('/dodajankiete', routerSurvey);
@@ -60,7 +58,8 @@ app.post('/addSurveyByKey', routerSurvey);
 
 //app.get('/=', routerShow);
 app.get('/zaladujankiete/:id', routerShow);
-app.get('/wynikiankiety/:id', routerShow);
+
+app.get('/wynikiankiety/:id/:usccv', routerShow);
 
 app.post('/sendSurvey/:id', routerShow);
 // app.get('/home', routerHome);

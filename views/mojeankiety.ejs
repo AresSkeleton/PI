@@ -39,7 +39,7 @@
 	<nav>
 	 <div id=leftnav>
 		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
-		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
+		<div id=mojeAnkiety >Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
 
 	 <div id="loginbox" >
@@ -54,7 +54,7 @@
 					  </a>
 
 					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" href="#">Wyloguj</a>
+						<a id="logout" class="dropdown-item" href="#">Wyloguj</a>
 					  </div>
 				</div>
 			
@@ -149,13 +149,12 @@
 			document.getElementById("zalogowany").style.display = "none";
 		}
 	})
-	console.log("<%= surveyAnother%>");
+	//console.log("<%= surveyAnother%>");
 
 	//tabelaAnkietDoWypelnienia("<%= JSON.stringify("{{surveyAnother}}")%>");
 
 
 
-	
 	let handleW = document.getElementById("wypelnianeAnkiety");
 	let rowW, cellW, keyNamesW;
     //if("<%= surveyAnother[0]%>" == "xd"){ //a[0]
@@ -181,7 +180,7 @@
 			<% } %>
             //linkowanie do zaladujAnkiete.ejs
             
-			rowW.insertCell().innerHTML = "<a href='zaladujankiete/" + "<%= x[keyNamesW[0]] %>" + "'>" +" >> "+"</a>";
+			rowW.insertCell().innerHTML = "<a href='/zaladujankiete/" + "<%= x[keyNamesW[0]] %>" + "'>" +" >> "+"</a>";
 			//rowW.insertCell().innerHTML = "<a href='zaladujankiete' >" +" >> "+"</a>";
             rowW.insertCell().innerHTML = "<a href='?usun="+ "<%= x[keyNamesW[0]] %> "+"'>"+" Usuń "+"</a>";
             
@@ -208,19 +207,56 @@
 
 			<% for(let j=0; j < 2; j++){ %>
 				cell = row.insertCell();
-				<% keyNames = Object.keys( x );%>
+				<% keyNames = Object.keys( x ); %>
 				cell.innerHTML  = "<%= x[keyNames[j]] %>";
 			
 			<% } %>
             //linkowanie do zaladujAnkiete.ejs
-			row.insertCell().innerHTML = "<a href='wynikiankiety/"+"<%= x[keyNames[0]] %>"+"'>"+" >> "+"</a>";
+			//row.insertCell().innerHTML = "<a href='   /wynikiankiety/"+ surveyccv +"/<%= x[keyNames[0]] %>   '> >> </a>";
+			row.insertCell().innerHTML = "<a id='wynikiankiety"+ "<%= x[keyNamesW[0]] %> " +"'> >> </a>";
 			row.insertCell().innerHTML = "<a href='?usun="+"<%= x[keyNames[0]] %>"+"'>"+" Usuń "+"</a>";
             
 	 <% 	}%>
 	 <% } %>
 
-
+	$("[id^='wynikiankiety']").click(function(){
+		//console.log("click");
+		let selectorId = $(this).attr("id").replace("wynikiankiety", "").trim();
+		//console.log(selectorId);
+		let usccv = prompt("Wprowadz kod CCV ,aby zobaczyć wyniki ankietowania");
+		if(usccv != null){
+			document.location.replace('/wynikiankiety/'+selectorId+"/"+usccv);
+		}
+	})
 	
 
+
+	$('#dodajAnkiete').click(function(){
+			document.location.replace('/dodajankiete');
+
+		});
+		
+		
+	$('#mojeAnkiety').click(function(){
+		let usPassword = prompt("Wpisz hasło ,aby kontynuować");
+		// let crypt = new SimpleCrypto("<%= user.login%>");
+		if(usPassword != null){
+			// usPassword = crypt.encrypt(usPassword);
+			// $.get('/mojeankiety/'+usPassword ); 
+			document.location.replace('/mojeankiety/'+usPassword);
+			
+		}
+		
+		
+		
+	});
+
+
+
+	
+	$('#logout').click(function(){
+		document.cookie = "login=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		document.location.replace('/');
+	});
 
 </script>
