@@ -90,8 +90,8 @@ router.post('/sendSurvey/:id', function(req, res){
                                 let ccv = decryptedData["ccv"];
                                 //console.log(ccv);
                                 let hashedByCCV = new SimpleCrypto(ccv);
-                                console.log(ccv);
-                                console.log("--------------------------------");
+                                // console.log(ccv);
+                                // console.log("--------------------------------");
 
                                 if(ifSurveyExists){
                                     // todo update row
@@ -104,7 +104,7 @@ router.post('/sendSurvey/:id', function(req, res){
                                     }).then( rowToAppend =>{
                                         let rowToAppendData = hashedByCCV.decrypt(rowToAppend.data);
                                         rowToAppendData = JSON.parse(rowToAppendData); //---------------------------objToAppend
-                                        console.log(rowToAppendData);
+                                        //console.log(rowToAppendData);
 
                                         for(let i = 1; i < Object.keys(rowToAppendData).length; i++){
                                             // console.log(i);
@@ -128,8 +128,8 @@ router.post('/sendSurvey/:id', function(req, res){
                                         
                                              
                                         }
-                                        console.log("----------------------------------dsadsadasdsadsa");
-                                        console.log(rowToAppendData);
+                                        // console.log("----------------------------------dsadsadasdsadsa");
+                                        // console.log(rowToAppendData);
 
                                         rowToAppendData = JSON.stringify(rowToAppendData)
                                         let EncRowToAppend = hashedByCCV.encrypt(rowToAppendData);
@@ -150,16 +150,16 @@ router.post('/sendSurvey/:id', function(req, res){
                                         res.send(err);
                                     });
                                 }else{
-                                    console.log(req.body.answers);
-                                    console.log("-----------------------")
+                                    // console.log(req.body.answers);
+                                    // console.log("-----------------------")
                                     let encryptedData = hashedByCCV.encrypt(req.body.answers);                                  
                                     Answers.create({
                                         key : decryptkey,
                                         name : syrveyKey.name,
                                         data : encryptedData
                                     }).then( newRow =>{
-                                        console.log("zapisało do Answers nowy wierz");
-                                        console.log(newRow);
+                                        // console.log("zapisało do Answers nowy wierz");
+                                        // console.log(newRow);
                                         res.send({status : "created"});
                                     }).catch(err=>{
                                         res.send(err);
@@ -185,8 +185,8 @@ router.post('/sendSurvey/:id', function(req, res){
 });
 
 
-router.get('/wynikiankiety/:id', function(req, res){
-    let hashedByCCV = new SimpleCrypto("68FoP3RTyx"); //todo input z ccv
+router.get('/wynikiankiety/:id/:usccv', function(req, res){
+    let hashedByCCV = new SimpleCrypto(req.params.usccv); //todo input z ccv
 
     Surveys.findOne({
         where : {
@@ -204,12 +204,13 @@ router.get('/wynikiankiety/:id', function(req, res){
         }).then( showAnswersRow =>{
             //let sss = showAnswersRow.data;
             let answersRow = hashedByCCV.decrypt(showAnswersRow.data);
-            console.log("--------------------");
-            console.log(answersRow);
-
+            // console.log("--------------------");
+            //console.log(answersRow);
+            
             res.render('wynikiAnkiety', {survey : answersRow, user : req.cookies.login});
         }).catch(err=>{
-            res.send(err);
+            res.send("Zły podany CCV");
+            
         });
     }).catch(err=>{
         res.send(err);

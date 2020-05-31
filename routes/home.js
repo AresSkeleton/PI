@@ -12,11 +12,11 @@ router.get('/dodajankiete', (req, res) =>{
 
 
 
-router.get('/mojeankiety', (req, res) =>{
+router.get('/mojeankiety/:uspass', (req, res) =>{
 
     // TODO need user password
     
-    let hashpass = new SimpleCrypto("test2"); // TODO change to pass
+    let hashpass = new SimpleCrypto(req.params.uspass); // TODO change to pass
     let arrayYourSurveyObj = [];
     let arrayNONEYourSurveyObj = [];
     Users.findOne({
@@ -99,9 +99,9 @@ router.get('/mojeankiety', (req, res) =>{
 
         }
         
-        console.log("home.js");
-        console.log(arrayYourSurveyObj+"\n"+arrayNONEYourSurveyObj);
-        console.log("------------------------");
+        // console.log("home.js");
+        // console.log(arrayYourSurveyObj+"\n"+arrayNONEYourSurveyObj);
+        // console.log("------------------------");
         //res.status(200).send('ok');
         //console.log(arrayYourSurveyObj +"                     "+ arrayNONEYourSurveyObj);
 

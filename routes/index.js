@@ -3,6 +3,7 @@ const router = express.Router();
 const Users = require('../models/Users');
 const bcrypt = require('bcrypt');
 
+
 router.get('/', function(req, res) {
         // res.cookie('chuj', 'miWdupe');
         

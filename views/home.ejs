@@ -10,7 +10,7 @@
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
   
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  
+  <script src="//cdn.jsdelivr.net/npm/simple-crypto-js@2.5.0/dist/SimpleCrypto.min.js"></script>
 	<!-- <script src="/js/js.js"></script> -->
   <!-- <script src="./bootstrap/js/bootstrap.js"></script> -->
   <script src="/bootstrap/js/bootstrap.bundle.js"></script>
@@ -38,7 +38,7 @@
 	<nav>
 	 <div id=leftnav>
 		<div id=dodajAnkiete onclick="dodajAnkiete()">Dodaj Ankietę</div>
-		<div id=mojeAnkiety onclick="mojeAnkiety()">Moje ankiety</div> <!--- Intially hidden -->
+		<div id=mojeAnkiety >Moje ankiety</div> <!--- Intially hidden -->
 	 </div>
 	 
 
@@ -100,9 +100,20 @@
 			document.location.replace('dodajankiete');
 
 		});
+		
+		
 		$('#mojeAnkiety').click(function(){
-			mojeAnkiety();
-			// document.location.replace('mojeankiety');
+			let usPassword = prompt("Wpisz hasło ,aby kontynuować");
+			// let crypt = new SimpleCrypto("<%= user.login%>");
+			if(usPassword != null){
+				// usPassword = crypt.encrypt(usPassword);
+				// $.get('/mojeankiety/'+usPassword ); 
+				document.location.replace('mojeankiety/'+usPassword);
+				
+			}
+			
+			
+
 			
 		});
 
