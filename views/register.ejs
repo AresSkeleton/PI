@@ -116,10 +116,17 @@
 			// document.location.replace('login');
 			let login = $('#textinput').val();
 			let password = $('#passwordinput').val();
+			let passwordCompare = $('#passwordValid').val();
 			// console.log(login);
-			$.post("/register",{login: login, password: password});
-			alert('Jestes zarejestrowany! Proszę zalogować się');
-			document.location.reload(true);
+			if(password == passwordCompare){
+				$.post("/register",{login: login, password: password});
+				alert('Jestes zarejestrowany! Proszę zalogować się');
+				document.location.reload(true);
+			}else{
+				alert('Hasła są różne! Wprowadz dane jeszcze raz!');
+				document.location.reload(true);
+			}
+			
 		});
 
 

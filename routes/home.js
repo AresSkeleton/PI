@@ -4,6 +4,19 @@ const SimpleCrypto = require("simple-crypto-js").default;
 const Users = require('../models/Users');
 const Surveys = require('../models/Surveys');
 
+
+
+
+/**
+ * @api {get} /dodajankiete Generuje strone 'dodajankiete'
+ * @apiGroup home.js
+ *
+ * @apiParam {String} login User login.
+ * 
+ * 
+ * @apiSuccess {Page} Page Render /dodajankiete page.
+ * 
+ */
 router.get('/dodajankiete', (req, res) =>{
     // console.log(req.cookies.login);
 
@@ -11,7 +24,16 @@ router.get('/dodajankiete', (req, res) =>{
 })
 
 
-
+/**
+ * @api {get} /mojeankiety/:uspass Wyswietla strone 'mojeankiety', gdzie można wypełniać dodane ankiety oraz zobaczyć wyniki swoich ankiet
+ * @apiGroup home.js
+ *
+ * @apiParam {String} uspass User password.
+ * 
+ * 
+ * @apiSuccess {Page} Page Render /mojeankiety/:uspass.
+ * 
+ */
 router.get('/mojeankiety/:uspass', (req, res) =>{
 
     // TODO need user password
@@ -41,7 +63,6 @@ router.get('/mojeankiety/:uspass', (req, res) =>{
                 })
     
                 arrayNONEYourSurveyObj.push(surv);
-                //console.log(arrayYourSurveyObj+"\n"+surv);
             } // for end
 
 
@@ -61,7 +82,6 @@ router.get('/mojeankiety/:uspass', (req, res) =>{
                 })
     
                 arrayYourSurveyObj.push(surv);
-                //console.log(surv+"\n"+arrayNONEYourSurveyObj);
             } // for end
             
         }
@@ -79,7 +99,6 @@ router.get('/mojeankiety/:uspass', (req, res) =>{
                 })
     
                 arrayNONEYourSurveyObj.push(surv);
-                //console.log(arrayYourSurveyObj+"\n"+surv);
             } // for end
             let arrayKeys = surveyKeys.hashedKeys.split(', ');
             for(let i = 0; i < arrayKeys.length-1; i++){
@@ -94,57 +113,17 @@ router.get('/mojeankiety/:uspass', (req, res) =>{
                 })
     
                 arrayYourSurveyObj.push(surv);
-                //console.log(surv+"\n"+arrayNONEYourSurveyObj);
             } // for end
 
         }
-        
-        // console.log("home.js");
-        // console.log(arrayYourSurveyObj+"\n"+arrayNONEYourSurveyObj);
-        // console.log("------------------------");
-        //res.status(200).send('ok');
-        //console.log(arrayYourSurveyObj +"                     "+ arrayNONEYourSurveyObj);
-
 
         res.render('mojeankiety', {surveysYour : arrayYourSurveyObj, surveyAnother : arrayNONEYourSurveyObj, user: req.cookies.login});
-        // for(let i = 0; i < arrayKeys.length-1; i++){
-
-        //     let unhashedKey = hashpass.decrypt(arrayKeys[i]); // TODO password here
-        //     const surv = await Surveys.findOne({
-        //         where : {
-        //             key: unhashedKey
-        //         },
-        //         attributes: ['id', 'name'],
-        //     })
-
-        //     arrayYourSurveyObj.push(surv);
-
-            
-
-        // } // for end
-        
+       
         
     })
     
-    //res.render('mojeankiety', { user: req.cookies.login});
 })
 
-
-// const findSurveys = async unhashedKey => {
-//     Surveys.findOne({
-//         where :{
-//             key: unhashedKey
-//         },
-//         attributes: ['id', 'name'],
-        
-//     }).then(surveyInfo=>{
-        
-//         //console.log(arrayObj.length);
-//         console.log("FINDONE")
-
-//         return callback(null, surveyInfo);
-//     })
-// }
 
 
 module.exports = router;

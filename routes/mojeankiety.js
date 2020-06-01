@@ -6,6 +6,18 @@ const UserSurveys = require('../models/UserSurveys');
 const Answers = require('../models/Answers');
 const SimpleCrypto = require("simple-crypto-js").default;
 
+/**
+ * @api {get} /zaladujankiete/:id Wyświetla strone z możliwościa wypełnienia ankiety o konkretnym id
+ * @apiGroup mojeankiety.js
+ *
+ * 
+ * @apiParam {Number} id Username id from Users table.
+ * 
+ * @apiSuccess {Page} Page Render /zaladujankiete with parameters "data" and "user".
+ * 
+ * 
+ * @apiError {Object} status Not such survey with given id.
+ */
 router.get('/zaladujankiete/:id', function(req, res){
     //res.send(req.params.id);
     Surveys.findOne({
@@ -26,15 +38,49 @@ router.get('/zaladujankiete/:id', function(req, res){
         res.render('zaladujankiete', {data : dataObj, user : req.cookies.login});
 
     }).catch(err =>{
-        res.send(err);
+        res.send({status : "error"});
     });
 });
 
 
+/**
+ * @api {post} /sendSurvey/:id Wysyła do bazy danych informacje o wypełniniej ankiecie
+ * @apiGroup mojeankiety.js
+ *
+ * @apiParam {Json} answers Json of survey with input data.
+ * @apiParam {Number} id Id of survey in Surveys table.
+ * 
+ * 
+ * @apiSuccess {Object} status Status of POST method is OK, if row was edit correctly.
+ * @apiSuccess {Object} status1 Status of POST method is Created, if row was created succesfully.
+ * @apiSuccessExample {Json} Update UserSurveys row:
+ *    200 OK
+ *    {
+ *      "done": "2"
+ *    }
+ * @apiSuccessExample {Json} Append "data" parameter in Answers table:
+ *    200 OK
+ *    {
+ *      "data": "--some new inputs --",
+ *    }
+ * @apiSuccessExample {Json} Create Answers row:
+ *    200 OK
+ *    {
+ *      "key" : "5tEg190520",
+        "name" : "testowy",
+        "data" : "--some encrypted data--"
+ *    }
+ * 
+ * @apiError {Object} status Not able to update row in table Answers.
+ * @apiError {Object} status1 Not able to find row with given key in Answers table.
+ * 
+ * @apiError {Object} status2 Not able to create row in table Answers.
+ * @apiError {Object} status3 Row from Users not founded.
+ * @apiError {Object} status4 Not able to find row with dehashed key.
+ * @apiError {Object} status5 Not able to update status of row in UserSurveys table.
+ * @apiError {Object} status6 Not able to find all rows in UserSurveys table.
+ */
 router.post('/sendSurvey/:id', function(req, res){
-    // console.log("Jestem backend");
-    // console.log(req.params.id);
-
     let hashByPass = new SimpleCrypto("test2"); // TODO zmienic na input hasła
     Surveys.findOne({
             where : {
@@ -43,23 +89,14 @@ router.post('/sendSurvey/:id', function(req, res){
             attributes : ["key", "name", "data"],
             raw: true
         }).then( syrveyKey =>{
-            //console.log(syrveyKey);
             UserSurveys.findAll({
                 attributes : ["hashedKey"],
                 raw :true
             } ).then( allHashedKeyfromUS=>{
-                //console.log(allHashedKeyfromUS);
-
-                //let arrayOfhashedKeys = [];
-                //console.log(allHashedKeyfromUS);
                 for(let i = 0; i < allHashedKeyfromUS.length; i++){
-                    //console.log(i+"   ------------------------- ilosc elementow");
-                    //console.log(allHashedKeyfromUS[i].hashedKey);
                     let decryptkey = hashByPass.decrypt(allHashedKeyfromUS[i].hashedKey);
-                    //console.log(" decrypt key ------- "+ decryptkey);
 
                     if(syrveyKey.key == decryptkey){
-                        //console.log("zapraszam");
                         UserSurveys.update({
                             done : "2",
                         }, {
@@ -67,32 +104,17 @@ router.post('/sendSurvey/:id', function(req, res){
                                 hashedKey : allHashedKeyfromUS[i].hashedKey
                             }
                         }).then( function(){
-
-                            // TODO utworzyc nową tabelę w db 
                             Answers.findOne({
                                 where : {
                                     key : decryptkey
                                 }, raw : true
                             }).then( ifSurveyExists =>{
-                                // console.log(typeof(ifSurveyExists));
-                                // console.log(ifSurveyExists);
-
-                                let answObj = JSON.parse(req.body.answers); //----------------------------------------- obj
-                                //console.log(answObj);
-
-
+                                let answObj = JSON.parse(req.body.answers);
                                 let hashByKey = new SimpleCrypto(syrveyKey.key);
                                 let decryptedData = hashByKey.decrypt(syrveyKey.data);
-                                //console.log(decryptedData);
                                 decryptedData = JSON.parse(decryptedData);
-                                //console.log(decryptedData);
-                                
                                 let ccv = decryptedData["ccv"];
-                                //console.log(ccv);
                                 let hashedByCCV = new SimpleCrypto(ccv);
-                                // console.log(ccv);
-                                // console.log("--------------------------------");
-
                                 if(ifSurveyExists){
                                     // todo update row
                                     Answers.findOne({
@@ -143,11 +165,11 @@ router.post('/sendSurvey/:id', function(req, res){
                                         }).then( function(){
                                             res.send({ status : "ok"});
                                         }).catch(err =>{
-                                            res.send(err);
+                                            res.send({ status : "error"});
                                         })
                                         
                                     }).catch(err =>{
-                                        res.send(err);
+                                        res.send({ status : "error"});
                                     });
                                 }else{
                                     // console.log(req.body.answers);
@@ -162,29 +184,42 @@ router.post('/sendSurvey/:id', function(req, res){
                                         // console.log(newRow);
                                         res.send({status : "created"});
                                     }).catch(err=>{
-                                        res.send(err);
+                                        rres.send({ status : "error"});
                                     })
                                     
                                 }
                             }).catch(err =>{
-                                res.send(err);
+                                res.send({ status : "error"});
                             });
                         }).catch(err =>{
-                            res.send(err);
+                            res.send({ status : "error"});
                         })
                     }
                     
                 }
             }).catch(err =>{
-                res.send(err);
+                res.send({ status : "error"});
             })
         }).catch(err =>{
-            res.send(err);
+            res.send({ status : "error"});
         });
 
 });
 
-
+/**
+ * @api {get} /wynikiankiety/:id/:usccv Pokazuje wyniki konkretnej ankiety
+ * @apiGroup mojeankiety.js 
+ *
+ * 
+ * @apiParam {Number} id Id from Users table.
+ * @apiParam {String} usccv Code CCV.
+ * 
+ * @apiSuccess {Page} Page Render /wynikiankiety/:id/:usccv with [id, usccv, survey, user] parameters.
+ * 
+ * 
+ * @apiError {String} status Bad CCV code.
+ * @apiError {Object} status1 Not such survey with given id.
+ */
 router.get('/wynikiankiety/:id/:usccv', function(req, res){
     let hashedByCCV = new SimpleCrypto(req.params.usccv); //todo input z ccv
 
@@ -213,7 +248,7 @@ router.get('/wynikiankiety/:id/:usccv', function(req, res){
             
         });
     }).catch(err=>{
-        res.send(err);
+        res.send({status: "error"});
     });
 });
 
