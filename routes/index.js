@@ -3,7 +3,16 @@ const router = express.Router();
 const Users = require('../models/Users');
 const bcrypt = require('bcrypt');
 
-
+/**
+ * @api {get} /index przekierowóje na strone loginowania albo na strone /home, w zalezności od sesji
+ * @apiGroup index.js
+ *
+ * 
+ * 
+ * @apiSuccess {Page} Page If session is not exist render /login page.
+ * @apiSuccess {Page} Page1 If session is exist redirect to /home page.
+ * 
+ */
 router.get('/', function(req, res) {
         // res.cookie('chuj', 'miWdupe');
         
@@ -16,7 +25,16 @@ router.get('/', function(req, res) {
         }
 });
 
-
+/**
+ * @api {get} /register przekierowóje na strone rejestracji albo na strone /home, w zalezności od sesji
+ * @apiGroup index.js
+ *
+ * 
+ * 
+ * @apiSuccess {Page} Page If session is not exist render /register page.
+ * @apiSuccess {Page} Page1 If session is exist redirect to /home page.
+ * 
+ */
 router.get('/register', function(req, res) {
     if(!req.cookies.login){
         res.render('register', {
@@ -29,17 +47,23 @@ router.get('/register', function(req, res) {
 });
 
 
+/**
+ * @api {post} /home Porównuje hasło
+ * @apiGroup index.js
+ *
+ * 
+ * @apiParam {String} login Username login.
+ * @apiParam {String} password Username password.
+ * 
+ * @apiSuccess {Object} status Send to page parameter iscorrect.
+ * 
+ */
 router.post('/home', async function(req, res){
         Users.findOne({
             where: {
                 login : req.body.login, 
                 }
             }).then( userRow =>{
-                // console.log(userRow);
-                // let iscorrect = bcrypt.compare(req.body.password, userRow.password, function(err, result) {
-                //     if (err) { throw (err); }
-                //     console.log(result);
-                // });
                 let iscorrect = bcrypt.compareSync(req.body.password, userRow.password);
                 res.cookie('login', req.body.login);
                 res.send( {iscorrect: iscorrect} );
@@ -48,9 +72,18 @@ router.post('/home', async function(req, res){
 });
 
 
+/**
+ * @api {get} /home Wyswietla głowną stronę dla zalogowanych użytkowników 
+ * @apiGroup index.js
+ *
+ * 
+ * 
+ * @apiSuccess {Page} Page If session is not exist render /index page.
+ * @apiSuccess {Page} Page If session is exist redirect to /home page with "user" parameter.
+ * 
+ * @apiError {Object} status Failed to find Users row.
+ */
 router.get('/home', function( req, res){
-    // console.log( req.cookies.login);
-    // поля будут обновлены со временем
     if(req.cookies.login){
         Users.findOne({
             where: {
@@ -60,27 +93,12 @@ router.get('/home', function( req, res){
         }).then( userSession =>{
             res.render('home', {user: userSession});
         }).catch( err =>{
-            res.send( err);
+            res.send( {status : "error"});
         });
     }else{
         res.redirect('/');
     }
 })
 
-// async function compareTwoHashPass(password, rowPass){
-//     try{
-//         console.log(rowPass +' 1-----1 ' + password);
-//         if (await bcrypt.compare(password, rowPass)) {
-//             console.log('true');
-//             return Promise.resolve(true);
-//         } else{
-//             console.log('false');
-//             return Promise.resolve(false);
-//         }
-//     } catch(err){
-//         console.log('elo error mordo');
-//         return Promise.resolve(err);
-//     }
-// }
 
 module.exports = router;

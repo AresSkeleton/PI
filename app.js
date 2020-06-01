@@ -14,6 +14,7 @@ const routerHome = require('./routes/home');
 const routerSurvey = require('./routes/dodajankiete');
 const routerShow = require('./routes/mojeankiety');
 
+
 app.use(cookieParser());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -26,7 +27,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/public'));
-
 
 
 db.authenticate().then(() =>{
@@ -68,7 +68,10 @@ app.listen(port, console.log(`Serwer urochomiony na porcie 1337`));
 
 
 
-
+/**
+ * Create a CCV code for survey 
+ * @param {number} length 
+ */
 function makeid(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
