@@ -23,8 +23,8 @@ let wyn = JSON.parse(jsonWyn);
 
 /**
  * Funkcja licząca odpowiedzi z pytań typu jednokrotnego wyboru
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function radioWyn(pytango, numereg){
     console.log(pytango);
@@ -72,8 +72,8 @@ function radioWyn(pytango, numereg){
 }
 /**
  * Funkcja licząca odpowiedzi z pytań typu wielokrotnego wyboru
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function checkboxWyn(pytango, numereg){
     console.log(pytango);
@@ -126,8 +126,8 @@ function checkboxWyn(pytango, numereg){
 
 /**
  * Funkcja licząca odpowiedzi z pytań otwartych
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function textboxWyn(pytango, numereg){
     console.log(pytango);
@@ -166,7 +166,7 @@ function textboxWyn(pytango, numereg){
 
 /**
  * Funkcja przetwarzająca plik typu JSON na wyniki ankiety
- * @param {JSON} wyn 
+ * @param {JSON} wyn - Obiekt JSON zawierający wyniki ankiety
  */
 function pokazWyniki(wyn){
     var iloscPytan = Object.keys(wyn).length;
