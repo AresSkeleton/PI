@@ -3,7 +3,7 @@ b = [[1,"Name"],[2,"Name2"],[3,"Name3"]];
 
 /**
  * Funkcja wypisująca dostępne ankiety do wypełnienia
- * @param {Array} a
+ * @param {Array} a - Tabela z danymi ankiet pobranymi z bazy danych
  */
 function tabelaAnkietDoWypelnienia(a){
     let handle = document.getElementById("wypelnianeAnkiety");
@@ -31,7 +31,7 @@ function tabelaAnkietDoWypelnienia(a){
 
 /**
  * Funkcja wypisująca dostępne wyniki ankiet, które zostały dodane przez użytkownika
- * @param {Array} a 
+ * @param {Array} a - Tabela z danymi ankiet pobranymi z bazy danych
  */
 function tabelaWynikowAnkiet(a){
 

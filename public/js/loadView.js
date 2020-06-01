@@ -21,13 +21,15 @@ var json = `{
 }`
 
 
-
+/**
+ * Sparowany obiekt JSON
+ */
 let obj = JSON.parse(json);
 
 /**
  * Funkcja wyświetlająca pytanie 
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function radio(pytango, numereg){
     // console.log(pytango);
@@ -60,8 +62,8 @@ function radio(pytango, numereg){
 
 /**
  * Funkcja wyświetlająca pytanie 
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function checkbox(pytango, numereg){
     // console.log(pytango);
@@ -94,8 +96,8 @@ function checkbox(pytango, numereg){
 
 /**
  * Funkcja wyświetlająca pytanie 
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function textbox(pytango, numereg){
     // console.log(pytango);
@@ -124,7 +126,7 @@ function textbox(pytango, numereg){
 
 /**
  * Funkcja wyświetlająca na ekranie pytania zapisane w pliku JSON
- * @param {JSON} obj 
+ * @param {JSON} obj - Obiekt JSON, interpretowany przez funkcję
  */
 function doQuestionary(obj){
     var iloscPytan = Object.keys(obj).length;
