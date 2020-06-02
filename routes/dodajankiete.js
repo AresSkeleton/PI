@@ -59,6 +59,7 @@ router.post('/dodajankiete', function(req, res){
     //------    
     surveyData["ccv"] = req.app.locals.uniqueCCV;
     let surveyJsonWithCCV = JSON.stringify(surveyData);
+    console.log(surveyJsonWithCCV);
     
 
     let hashedKey = hashPass.encrypt(key) // szyfrowane klucza hasłem 
