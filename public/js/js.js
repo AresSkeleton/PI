@@ -1,15 +1,25 @@
 
-//########################### Po wciśnięciu "Dodaj ankiete"
-var idOfQuestion = 0;     // Przechowuje informacje na temat ilosci pytań   //
+/**
+ * Informacja na temat ilości pytań
+ */
+var idOfQuestion = 0;
+/**
+ * Tabela przechowuje informacje na temat ilości opcji do wyboru
+ */
+var questionDetails = [];
+/**
+ * Pierwsze pole jest zerowe gdyż reprezentuje nazwę ankiety
+ */
+questionDetails.push(null); 
 
-var questionDetails = []; // Przechowuje informacje na temat ilosci inputow //
-questionDetails.push(null); // zerowe pole nie używane bo tak łatwiej xd
-//########################### Po wysłaniu ankiety do bazy
-//var SurveyKey = "";  10 znaków - Generacja
 
 
-//#################################################### Obsługa błędów
+
+/**
+ * CCV do rozszyfrowywania danych wynikowych ankiety
+ */
 let answersCCV;
+
 let pass; //temp
 
 /**
@@ -42,8 +52,8 @@ function readAnswerCCV(){
 
 /**
  * Wyświetla informacje o błędzie na stronie  
- * @param {string} header 
- * @param {string} info
+ * @param {string} header - Tytuł informacji o błędzie
+ * @param {string} info - Szczegółowe informacja o błędzie
  */
 function errorOverlayShow(header, info){
     document.getElementById("overlay").style.display = "flex";
@@ -134,7 +144,7 @@ function wysylanieWygenerowanejAnkiety(){
 /**
  * Funkcja usuwa pytanie o podanym numerze z generatora
  * 
- * @param {integer} idPytania 
+ * @param {integer} idPytania - Numer pytania z ankiety
  */
 function deleteQuestion(idPytania){
     questionDetails[idPytania] = 'x';
@@ -170,7 +180,7 @@ function newTextbox(){
 /**
  * Funkcja dodaje opcje typu radio do wybranego pytania spełniającego warunek typu
  * 
- * @param {integer} idPytania 
+ * @param {integer} idPytania - Numer pytania z ankiety
  */
 function dodajOpcjeRadio(idPytania){
     /**
@@ -200,7 +210,7 @@ function dodajOpcjeRadio(idPytania){
 /**
  * Usuwanie opcji wyboru z pytania 
  * 
- * @param {integer} idPytania 
+ * @param {integer} idPytania  - Numer pytania z ankiety
  */
 function usunOpcjeRadio(idPytania){
     var currentQuestionOptionsCount = questionDetails[idPytania];
@@ -253,7 +263,7 @@ function newRadio(){
 
 /**
  * 
- * @param {integer} idPytania 
+ * @param {integer} idPytania - Numer pytania z ankiety 
  */
 function dodajOpcjeCheckbox(idPytania){
     var currentQuestionOptionsCount = questionDetails[idPytania];
@@ -277,7 +287,7 @@ function dodajOpcjeCheckbox(idPytania){
 
 /**
  * Usuwa opcje wyboru z pytania typu checkbox
- * @param {integer} idPytania 
+ * @param {integer} idPytania - Numer pytania z ankiety 
  */
 function usunOpcjeCheckbox(idPytania){
     var currentQuestionOptionsCount = questionDetails[idPytania];

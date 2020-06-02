@@ -23,8 +23,8 @@ let wyn = JSON.parse(jsonWyn);
 
 /**
  * Funkcja licząca odpowiedzi z pytań typu jednokrotnego wyboru
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function radioWyn(pytango, numereg){
     console.log(pytango);
@@ -51,7 +51,7 @@ function radioWyn(pytango, numereg){
     document.getElementById("forma").innerHTML +=`
     <div xd="Radio" id="EntireQuestionNo`+numereg+`">
 
-        <label class="questionLabel"  id="questionLabel`+numereg +`" contenteditable="false" >` + tajtle+  `  </label>            
+        <label class="questionLabel"  id="questionLabel`+numereg +`" contenteditable="false" >` + tajtle+  `</label>            
 
 			<div id="divOfQuestion`+numereg+`">`;
             // <input type="radio" class="custom-control-input" id="radioGroupOption`+  i +`" name="groupOfRadiosFromQuestion`+numereg+`">
@@ -60,7 +60,7 @@ function radioWyn(pytango, numereg){
 				<div class="custom-control custom-radio" id="Q`+numereg+`o`+ i+`">
 
                   
-				  <label class="custom-control-label" for="radioGroupOption`+ i  +`" contenteditable="false">`+opszyns[i]+ " - " +  (zliczOdpowiedzi[i]/odpowiedziLiczba *100).toFixed(2)   + "% "+`</label> 
+				  <label class="custom-control-label" for="radioGroupOption`+ i  +`" contenteditable="false">`+opszyns[i]+ " - " +  (zliczOdpowiedzi[i]/odpowiedziLiczba *100).toFixed(2)   + "%"+`</label> 
 				</div>`;
     }
     
@@ -72,8 +72,8 @@ function radioWyn(pytango, numereg){
 }
 /**
  * Funkcja licząca odpowiedzi z pytań typu wielokrotnego wyboru
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function checkboxWyn(pytango, numereg){
     console.log(pytango);
@@ -111,7 +111,7 @@ function checkboxWyn(pytango, numereg){
                 <div class="custom-control custom-checkbox" id="Q`+numereg+`o`+i+`">
                 
 					
-					<label class="custom-control-label" for="checkboxOption`+ i+`" contenteditable="false">`+opszyns[i]+ " - " +  (zliczOdpowiedzi[i]/odpowiedziLiczba *100).toFixed(2)   + "% "+`</label>
+					<label class="custom-control-label" for="checkboxOption`+ i+`" contenteditable="false">`+opszyns[i]+ " - " +  (zliczOdpowiedzi[i]/odpowiedziLiczba *100).toFixed(2)   + "%"+`</label>
                 </div>`
     }         
     document.getElementById("forma").innerHTML +=`			
@@ -126,8 +126,8 @@ function checkboxWyn(pytango, numereg){
 
 /**
  * Funkcja licząca odpowiedzi z pytań otwartych
- * @param {integer} pytango 
- * @param {integer} numereg 
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
  */
 function textboxWyn(pytango, numereg){
     console.log(pytango);
@@ -166,7 +166,7 @@ function textboxWyn(pytango, numereg){
 
 /**
  * Funkcja przetwarzająca plik typu JSON na wyniki ankiety
- * @param {JSON} wyn 
+ * @param {JSON} wyn - Obiekt JSON zawierający wyniki ankiety
  */
 function pokazWyniki(wyn){
     var iloscPytan = Object.keys(wyn).length;
