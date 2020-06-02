@@ -48,7 +48,7 @@ router.get('/mojeankiety/:uspass', (req, res) =>{
         attributes : ['hashedKeys', 'anotherHashedKeys']
     }).then(async surveyKeys=>{
 
-        if(!surveyKeys.hashedKeys ){
+        if(!surveyKeys.hashedKeys && surveyKeys.anotherHashedKeys){
             arrayYourSurveyObj = ["xd"];
             let addedArraysKeys = surveyKeys.anotherHashedKeys.split(', ');
             for(let i = 0; i < addedArraysKeys.length-1; i++){
@@ -67,7 +67,7 @@ router.get('/mojeankiety/:uspass', (req, res) =>{
 
 
         }
-        if(!surveyKeys.anotherHashedKeys){
+        if(!surveyKeys.anotherHashedKeys && surveyKeys.hashedKeys){
             arrayNONEYourSurveyObj = ["xd"];
             let arrayKeys = surveyKeys.hashedKeys.split(', ');
             for(let i = 0; i < arrayKeys.length-1; i++){
@@ -80,7 +80,7 @@ router.get('/mojeankiety/:uspass', (req, res) =>{
                     attributes: ['id', 'name'],
                     raw: true
                 })
-    
+                console.log(surv.id+" "+surv.name);
                 arrayYourSurveyObj.push(surv);
             } // for end
             
@@ -111,12 +111,17 @@ router.get('/mojeankiety/:uspass', (req, res) =>{
                     attributes: ['id', 'name'],
                     raw: true
                 })
-    
+                console.log(surv.id+" "+surv.name);
                 arrayYourSurveyObj.push(surv);
             } // for end
 
+        }if(!surveyKeys.hashedKeys && !surveyKeys.anotherHashedKeys){
+            arrayNONEYourSurveyObj  = ["xd"];
+            arrayYourSurveyObj = ["xd"];
+            console.log("nie ma żadnego");
+            
         }
-
+        console.log(arrayYourSurveyObj+'\n'+arrayNONEYourSurveyObj);
         res.render('mojeankiety', {surveysYour : arrayYourSurveyObj, surveyAnother : arrayNONEYourSurveyObj, user: req.cookies.login});
        
         

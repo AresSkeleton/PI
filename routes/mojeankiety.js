@@ -237,14 +237,16 @@ router.get('/wynikiankiety/:id/:usccv', function(req, res){
             attributes : ["data"],
             raw : true
         }).then( showAnswersRow =>{
-            //let sss = showAnswersRow.data;
+            let sss = showAnswersRow.data;
+            console.log("--------------------");
+            console.log(sss);
             let answersRow = hashedByCCV.decrypt(showAnswersRow.data);
-            // console.log("--------------------");
-            //console.log(answersRow);
+            console.log("--------------------");
+            console.log(answersRow);
             
             res.render('wynikiAnkiety', {survey : answersRow, user : req.cookies.login});
         }).catch(err=>{
-            res.send("Zły podany CCV");
+            res.send("Nikt jeszcze nie wypełnił towjej ankiety");
             
         });
     }).catch(err=>{

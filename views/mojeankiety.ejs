@@ -156,7 +156,8 @@
 
 
 	let handleW = document.getElementById("wypelnianeAnkiety");
-	let rowW, cellW, keyNamesW;
+	let rowW, cellW; 
+	<% let keyNamesW; %>
     //if("<%= surveyAnother[0]%>" == "xd"){ //a[0]
 	<% if( surveyAnother[0] == "xd"){ %>
         //Pusta tabela
@@ -190,7 +191,8 @@
 
 
 	let handle = document.getElementById("mojeWyniki");
-	let row	, cell, keyNames;
+	let row	, cell;
+	<% let keyNames; %>
     //if("<%= surveyAnother[0]%>" == "xd"){ //a[0]
 	<% if( surveysYour[0] == "xd"){ %>
         //Pusta tabela
@@ -213,7 +215,7 @@
 			<% } %>
             //linkowanie do zaladujAnkiete.ejs
 			//row.insertCell().innerHTML = "<a href='   /wynikiankiety/"+ surveyccv +"/<%= x[keyNames[0]] %>   '> >> </a>";
-			row.insertCell().innerHTML = "<a id='wynikiankiety"+ "<%= x[keyNamesW[0]] %> " +"'> >> </a>";
+			row.insertCell().innerHTML = "<a id='wynikiankiety"+ "<%= x[keyNames[0]] %> " +"'> >> </a>";
 			row.insertCell().innerHTML = "<a href='?usun="+"<%= x[keyNames[0]] %>"+"'>"+" Usuń "+"</a>";
             
 	 <% 	}%>
