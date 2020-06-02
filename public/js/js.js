@@ -200,7 +200,7 @@ function dodajOpcjeRadio(idPytania){
 
             <input type="radio" class="custom-control-input" id="radioGroupOption`+ questionDetails[idPytania] +`" name="groupOfRadiosFromQuestion`+idPytania+`">
 
-		    <label class="custom-control-label" for="XradioGroupOption`+ questionDetails[idPytania] +`" contenteditable="true">Option `+questionDetails[idPytania]+`</label> 
+		    <label class="custom-control-label" for="XradioGroupOption`+ questionDetails[idPytania] +`" contenteditable="true">Option`+" "+questionDetails[idPytania]+`</label> 
         </div>
       
     `;
@@ -250,7 +250,7 @@ function newRadio(){
 				<div class="custom-control custom-radio" id="Q`+idOfQuestion+`o`+questionDetails[idOfQuestion]+`">
 
                   <input type="radio" class="custom-control-input" id="radioGroupOption`+ questionDetails[idOfQuestion] +`" name="groupOfRadiosFromQuestion`+idOfQuestion+`">
-				  <label class="custom-control-label" for="XradioGroupOption`+ questionDetails[idOfQuestion] +`" contenteditable="true">Option `+questionDetails[idOfQuestion]+`</label> 
+				  <label class="custom-control-label" for="XradioGroupOption`+ questionDetails[idOfQuestion] +`" contenteditable="true">Option`+" "+questionDetails[idOfQuestion]+`</label> 
 				</div>
 
 				
@@ -274,7 +274,7 @@ function dodajOpcjeCheckbox(idPytania){
         <div class="custom-control custom-checkbox" id="Q`+idPytania+`o`+questionDetails[idPytania]+`">
                     
             <input type="checkbox" class="custom-control-input" id="checkboxOption`+questionDetails[idPytania] +`">
-            <label class="custom-control-label" for="XcheckboxOption`+ questionDetails[idPytania] +`" contenteditable="true">Opcja do wielokrotnego wyboru numer `+questionDetails[idPytania]+`</label>
+            <label class="custom-control-label" for="XcheckboxOption`+ questionDetails[idPytania] +`" contenteditable="true">Opcja do wielokrotnego wyboru numer`+" "+questionDetails[idPytania]+`</label>
         </div>
      
     </div>    
@@ -326,7 +326,7 @@ function newCheckbox(){
                 <div class="custom-control custom-checkbox" id="Q`+idOfQuestion+`o`+questionDetails[idOfQuestion]+`">
                 
 					<input type="checkbox" class="custom-control-input" id="checkboxOption`+questionDetails[idOfQuestion] +`">
-					<label class="custom-control-label" for="XcheckboxOption`+ questionDetails[idOfQuestion] +`" contenteditable="true">Opcja do wielokrotnego wyboru numer `+questionDetails[idOfQuestion]+`</label>
+					<label class="custom-control-label" for="XcheckboxOption`+ questionDetails[idOfQuestion] +`" contenteditable="true">Opcja do wielokrotnego wyboru numer`+" "+questionDetails[idOfQuestion]+`</label>
                 </div>
                 
 				
