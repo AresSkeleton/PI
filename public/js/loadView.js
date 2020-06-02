@@ -40,7 +40,7 @@ function radio(pytango, numereg){
     document.getElementById("forma").innerHTML +=`
     <div xd="Radio" id="EntireQuestionNo`+numereg+`">
 
-        <label class="questionLabel"  id="questionLabel`+numereg +`" contenteditable="false" >` + tajtle+ `  </label>            
+        <label class="questionLabel"  id="questionLabel`+numereg +`" contenteditable="false" >` + tajtle+ `</label>            
 
 		<div id="divOfQuestion`+numereg+`">`;
 				
