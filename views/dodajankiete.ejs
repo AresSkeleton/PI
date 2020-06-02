@@ -90,7 +90,7 @@
 				<br><br>
 				<h3>Klucz dostępu  do wyników ankiety (nie jest później dostępny): </h3>
 				<label id="CCV" style="color: red;font-size: 2em;">PLACE HOLDER</label><br><br><br>
-				<button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView  onclick="showGenerator();" > Zapisałem dane</button>
+				<button id="backToMain" type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView  onclick="showGenerator();" > Zapisałem dane</button>
 			</div>
 		
 			<!-- <button type="button" class="btn btn-light btn-lg btn-block" name=GeneratorView  onclick="showGenerator(); writeSurvey(); mojeAnkiety()" id="sendSurvey" > Wyślij ankietę !</button> -->
@@ -372,7 +372,9 @@
 			// console.log(questionDetails);
 		});
 
-
+		$('#backToMain').click( function(){
+			document.location.replace('home');
+		})
 
 		$('#sendAddSurveyByKey').click(function(){
 			//console.log('123213')
