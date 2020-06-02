@@ -240,7 +240,7 @@ router.get('/wynikiankiety/:id/:usccv', function(req, res){
             //let sss = showAnswersRow.data;
             let answersRow = hashedByCCV.decrypt(showAnswersRow.data);
             // console.log("--------------------");
-            //console.log(answersRow);
+            console.log(answersRow);
             
             res.render('wynikiAnkiety', {survey : answersRow, user : req.cookies.login});
         }).catch(err=>{
