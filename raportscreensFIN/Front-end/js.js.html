@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: js.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: js.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * Informacja na temat ilości pytań
+ */
+var idOfQuestion = 0;
+/**
+ * Tabela przechowuje informacje na temat ilości opcji do wyboru
+ */
+var questionDetails = [];
+/**
+ * Pierwsze pole jest zerowe gdyż reprezentuje nazwę ankiety
+ */
+questionDetails.push(null); 
+
+
+
+
+/**
+ * CCV do rozszyfrowywania danych wynikowych ankiety
+ */
+let answersCCV;
+
+let pass; //temp
+
+/**
+ * Otwieranie okna do wpisania kodu CCV potrzebnego do wyświetlania ankiety
+ */
+function getCCV(){
+    document.body.innerHTML+=`&lt;div id="overlay" style="display:flex;">
+        
+        &lt;div id=errorBox >
+            &lt;h2 id="getPasswdTitle">Aby przejść do wyników wpisz kod CCV ankiety: &lt;/h2>
+            
+            &lt;input class="form-control" type="text" id="getCCVCVV">
+            &lt;br>
+            &lt;button id="getCCVSubmit" class="btn btn-light btn-lg btn-block" style="margin-top:4em;" onClick="readAnswerCCV()"> Przejdź &lt;/button>
+        &lt;/div>
+
+&lt;/div>`;
+
+
+}
+
+/**
+ * Funkcja zapisująca CCV
+ */
+function readAnswerCCV(){
+    answersCCV = document.getElementById("getCCVCVV").innerText;
+}
+
+
+
+/**
+ * Wyświetla informacje o błędzie na stronie  
+ * @param {string} header - Tytuł informacji o błędzie
+ * @param {string} info - Szczegółowe informacja o błędzie
+ */
+function errorOverlayShow(header, info){
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("errorTitle").innerHTML = header;
+    document.getElementById("errorMsg").innerHTML = info;
+}
+/**
+ * Ukrywa bład
+ */
+function errorOverlayHide(){
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("errorTitle").innerHTML = "Coś poszło nie tak!";
+    document.getElementById("errorMsg").innerHTML = "Aby kontynuować kliknij...";
+}
+/**
+ * Powrót na stronę główną
+ */
+function errorGoToMain(){
+    location.replace("/home");
+}
+
+
+
+/**
+ *  Funkcja obsługująca wysyłanie gotowej ankiety do bazy danych
+ */
+function gSPID(){
+    let xd = document.getElementsByClassName("gSPID");
+    for(var i = 0; i&lt;xd.length;i++){
+
+        xd[i].style.display = "none";
+    }
+
+    document.getElementById("generatedSurveyPasswdInputDiv").style.display="block";
+
+}
+
+/**
+ *  Pobranie od użytkownika hasła w celu uzyskania dostępu do listy dostępnych ankiet
+ */
+function mojeAnkiety(){
+    // location.replace("/mojeankiety");
+    document.body.innerHTML+=`&lt;div id="overlay" style="display:flex;">
+        
+            &lt;div id=errorBox >
+                &lt;h2 id="getPasswdTitle">Aby przejść dalej podaj hasło: &lt;/h2>
+                
+                &lt;input class="form-control" type="password" id="getPasswdPasswd">
+                &lt;br>
+                &lt;button id="getPasswdSubmit" onClick="getPass()" class="btn btn-light btn-lg btn-block" style="margin-top:4em;"> Przejdź &lt;/button>
+            &lt;/div>
+       
+	&lt;/div>`;
+
+}
+/**
+ * Pobranie hasła z inputu
+ */
+function getPass(){
+    pass =document.getElementById("getPasswdPasswd").innerText;
+}
+
+/**
+ * Funkcja pokazuje interfejs do obsługi tworzenia ankiet
+ */
+function showGenerator(){
+    var xd = document.getElementsByClassName("generatorAnkiet");
+    for(var i = 0; i&lt;xd.length;i++){
+
+        xd[i].style.display = "inline";
+    }
+    document.getElementById("generatedSurveySend").style.display = "none"
+    document.getElementById("AddSurveyByKey").style.display = "none";
+}
+/**
+ * Wysyłanie wygenerowanej ankiety [Ukrywanie generatora w celu uniemożliwienia interakcji]
+ */
+function wysylanieWygenerowanejAnkiety(){
+    var xd = document.getElementsByClassName("generatorAnkiet");
+    for(var i = 0; i&lt;xd.length;i++){
+
+        xd[i].style.display = "none";
+    }
+    
+    document.getElementById("generatedSurveySend").style.display = "block";
+}
+
+/**
+ * Funkcja usuwa pytanie o podanym numerze z generatora
+ * 
+ * @param {integer} idPytania - Numer pytania z ankiety
+ */
+function deleteQuestion(idPytania){
+    questionDetails[idPytania] = 'x';
+    var pytanie = document.getElementById("EntireQuestionNo"+idPytania);
+    pytanie.remove();
+
+    // TODO: Możliwość wstawienia placeholdera w miejsce usuwanego pytania z przyciskiem cofnij 
+}
+/**
+ * Dodanie pola typu textbox do ankiety
+ */
+function newTextbox(){   
+    idOfQuestion++;
+    questionDetails.push(0);
+
+    // &lt;label class="questionLabel" for="questiofn`+idOfQuestion +`" contenteditable="true">Example textarea&lt;/label>
+    document.getElementById("forma").innerHTML += `
+    &lt;div xd="Text" id="EntireQuestionNo`+idOfQuestion+`">
+
+    &lt;button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE&lt;/button>       
+    &lt;label class="questionLabel " id="questionLabel`+idOfQuestion +`" contenteditable="true">Example textarea&lt;/label>
+
+        &lt;div id="divOfQuestion`+idOfQuestion+`" class="form-group col-md-8">             
+               
+                
+                &lt;br>
+                &lt;textarea  class="form-control" id="question`+idOfQuestion +`" rows="1">&lt;/textarea>
+        &lt;/div>&lt;br>
+
+    &lt;/div>
+    `;
+}
+/**
+ * Funkcja dodaje opcje typu radio do wybranego pytania spełniającego warunek typu
+ * 
+ * @param {integer} idPytania - Numer pytania z ankiety
+ */
+function dodajOpcjeRadio(idPytania){
+    /**
+     *  Aktualna liczba pytań;
+     */
+    var currentQuestionOptionsCount = questionDetails[idPytania];
+    currentQuestionOptionsCount++;
+
+    questionDetails[idPytania] = currentQuestionOptionsCount;
+
+    /**
+     * Dopisywanie do konteneru na stronie danych.
+     */
+    document.getElementById("divOfQuestion"+idPytania).innerHTML+=`
+  
+        &lt;div class="custom-control custom-radio" id="Q`+idPytania+`o`+questionDetails[idPytania]+`">
+
+            &lt;input type="radio" class="custom-control-input" id="radioGroupOption`+ questionDetails[idPytania] +`" name="groupOfRadiosFromQuestion`+idPytania+`">
+
+		    &lt;label class="custom-control-label" for="XradioGroupOption`+ questionDetails[idPytania] +`" contenteditable="true">Option `+questionDetails[idPytania]+`&lt;/label> 
+        &lt;/div>
+      
+    `;
+    //######################## for w label nie używane  // potrzebne dopiero przy wyświetlaniu wygenerowanej ankiety 
+
+}
+/**
+ * Usuwanie opcji wyboru z pytania 
+ * 
+ * @param {integer} idPytania  - Numer pytania z ankiety
+ */
+function usunOpcjeRadio(idPytania){
+    var currentQuestionOptionsCount = questionDetails[idPytania];
+
+    var toDelete = document.getElementById("Q"+idPytania+"o"+currentQuestionOptionsCount);
+    toDelete.remove();
+
+    currentQuestionOptionsCount --;
+    questionDetails[idPytania] = currentQuestionOptionsCount;
+}
+
+/**
+ * Dodanie pytania typu jednokrotenego wyboru do generatora
+ */
+function newRadio(){
+    idOfQuestion++;
+    questionDetails.push(0);
+    // var radioOption = 0;
+
+    // &lt;input type="radio" class="custom-control-input" id="radioGroupToQuestion`+idOfQuestion+`" name="groupOfDefaultRadios">
+   
+    document.getElementById("forma").innerHTML +=`
+    &lt;div xd="Radio" id="EntireQuestionNo`+idOfQuestion+`">
+
+    &lt;button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE&lt;/button>
+
+        &lt;label class="questionLabel"  id="questionLabel`+idOfQuestion +`" contenteditable="true" >Example question  &lt;/label>
+
+            &lt;div id=unSelect >
+                &lt;label onclick="dodajOpcjeRadio(`+ idOfQuestion+`);">[dodaj opcje]&lt;/label>\t
+                &lt;label onclick="usunOpcjeRadio(`+ idOfQuestion+`);">[usuń opcje]&lt;/label>
+            &lt;/div>
+
+			&lt;div xdd='elo' id="divOfQuestion`+idOfQuestion+`">
+				
+				
+				&lt;div class="custom-control custom-radio" id="Q`+idOfQuestion+`o`+questionDetails[idOfQuestion]+`">
+
+                  &lt;input type="radio" class="custom-control-input" id="radioGroupOption`+ questionDetails[idOfQuestion] +`" name="groupOfRadiosFromQuestion`+idOfQuestion+`">
+				  &lt;label class="custom-control-label" for="XradioGroupOption`+ questionDetails[idOfQuestion] +`" contenteditable="true">Option `+questionDetails[idOfQuestion]+`&lt;/label> 
+				&lt;/div>
+
+				
+            &lt;/div>
+            &lt;br>
+    &lt;/div>
+    `;
+        //######################## for w label nie używane  // potrzebne dopiero przy wyświetlaniu wygenerowanej ankiety 
+}
+
+/**
+ * 
+ * @param {integer} idPytania - Numer pytania z ankiety 
+ */
+function dodajOpcjeCheckbox(idPytania){
+    var currentQuestionOptionsCount = questionDetails[idPytania];
+    currentQuestionOptionsCount++;
+    questionDetails[idPytania] = currentQuestionOptionsCount;
+    document.getElementById("divOfQuestion"+idPytania).innerHTML+=`
+    &lt;div>
+        &lt;div class="custom-control custom-checkbox" id="Q`+idPytania+`o`+questionDetails[idPytania]+`">
+                    
+            &lt;input type="checkbox" class="custom-control-input" id="checkboxOption`+questionDetails[idPytania] +`">
+            &lt;label class="custom-control-label" for="XcheckboxOption`+ questionDetails[idPytania] +`" contenteditable="true">Opcja do wielokrotnego wyboru numer `+questionDetails[idPytania]+`&lt;/label>
+        &lt;/div>
+     
+    &lt;/div>    
+    `;
+    //######################## for w label nie używane  // potrzebne dopiero przy wyświetlaniu wygenerowanej ankiety 
+
+}
+
+
+
+/**
+ * Usuwa opcje wyboru z pytania typu checkbox
+ * @param {integer} idPytania - Numer pytania z ankiety 
+ */
+function usunOpcjeCheckbox(idPytania){
+    var currentQuestionOptionsCount = questionDetails[idPytania];
+
+    var toDelete = document.getElementById("Q"+idPytania+"o"+currentQuestionOptionsCount);
+    toDelete.remove();
+
+    currentQuestionOptionsCount --;
+    questionDetails[idPytania] = currentQuestionOptionsCount;
+}
+
+/**
+ * Dodaje pytanie wielokrotnego wyboru z pola checkbox
+ */
+function newCheckbox(){
+    idOfQuestion++;
+    questionDetails.push(0);
+
+
+    // var checkboxOption = 0;
+
+/* &lt;label onclick="dodajOpcje(`+ checkboxOption +`,`+ idOfQuestion+`);">[dodaj opcje]&lt;/label> */
+    document.getElementById("forma").innerHTML +=`
+    &lt;div xd="Check" id="EntireQuestionNo`+idOfQuestion+`">
+    &lt;button type="button" class="btn btn-danger deleteButton" onclick="deleteQuestion(`+idOfQuestion+`)">USUŃ TO PYTANIE&lt;/button>
+        &lt;label class="questionLabel" id="questionLabel`+idOfQuestion +`" contenteditable="true" >Example question checkbox &lt;/label>
+
+        
+            &lt;div id=unSelect >
+        &lt;label onclick="dodajOpcjeCheckbox(`+ idOfQuestion+`);">[dodaj opcje]&lt;/label>
+        &lt;label onclick="usunOpcjeCheckbox(`+ idOfQuestion+`);">[usun opcje]&lt;/label>
+            &lt;/div>
+            &lt;div id="divOfQuestion`+idOfQuestion+`">
+            
+
+                &lt;div class="custom-control custom-checkbox" id="Q`+idOfQuestion+`o`+questionDetails[idOfQuestion]+`">
+                
+					&lt;input type="checkbox" class="custom-control-input" id="checkboxOption`+questionDetails[idOfQuestion] +`">
+					&lt;label class="custom-control-label" for="XcheckboxOption`+ questionDetails[idOfQuestion] +`" contenteditable="true">Opcja do wielokrotnego wyboru numer `+questionDetails[idOfQuestion]+`&lt;/label>
+                &lt;/div>
+                
+				
+            &lt;/div>		
+				
+            &lt;br>
+    &lt;/div>        
+    `;
+}
+
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#answersCCV">answersCCV</a></li><li><a href="global.html#deleteQuestion">deleteQuestion</a></li><li><a href="global.html#dodajOpcjeCheckbox">dodajOpcjeCheckbox</a></li><li><a href="global.html#dodajOpcjeRadio">dodajOpcjeRadio</a></li><li><a href="global.html#errorGoToMain">errorGoToMain</a></li><li><a href="global.html#errorOverlayHide">errorOverlayHide</a></li><li><a href="global.html#errorOverlayShow">errorOverlayShow</a></li><li><a href="global.html#getCCV">getCCV</a></li><li><a href="global.html#getPass">getPass</a></li><li><a href="global.html#gSPID">gSPID</a></li><li><a href="global.html#idOfQuestion">idOfQuestion</a></li><li><a href="global.html#mojeAnkiety">mojeAnkiety</a></li><li><a href="global.html#newCheckbox">newCheckbox</a></li><li><a href="global.html#newRadio">newRadio</a></li><li><a href="global.html#newTextbox">newTextbox</a></li><li><a href="global.html#questionDetails">questionDetails</a></li><li><a href="global.html#readAnswerCCV">readAnswerCCV</a></li><li><a href="global.html#showGenerator">showGenerator</a></li><li><a href="global.html#usunOpcjeCheckbox">usunOpcjeCheckbox</a></li><li><a href="global.html#usunOpcjeRadio">usunOpcjeRadio</a></li><li><a href="global.html#wysylanieWygenerowanejAnkiety">wysylanieWygenerowanejAnkiety</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon Jun 01 2020 04:48:16 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

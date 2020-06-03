@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: loadResults.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: loadResults.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var jsonWyn = `{
+    "title":"Ankieta !",
+    "EntireQuestionNo1":{
+        "name":"Example textarea",
+        "type":"t",
+        "input":["odp1","odp2", "odp3"]         
+    },
+    "EntireQuestionNo2":{
+        "name":"Example question checkbox ",
+        "type":"c",
+        "options":["Opcja do wiel  numer 0" ,"Opcja do wiel  numer 1", "Opcja do wiel  numer 2"],
+        "input": [[1], [2,3], [2,3]]
+    },
+    "EntireQuestionNo3":{
+        "name":"Example question ",
+        "type":"r",
+        "options":["Option 0","Option 1", "Option 3"],
+        "input":[1,2,3]
+    }
+}`
+
+let wyn = JSON.parse(jsonWyn);
+
+/**
+ * Funkcja licząca odpowiedzi z pytań typu jednokrotnego wyboru
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
+ */
+function radioWyn(pytango, numereg){
+    console.log(pytango);
+    let tajtle  = pytango['name'];
+
+    let opszyns = pytango['options'];     // Tablica opcji
+    let opcjeLiczba = Object.keys(opszyns).length; // liczba opcji
+
+    let odpowiedzi = pytango['input'].flat();
+    let odpowiedziLiczba =  Object.keys(odpowiedzi).length;
+
+    zliczOdpowiedzi = [];
+
+    for(let i = 0; i &lt; opcjeLiczba; i++){
+        zliczOdpowiedzi.push(0);
+    }
+
+    for(let i = 0; i &lt;  odpowiedziLiczba ; i++){
+        zliczOdpowiedzi[odpowiedzi[i]-1] ++;
+    }
+
+    console.log(zliczOdpowiedzi);    
+
+    document.getElementById("forma").innerHTML +=`
+    &lt;div xd="Radio" id="EntireQuestionNo`+numereg+`">
+
+        &lt;label class="questionLabel"  id="questionLabel`+numereg +`" contenteditable="false" >` + tajtle+  `  &lt;/label>            
+
+			&lt;div id="divOfQuestion`+numereg+`">`;
+            // &lt;input type="radio" class="custom-control-input" id="radioGroupOption`+  i +`" name="groupOfRadiosFromQuestion`+numereg+`">
+	for(var i = 0 ; i&lt; opcjeLiczba; i++){
+        document.getElementById("forma").innerHTML +=`
+				&lt;div class="custom-control custom-radio" id="Q`+numereg+`o`+ i+`">
+
+                  
+				  &lt;label class="custom-control-label" for="radioGroupOption`+ i  +`" contenteditable="false">`+opszyns[i]+ " - " +  (zliczOdpowiedzi[i]/odpowiedziLiczba *100).toFixed(2)   + "% "+`&lt;/label> 
+				&lt;/div>`;
+    }
+    
+    document.getElementById("forma").innerHTML +=`
+        &lt;/div>
+        &lt;br>
+    &lt;/div>
+    `;
+}
+/**
+ * Funkcja licząca odpowiedzi z pytań typu wielokrotnego wyboru
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
+ */
+function checkboxWyn(pytango, numereg){
+    console.log(pytango);
+    let tajtle  = pytango['name'];
+
+    let opszyns = pytango['options'];     // Tablica opcji
+    let opcjeLiczba = Object.keys(opszyns).length; // liczba opcji
+
+    let odpowiedzi = pytango['input'].flat();
+
+    
+    console.log(odpowiedzi);
+    let odpowiedziLiczba =  Object.keys(odpowiedzi).length;
+
+    zliczOdpowiedzi = [];
+
+    for(let i = 0; i &lt; opcjeLiczba; i++){
+        zliczOdpowiedzi.push(0);
+    }
+
+    for(let i = 0; i &lt;  odpowiedziLiczba ; i++){
+        zliczOdpowiedzi[odpowiedzi[i]-1] ++;
+    }
+
+
+    document.getElementById("forma").innerHTML +=`
+    &lt;div xd="Check" id="EntireQuestionNo`+idOfQuestion+`">
+    
+        &lt;label class="questionLabel" id="questionLabel`+numereg +`" contenteditable="false" >`+tajtle+`&lt;/label>
+
+            &lt;div id="divOfQuestion`+numereg+`">`;
+            // &lt;input type="checkbox" class="custom-control-input" id="checkboxOption`+i+`">&lt;/input>
+    for(var i = 0 ; i&lt; opcjeLiczba; i++){    
+        document.getElementById("forma").innerHTML +=`
+                &lt;div class="custom-control custom-checkbox" id="Q`+numereg+`o`+i+`">
+                
+					
+					&lt;label class="custom-control-label" for="checkboxOption`+ i+`" contenteditable="false">`+opszyns[i]+ " - " +  (zliczOdpowiedzi[i]/odpowiedziLiczba *100).toFixed(2)   + "% "+`&lt;/label>
+                &lt;/div>`
+    }         
+    document.getElementById("forma").innerHTML +=`			
+            &lt;/div>		
+				
+            &lt;br>
+    &lt;/div>        
+    `;
+
+
+}
+
+/**
+ * Funkcja licząca odpowiedzi z pytań otwartych
+ * @param {Array} pytango - Obiekt pytania z ankiety
+ * @param {integer} numereg - Numer pytania z ankiety
+ */
+function textboxWyn(pytango, numereg){
+    console.log(pytango);
+    var tajtle  = pytango['name'];
+
+    let odpowiedzi = pytango['input'].flat();   
+    
+    let odpowiedziLiczba =  Object.keys(odpowiedzi).length;
+
+
+    document.getElementById("forma").innerHTML += `
+    &lt;div xd="Text" id="EntireQuestionNo`+numereg+`">
+
+    
+    &lt;label class="questionLabel " id="questionLabel`+numereg +`" contenteditable="false">`+ tajtle+`&lt;/label>
+
+        &lt;div id="divOfQuestion`+numereg+`  overflow-auto" class="form-group col-md-8">     &lt;br>  
+            &lt;textarea  class="form-control" id="question`+numereg +`" rows="6" readonly style="background-color:#f8f9fa; color:black;">`;
+
+            for(let i = 0;i&lt; odpowiedziLiczba;i++){
+
+                document.getElementById("question"+numereg).innerHTML += odpowiedzi[i] +"\n";
+
+            }   
+    
+    document.getElementById("forma").innerHTML += ` &lt;/textarea>
+        &lt;/div>&lt;br>
+
+    &lt;/div>
+    `;
+
+}
+
+
+
+
+/**
+ * Funkcja przetwarzająca plik typu JSON na wyniki ankiety
+ * @param {JSON} wyn - Obiekt JSON zawierający wyniki ankiety
+ */
+function pokazWyniki(wyn){
+    var iloscPytan = Object.keys(wyn).length;
+    var prefix = "EntireQuestionNo";
+
+    var titel = `&lt;legend id="title" contenteditable="false" class="col-md-8" style="text-align: center;">`+wyn['title'] +" - Wyniki procentowe" +`&lt;/legend>`
+
+    document.getElementById("forma").innerHTML += titel;
+    for(var i = 1; i&lt;iloscPytan ; i++){
+        // var questionName = obj[prefix+i]["name"];
+        var question = wyn[prefix+i];
+        if(question['type']=="r"){
+            
+            radioWyn(question,i);
+        }        
+        else
+        if(question['type']=="c"){
+            
+            checkboxWyn(question,i);
+        }
+        else
+        if(question['type']=="t"){
+            textboxWyn(question,i);
+        }
+
+    }
+
+
+}
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkboxWyn">checkboxWyn</a></li><li><a href="global.html#pokazWyniki">pokazWyniki</a></li><li><a href="global.html#radioWyn">radioWyn</a></li><li><a href="global.html#textboxWyn">textboxWyn</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Mon Jun 01 2020 04:48:21 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
