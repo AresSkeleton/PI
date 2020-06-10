@@ -18,24 +18,59 @@ const SimpleCrypto = require("simple-crypto-js").default;
  * 
  * @apiError {Object} status Not such survey with given id.
  */
-router.get('/zaladujankiete/:id', function(req, res){
+router.get('/zaladujankiete/:id/:pass', function(req, res){
     //res.send(req.params.id);
+    //res.send(req.params.pass);
     Surveys.findOne({
         where: {
             id: req.params.id
         }
     }).then( surveyRow =>{
-        let survKey = new SimpleCrypto(surveyRow.key);
-        let unhashedData = survKey.decrypt(surveyRow.data);
-        let dataObj = JSON.parse(unhashedData);
+        let hashByPass = new SimpleCrypto(req.params.pass);
+        
+        UserSurveys.findAll({
+            attributes : ["hashedKey"],
+            raw :true
+        } ).then( allHashedKeyfromUS=>{
+            for(let i = 0; i < allHashedKeyfromUS.length; i++){
+                let decryptkey = hashByPass.decrypt(allHashedKeyfromUS[i].hashedKey);
 
-       // console.log(dataObj);
+                if(surveyRow.key == decryptkey){
+                    UserSurveys.findOne({
+                        where : {
+                            hashedKey : allHashedKeyfromUS[i].hashedKey,
+                            done : "0"
+                        }, raw: true
+                    }).then( nonAnswerdSurvey =>{
+                        if(nonAnswerdSurvey){
 
-        delete dataObj["ccv"];
-        //console.log(dataObj);
-        //dataJson = JSON.stringify(dataObj);
+                            let survKey = new SimpleCrypto(surveyRow.key);
+                            let unhashedData = survKey.decrypt(surveyRow.data);
+                            let dataObj = JSON.parse(unhashedData);
 
-        res.render('zaladujankiete', {data : dataObj, user : req.cookies.login});
+                            // console.log(dataObj);
+
+                            delete dataObj["ccv"];
+                            //console.log(dataObj);
+                            //dataJson = JSON.stringify(dataObj);
+
+                            res.render('zaladujankiete', {data : dataObj, user : req.cookies.login});
+
+                        }else{
+                            res.render('error', {errorLog : "Nie można wypełniać ankiet 2 razy", user : req.cookies.login});
+                        }
+
+
+                    }).catch( err =>{
+                        res.render('error', {errorLog : "Problem z bazą danych", user : req.cookies.login});
+                    })
+
+
+                }
+            }
+        }).catch(err =>{
+            res.render('error', {errorLog : "Problem z bazą danych", user : req.cookies.login});
+        })
 
     }).catch(err =>{
         res.send({status : "error"});
@@ -81,7 +116,7 @@ router.get('/zaladujankiete/:id', function(req, res){
  * @apiError {Object} status6 Not able to find all rows in UserSurveys table.
  */
 router.post('/sendSurvey/:id', function(req, res){
-    let hashByPass = new SimpleCrypto("test2"); // TODO zmienic na input hasła
+    let hashByPass = new SimpleCrypto(req.body.password); // TODO zmienic na input hasła
     Surveys.findOne({
             where : {
                 id : req.params.id
@@ -246,8 +281,9 @@ router.get('/wynikiankiety/:id/:usccv', function(req, res){
             
             res.render('wynikiAnkiety', {survey : answersRow, user : req.cookies.login});
         }).catch(err=>{
-            res.send("Nikt jeszcze nie wypełnił towjej ankiety");
-            
+            // res.send("Nikt jeszcze nie wypełnił towjej ankiety");
+            res.render('error', {errorLog : "Nikt jeszcze nie wypełnił twojej ankiety", user : req.cookies.login});
+            //res.redirect('/error')
         });
     }).catch(err=>{
         res.send({status: "error"});

@@ -117,7 +117,9 @@
 			let id = window.location.pathname;
 			id = id.split('/')[2];
 			console.log(jsonAnswers);
-			$.post("/sendSurvey/"+id, { answers: jsonAnswers} , function(data, status){
+			let pass = prompt("Wprowadz swoje hasło");
+			if(pass != null){
+				$.post("/sendSurvey/"+id, { answers: jsonAnswers, password : pass} , function(data, status){
 				if(data.status == "ok"){
 					//console.log("okkkkkkkkkkkkkkkk");
 					alert("Ankieta została wysłana!");
@@ -128,7 +130,9 @@
 					alert("Ankieta została dodana!");
 					document.location.replace('/home');
 				}
-			})
+			});
+			}
+			
 		});
 
 	});

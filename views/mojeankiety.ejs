@@ -181,7 +181,7 @@
 			<% } %>
             //linkowanie do zaladujAnkiete.ejs
             
-			rowW.insertCell().innerHTML = "<a href='/zaladujankiete/" + "<%= x[keyNamesW[0]] %>" + "'>" +" >> "+"</a>";
+			rowW.insertCell().innerHTML = "<a id='zaladujankiete"+ "<%= x[keyNamesW[0]] %>" + "'>" +" >> "+"</a>";
 			//rowW.insertCell().innerHTML = "<a href='zaladujankiete' >" +" >> "+"</a>";
             rowW.insertCell().innerHTML = "<a href='?usun="+ "<%= x[keyNamesW[0]] %> "+"'>"+" Usuń "+"</a>";
             
@@ -221,9 +221,21 @@
 	 <% 	}%>
 	 <% } %>
 
+	 let selectorId;
+	 $("[id^='zaladujankiete']").click(function(){
+		//console.log("click");
+		selectorId = $(this).attr("id").replace("zaladujankiete", "").trim();
+		//console.log(selectorId);
+		let pass = prompt("Wprowadz swoje hasło");
+		if(pass != null){
+			document.location.replace('/zaladujankiete/'+selectorId+"/"+pass);
+		}
+	})
+
+
 	$("[id^='wynikiankiety']").click(function(){
 		//console.log("click");
-		let selectorId = $(this).attr("id").replace("wynikiankiety", "").trim();
+		selectorId = $(this).attr("id").replace("wynikiankiety", "").trim();
 		//console.log(selectorId);
 		let usccv = prompt("Wprowadz kod CCV ,aby zobaczyć wyniki ankietowania");
 		if(usccv != null){
