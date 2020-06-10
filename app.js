@@ -39,6 +39,7 @@ db.authenticate().then(() =>{
 app.get('/', routerIndex);
 // app.render
 // app.get('/login', routerIndex);
+app.get('/error', routerIndex);
 
 
 app.get('/register', routerIndex);
@@ -57,7 +58,7 @@ app.post('/addSurveyByKey', routerSurvey);
 // app.get('/user', router);   routerShow
 
 //app.get('/=', routerShow);
-app.get('/zaladujankiete/:id', routerShow);
+app.get('/zaladujankiete/:id/:pass', routerShow);
 
 app.get('/wynikiankiety/:id/:usccv', routerShow);
 

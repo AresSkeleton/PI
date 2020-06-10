@@ -99,6 +99,7 @@ router.post('/dodajankiete', function(req, res){
                             res.send({status : "ok"});
                         }).catch(e =>{
                             res.send({status : 'error'});
+                            
                         });
                     }).catch( e =>{
                         res.send({status : 'error'});
